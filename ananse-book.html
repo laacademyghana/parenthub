@@ -13,14 +13,15 @@
 
         .book-hub-banner {
             width: 100%;
-            height: 90px;
+            height: 65px;
             object-fit: cover;
+            object-position: center;
             display: block;
         }
 
         .book-wrapper {
             width: 100vw;
-            height: calc(100vh - 170px);
+            height: calc(100vh - 150px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,8 +29,8 @@
         }
 
         #book {
-            width: 82vw;
-            height: 68vh;
+            width: 92vw;
+            height: 76vh;
         }
 
         .page {
@@ -46,11 +47,11 @@
         }
 
         .controls {
-            height: 80px;
+            height: 85px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 35px;
             background: white;
         }
 
@@ -130,15 +131,15 @@
 
     <script>
         const book = new St.PageFlip(document.getElementById('book'), {
-            width: 700,
-            height: 900,
+            width: 1100,
+            height: 750,
             size: "stretch",
             minWidth: 300,
-            maxWidth: 1000,
-            minHeight: 400,
-            maxHeight: 1100,
+            maxWidth: 1600,
+            minHeight: 300,
+            maxHeight: 1000,
             showCover: false,
-            usePortrait: true,
+            usePortrait: false,
             mobileScrollSupport: false,
             flippingTime: 1800,
             drawShadow: true,
