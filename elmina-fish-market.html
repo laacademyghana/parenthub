@@ -3,6 +3,7 @@
 <head>
     <title>Elmina Fish Market</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
     <style>
         body {
             margin: 0;
@@ -38,44 +39,24 @@
             background: white;
         }
 
-       <div class="controls">
-
-    <a class="round-btn" href="index.html">
-        <span class="icon">⌂</span>
-        Home
-    </a>
-
-    <button class="round-btn" type="button" onclick="goPrevious()">
-        <span class="big-icon">⏮</span>
-        Previous
-    </button>
-
-    <button class="round-btn" type="button" onclick="openZoom()">
-        <span class="big-icon">🔍</span>
-        Zoom
-    </button>
-
-    <a class="round-btn" href="storybooks.html">
-        <span class="icon">📚</span>
-        Book Hub
-    </a>
-
-    <button class="round-btn" type="button" onclick="goNext()">
-        <span class="big-icon">⏭</span>
-        Next
-    </button>
-
-</div>
+        .controls {
+            height: 105px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            background: white;
+        }
 
         .round-btn {
-            width: 78px;
-            height: 78px;
+            width: 74px;
+            height: 74px;
             border-radius: 50%;
             border: none;
             background: #071f4d;
             color: white;
             font-weight: bold;
-            font-size: 11px;
+            font-size: 10px;
             cursor: pointer;
             text-decoration: none;
             display: flex;
@@ -92,15 +73,33 @@
         }
 
         .icon {
-            font-size: 26px;
+            font-size: 22px;
             line-height: 1;
             margin-bottom: 4px;
         }
 
         .big-icon {
-            font-size: 34px;
+            font-size: 30px;
             line-height: 1;
             margin-bottom: 2px;
+        }
+
+        #zoomBox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 9999999;
+            overflow: auto;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #zoomImage {
+            width: 100%;
+            max-width: none;
+            height: auto;
         }
 
         @media (max-width: 700px) {
@@ -115,21 +114,21 @@
 
             .controls {
                 height: 90px;
-                gap: 10px;
+                gap: 6px;
             }
 
             .round-btn {
-                width: 66px;
-                height: 66px;
-                font-size: 9px;
+                width: 62px;
+                height: 62px;
+                font-size: 8px;
             }
 
             .icon {
-                font-size: 21px;
+                font-size: 18px;
             }
 
             .big-icon {
-                font-size: 28px;
+                font-size: 24px;
             }
         }
     </style>
@@ -170,6 +169,11 @@
             Previous
         </button>
 
+        <button class="round-btn" type="button" onclick="openZoom()">
+            <span class="big-icon">🔍</span>
+            Zoom
+        </button>
+
         <a class="round-btn" href="storybooks.html">
             <span class="icon">📚</span>
             Book Hub
@@ -181,28 +185,34 @@
         </button>
 
     </div>
-<div id="zoomBox" onclick="closeZoom()" style="
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: white;
-    z-index: 9999999;
-    overflow: auto;
-    text-align: center;
-">
-    <img id="zoomImage" src="" style="
-        width: 100%;
-        max-width: none;
-        height: auto;
-    ">
-</div>
+
+    <div id="zoomBox" onclick="closeZoom()">
+        <img id="zoomImage" src="" alt="Zoomed book page">
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <script>
         let book;
+
+        const pages = [
+            "elmina1.png",
+            "elmina2.png",
+            "elmina3.png",
+            "elmina4.png",
+            "elmina5.png",
+            "elmina6.png",
+            "elmina7.png",
+            "elmina8.png",
+            "elmina9.png",
+            "elmina10.png",
+            "elmina11.png",
+            "elmina12.png",
+            "elmina13.png",
+            "elmina14.png",
+            "elmina15.png",
+            "elmina16.png"
+        ];
 
         window.addEventListener("load", function () {
             book = new St.PageFlip(document.getElementById("book"), {
@@ -235,6 +245,20 @@
             if (book) {
                 book.flipPrev();
             }
+        }
+
+        function openZoom() {
+            if (!book) return;
+
+            const currentPage = book.getCurrentPageIndex();
+            const safePage = Math.max(0, Math.min(currentPage, pages.length - 1));
+
+            document.getElementById("zoomImage").src = pages[safePage];
+            document.getElementById("zoomBox").style.display = "block";
+        }
+
+        function closeZoom() {
+            document.getElementById("zoomBox").style.display = "none";
         }
     </script>
 
