@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Storybooks - Little Angels Academy Parent Hub</title>
+    <title>Book Hub - Little Angels Academy Parent Hub</title>
 
     <style>
         body {
@@ -9,17 +9,32 @@
             font-family: Arial, sans-serif;
             background: #f7fffd;
             text-align: center;
+            color: #071f4d;
         }
 
-        h1 {
-            background: #071f4d;
-            color: white;
-            margin: 0;
-            padding: 25px;
+        .banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .intro {
+            padding: 20px;
+        }
+
+        .intro h1 {
+            color: #071f4d;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: auto;
         }
 
         .books {
-            padding: 40px;
+            padding: 30px;
         }
 
         .book {
@@ -32,8 +47,13 @@
 
         .book img {
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+            transition: 0.3s;
+        }
+
+        .book img:hover {
+            transform: scale(1.05);
         }
 
         .book-title {
@@ -46,13 +66,36 @@
 
 <body>
 
-    <h1>Storybooks</h1>
+    <img src="book-hub-banner.png.png"
+         alt="Book Hub Banner"
+         class="banner">
+
+    <div class="intro">
+
+        <h1>Book Hub</h1>
+
+        <p>
+            Explore engaging children's storybooks created to inspire reading,
+            imagination, language development and a love of learning.
+        </p>
+
+    </div>
 
     <div class="books">
 
         <a class="book" href="elmina-fish-market.html">
             <img src="elmina1.png" alt="Elmina Fish Market">
             <div class="book-title">Elmina Fish Market</div>
+        </a>
+
+        <a class="book" href="#">
+            <img src="counting1.png" alt="Counting Book">
+            <div class="book-title">Counting Book</div>
+        </a>
+
+        <a class="book" href="#">
+            <img src="ananse1.png" alt="Ananse and the Greedy Friend">
+            <div class="book-title">Ananse and the Greedy Friend</div>
         </a>
 
     </div>
