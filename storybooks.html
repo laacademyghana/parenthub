@@ -1,11 +1,9 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
     <title>Book Hub - Little Angels Academy Parent Hub</title>
 
     <style>
-
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -30,13 +28,17 @@
             margin: 20px;
             text-decoration: none;
             color: #071f4d;
+            vertical-align: top;
         }
 
         .book img {
             width: 100%;
+            height: 150px;
+            object-fit: cover;
             border-radius: 15px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.25);
             transition: all 0.3s ease;
+            background: white;
         }
 
         .book img:hover {
@@ -56,15 +58,12 @@
             font-weight: bold;
             color: #008c7a;
         }
-
     </style>
 </head>
 
 <body>
 
-    <img src="book-hub-banner.png.png"
-         alt="Book Hub Banner"
-         class="banner">
+    <img src="book-hub-banner.png.png" alt="Book Hub Banner" class="banner">
 
     <div class="books">
 
@@ -73,13 +72,13 @@
             <div class="book-title">Elmina Fish Market</div>
         </a>
 
-        <a class="book" href="#">
-            <img src="counting1.png" alt="Counting Book">
-            <div class="book-title">Counting Book</div>
+        <a class="book" href="counting-book.html">
+            <img src="counting1.png" alt="Counting">
+            <div class="book-title">Counting</div>
         </a>
 
-        <a class="book" href="#">
-            <img src="ananse1.png" alt="Ananse and the Greedy Friend">
+        <a class="book" href="ananse-book.html">
+            <img src="Ananse 1.png" alt="Ananse and the Greedy Friend">
             <div class="book-title">Ananse and the Greedy Friend</div>
         </a>
 
@@ -91,4 +90,3 @@
 
 </body>
 </html>
-```
