@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Counting Book</title>
+    <title>Counting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
@@ -11,16 +12,9 @@
             overflow: hidden;
         }
 
-        .book-hub-banner {
-            width: 100%;
-            max-height: 64px;
-            object-fit: cover;
-            display: block;
-        }
-
         .book-wrapper {
             width: 100vw;
-            height: calc(100vh - 230px);
+            height: calc(100vh - 115px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,8 +22,8 @@
         }
 
         #book {
-            width: 82vw;
-            height: 68vh;
+            width: 90vw;
+            height: 72vh;
         }
 
         .page {
@@ -46,15 +40,15 @@
         }
 
         .controls {
-            height: 80px;
+            height: 105px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 70px;
+            gap: 20px;
             background: white;
         }
 
-        button {
+        .round-btn {
             width: 78px;
             height: 78px;
             border-radius: 50%;
@@ -62,28 +56,67 @@
             background: #071f4d;
             color: white;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 11px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
         }
 
-        button:hover {
+        .round-btn:hover {
             background: #00a88f;
             transform: scale(1.08);
         }
 
-        .arrow {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 5px;
+        .icon {
+            font-size: 26px;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .big-icon {
+            font-size: 34px;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        @media (max-width: 700px) {
+            .book-wrapper {
+                height: calc(100vh - 95px);
+            }
+
+            #book {
+                width: 96vw;
+                height: 72vh;
+            }
+
+            .controls {
+                height: 90px;
+                gap: 10px;
+            }
+
+            .round-btn {
+                width: 66px;
+                height: 66px;
+                font-size: 9px;
+            }
+
+            .icon {
+                font-size: 21px;
+            }
+
+            .big-icon {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 
 <body>
-
-    <img src="book-hub-banner.png.png" alt="Book Hub Banner" class="book-hub-banner">
 
     <div class="book-wrapper">
         <div id="book">
@@ -102,54 +135,65 @@
     </div>
 
     <div class="controls">
-        <button onclick="goPrevious()">
-            <span class="arrow">←</span>
+
+        <a class="round-btn" href="index.html">
+            <span class="icon">⌂</span>
+            Home
+        </a>
+
+        <button class="round-btn" type="button" onclick="goPrevious()">
+            <span class="big-icon">⏮</span>
             Previous
         </button>
 
-        <button onclick="goHome()">
-            <span class="arrow">⌂</span>
+        <a class="round-btn" href="storybooks.html">
+            <span class="icon">📚</span>
             Book Hub
-        </button>
+        </a>
 
-        <button onclick="goNext()">
-            <span class="arrow">→</span>
+        <button class="round-btn" type="button" onclick="goNext()">
+            <span class="big-icon">⏭</span>
             Next
         </button>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <script>
-        const book = new St.PageFlip(document.getElementById('book'), {
-            width: 700,
-            height: 900,
-            size: "stretch",
-            minWidth: 300,
-            maxWidth: 1000,
-            minHeight: 400,
-            maxHeight: 1100,
-            showCover: false,
-            usePortrait: true,
-            mobileScrollSupport: false,
-            flippingTime: 1800,
-            drawShadow: true,
-            maxShadowOpacity: 0.6,
-            startZIndex: 20
+        let book;
+
+        window.addEventListener("load", function () {
+            book = new St.PageFlip(document.getElementById("book"), {
+                width: 1100,
+                height: 750,
+                size: "stretch",
+                minWidth: 280,
+                maxWidth: 1500,
+                minHeight: 220,
+                maxHeight: 950,
+                showCover: true,
+                usePortrait: true,
+                mobileScrollSupport: false,
+                flippingTime: 1800,
+                drawShadow: true,
+                maxShadowOpacity: 0.6,
+                startZIndex: 20
+            });
+
+            book.loadFromHTML(document.querySelectorAll(".page"));
         });
 
-        book.loadFromHTML(document.querySelectorAll('.page'));
-
         function goNext() {
-            book.flipNext();
+            if (book) {
+                book.flipNext();
+            }
         }
 
         function goPrevious() {
-            book.flipPrev();
-        }
-
-        function goHome() {
-            window.location.href = "storybooks.html";
+            if (book) {
+                book.flipPrev();
+            }
         }
     </script>
 
