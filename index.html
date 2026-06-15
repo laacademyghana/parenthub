@@ -33,15 +33,28 @@
             line-height: 1.6;
         }
 
-        .button {
-            display: inline-block;
-            margin: 10px;
-            padding: 14px 24px;
-            background: #071f4d;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
+       .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    margin: 15px;
+    background: #071f4d;
+    color: white;
+    text-decoration: none;
+    border-radius: 50%;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.button:hover {
+    background: #00a88f;
+    transform: scale(1.08);
+}
         }
 
         .motto {
