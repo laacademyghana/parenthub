@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tip Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            background: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .book-wrapper {
+            width: 100vw;
+            height: calc(100vh - 115px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+        }
+
+        #book {
+            width: 90vw;
+            height: 72vh;
+        }
+
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: white;
+        }
+
+        .controls {
+            height: 105px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background: white;
+        }
+
+        .round-btn {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            border: none;
+            background: #071f4d;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        .round-btn:hover {
+            background: #00a88f;
+        }
+
+        .icon {
+            font-size: 26px;
+            margin-bottom: 4px;
+        }
+
+        .big-icon {
+            font-size: 34px;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="book-wrapper">
+        <div id="book">
+            <div class="page"><img src="phwk1.png"></div>
+            <div class="page"><img src="phwk2.png"></div>
+            <div class="page"><img src="phwk3.png"></div>
+            <div class="page"><img src="phwk4.png"></div>
+            <div class="page"><img src="phwk5.png"></div>
+            <div class="page"><img src="phwk6.png"></div>
+            <div class="page"><img src="phwk7.png"></div>
+            <div class="page"><img src="phwk8.png"></div>
+            <div class="page"><img src="phwk9.png"></div>
+            <div class="page"><img src="phwk10.png"></div>
+            <div class="page"><img src="phwk11.png"></div>
+            <div class="page"><img src="phwk12.png"></div>
+            <div class="page"><img src="phwk13.png"></div>
+            <div class="page"><img src="phwk14.png"></div>
+            <div class="page"><img src="phwk15.png"></div>
+            <div class="page"><img src="phwk16.png"></div>
+            <div class="page"><img src="phwk17.png"></div>
+            <div class="page"><img src="phwk18.png"></div>
+            <div class="page"><img src="phwk19.png"></div>
+            <div class="page"><img src="phwk20.png"></div>
+            <div class="page"><img src="phwk21.png"></div>
+            <div class="page"><img src="phwk22.png"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <a class="round-btn" href="index.html"><span class="icon">⌂</span>Home</a>
+        <button class="round-btn" onclick="goPrevious()"><span class="big-icon">⏮</span>Previous</button>
+        <a class="round-btn" href="index.html"><span class="icon">🤝</span>Tip Hub</a>
+        <button class="round-btn" onclick="goNext()"><span class="big-icon">⏭</span>Next</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+    <script>
+        let book;
+
+        window.addEventListener("load", function () {
+            book = new St.PageFlip(document.getElementById("book"), {
+                width: 1100,
+                height: 750,
+                size: "stretch",
+                minWidth: 280,
+                maxWidth: 1500,
+                minHeight: 220,
+                maxHeight: 950,
+                showCover: true,
+                usePortrait: true,
+                mobileScrollSupport: false,
+                flippingTime: 1800,
+                drawShadow: true,
+                maxShadowOpacity: 0.6
+            });
+
+            book.loadFromHTML(document.querySelectorAll(".page"));
+        });
+
+        function goNext() {
+            if (book) book.flipNext();
+        }
+
+        function goPrevious() {
+            if (book) book.flipPrev();
+        }
+    </script>
+
+</body>
+</html>
