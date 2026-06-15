@@ -154,7 +154,17 @@ button:hover {
         });
 
         book.loadFromHTML(document.querySelectorAll('.page'));
+function goNext() {
+    book.flipNext();
+}
 
+function goPrevious() {
+    book.flipPrev();
+}
+
+function goHome() {
+    window.location.href = "storybooks.html";
+}
         function openFullscreen() {
             const elem = document.documentElement;
             if (elem.requestFullscreen) {
