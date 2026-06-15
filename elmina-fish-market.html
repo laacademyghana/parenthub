@@ -6,40 +6,32 @@
     <style>
         body {
             margin: 0;
-        background: white;
+            background: white;
             font-family: Arial, sans-serif;
             overflow: hidden;
         }
 
-        .topbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 48px;
-            background: #071f4d;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-            font-weight: bold;
+        .book-hub-banner {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            background: white;
         }
 
         .book-wrapper {
             width: 100vw;
-            height: 100vh;
-            padding-top: 48px;
-            padding-bottom: 70px;
-            box-sizing: border-box;
+            height: calc(100vh - 265px);
             display: flex;
             justify-content: center;
             align-items: center;
+            background: white;
         }
 
         #book {
-            width: 80vw;
-            height: 78vh;
+            width: 78vw;
+            height: 62vh;
         }
 
         .page {
@@ -56,54 +48,44 @@
         }
 
         .controls {
-    position: fixed;
-    bottom: 15px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    z-index: 60;
-}
-       button {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: none;
-    background: #071f4d;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-}
+            height: 85px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 35px;
+            background: white;
+        }
 
-button:hover {
-    background: #00a88f;
-    transform: scale(1.08);
-}
+        button {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            border: none;
+            background: #071f4d;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
 
         button:hover {
             background: #00a88f;
+            transform: scale(1.08);
         }
 
-        .back-home {
-            position: fixed;
-            top: 12px;
-            left: 15px;
-            z-index: 80;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
+        .arrow {
+            font-size: 26px;
+            display: block;
+            margin-bottom: 4px;
         }
     </style>
 </head>
 
 <body>
 
-    <a class="back-home" href="index.html">← Home</a>
-
-    <div class="topbar">Elmina Fish Market</div>
+    <img src="book-hub-banner.png.png" alt="Book Hub Banner" class="book-hub-banner">
 
     <div class="book-wrapper">
         <div id="book">
@@ -126,25 +108,40 @@ button:hover {
         </div>
     </div>
 
-   <div class="controls">
-    <button onclick="goHome()">Home</button>
-    <button onclick="goPrevious()">Previous</button>
-    <button onclick="goNext()">Next</button>
-    <button onclick="openFullscreen()">Full Screen</button>
-</div>
+    <div class="controls">
+        <button onclick="goParentHub()">
+            <span class="arrow">⌂</span>
+            Home
+        </button>
+
+        <button onclick="goPrevious()">
+            <span class="arrow">←</span>
+            Previous
+        </button>
+
+        <button onclick="goBookHub()">
+            <span class="arrow">📚</span>
+            Book Hub
+        </button>
+
+        <button onclick="goNext()">
+            <span class="arrow">→</span>
+            Next
+        </button>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <script>
         const book = new St.PageFlip(document.getElementById('book'), {
-            width: 700,
-            height: 900,
+            width: 1100,
+            height: 750,
             size: "stretch",
             minWidth: 300,
-            maxWidth: 900,
-            minHeight: 400,
-            maxHeight: 1100,
-            showCover: false,
+            maxWidth: 1600,
+            minHeight: 300,
+            maxHeight: 1000,
+            showCover: true,
             usePortrait: true,
             mobileScrollSupport: false,
             flippingTime: 1800,
@@ -154,22 +151,21 @@ button:hover {
         });
 
         book.loadFromHTML(document.querySelectorAll('.page'));
-function goNext() {
-    book.flipNext();
-}
 
-function goPrevious() {
-    book.flipPrev();
-}
+        function goNext() {
+            book.flipNext();
+        }
 
-function goHome() {
-    window.location.href = "storybooks.html";
-}
-        function openFullscreen() {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            }
+        function goPrevious() {
+            book.flipPrev();
+        }
+
+        function goParentHub() {
+            window.location.href = "index.html";
+        }
+
+        function goBookHub() {
+            window.location.href = "storybooks.html";
         }
     </script>
 
