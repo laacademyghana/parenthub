@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Elmina Fish Market</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
@@ -13,7 +14,7 @@
 
         .book-wrapper {
             width: 100vw;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 115px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,7 +22,7 @@
         }
 
         #book {
-            width: 82vw;
+            width: 90vw;
             height: 72vh;
         }
 
@@ -39,23 +40,23 @@
         }
 
         .controls {
-            height: 110px;
+            height: 105px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 35px;
+            gap: 20px;
             background: white;
         }
 
         .round-btn {
-            width: 82px;
-            height: 82px;
+            width: 78px;
+            height: 78px;
             border-radius: 50%;
             border: none;
             background: #071f4d;
             color: white;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             text-decoration: none;
             display: flex;
@@ -72,15 +73,45 @@
         }
 
         .icon {
-            font-size: 28px;
+            font-size: 26px;
             line-height: 1;
             margin-bottom: 4px;
         }
 
         .big-icon {
-            font-size: 36px;
+            font-size: 34px;
             line-height: 1;
             margin-bottom: 2px;
+        }
+
+        @media (max-width: 700px) {
+            .book-wrapper {
+                height: calc(100vh - 95px);
+            }
+
+            #book {
+                width: 96vw;
+                height: 72vh;
+            }
+
+            .controls {
+                height: 90px;
+                gap: 10px;
+            }
+
+            .round-btn {
+                width: 66px;
+                height: 66px;
+                font-size: 9px;
+            }
+
+            .icon {
+                font-size: 21px;
+            }
+
+            .big-icon {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
@@ -142,9 +173,9 @@
                 width: 1100,
                 height: 750,
                 size: "stretch",
-                minWidth: 300,
+                minWidth: 280,
                 maxWidth: 1500,
-                minHeight: 300,
+                minHeight: 220,
                 maxHeight: 950,
                 showCover: true,
                 usePortrait: true,
