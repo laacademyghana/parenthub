@@ -11,31 +11,18 @@
             overflow: hidden;
         }
 
-        .book-hub-banner {
-            width: 100%;
-            height: 220px;
-            object-fit: contain;
-            object-position: center;
-            display: block;
-            background: white;
-        }
-
-       .book-wrapper {
-    width: 100vw;
-    height: calc(100vh - 120px);
+        .book-wrapper {
+            width: 100vw;
+            height: calc(100vh - 120px);
             display: flex;
             justify-content: center;
             align-items: center;
             background: white;
-            position: relative;
-            z-index: 1;
         }
 
         #book {
-            width: 75vw;
-            height: 58vh;
-            position: relative;
-            z-index: 1;
+            width: 82vw;
+            height: 72vh;
         }
 
         .page {
@@ -52,23 +39,17 @@
         }
 
         .controls {
-            position: fixed;
-            bottom: 15px;
-            left: 0;
-            right: 0;
-            height: 95px;
+            height: 110px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 35px;
             background: white;
-            z-index: 999999;
-            pointer-events: auto;
         }
 
-        button {
-            width: 78px;
-            height: 78px;
+        .round-btn {
+            width: 82px;
+            height: 82px;
             border-radius: 50%;
             border: none;
             background: #071f4d;
@@ -76,24 +57,31 @@
             font-weight: bold;
             font-size: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-            position: relative;
-            z-index: 1000000;
-            pointer-events: auto;
+            transition: all 0.3s ease;
         }
 
-        button:hover {
+        .round-btn:hover {
             background: #00a88f;
             transform: scale(1.08);
         }
 
-       .arrow {
-    font-size: 42px;
-    display: block;
-    margin-bottom: 2px;
-    line-height: 1;
-}
+        .icon {
+            font-size: 28px;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .big-icon {
+            font-size: 36px;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
     </style>
 </head>
 
@@ -121,24 +109,27 @@
     </div>
 
     <div class="controls">
-        <button type="button" onclick="goParentHub()">
-            <span class="arrow">⌂</span>
+
+        <a class="round-btn" href="index.html">
+            <span class="icon">⌂</span>
             Home
+        </a>
+
+        <button class="round-btn" type="button" onclick="goPrevious()">
+            <span class="big-icon">⏮</span>
+            Previous
         </button>
 
-        <button class="round-btn" onclick="previousPage()">
-    <span class="icon">⏮</span>
-    Previous
-</button>
-
-        <button type="button" onclick="goBookHub()">
-            <span class="arrow">📚</span>
+        <a class="round-btn" href="storybooks.html">
+            <span class="icon">📚</span>
             Book Hub
+        </a>
+
+        <button class="round-btn" type="button" onclick="goNext()">
+            <span class="big-icon">⏭</span>
+            Next
         </button>
-<button class="round-btn" onclick="nextPage()">
-    <span class="icon">⏭</span>
-    Next
-</button>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
@@ -177,14 +168,6 @@
             if (book) {
                 book.flipPrev();
             }
-        }
-
-        function goParentHub() {
-            window.location.href = "index.html";
-        }
-
-        function goBookHub() {
-            window.location.href = "storybooks.html";
         }
     </script>
 
