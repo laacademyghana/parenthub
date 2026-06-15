@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counting Book</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .book-hub-banner {
+            width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .book-wrapper {
+            width: 100vw;
+            height: calc(100vh - 230px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+        }
+
+        #book {
+            width: 82vw;
+            height: 68vh;
+        }
+
+        .page {
+            background: white;
+            overflow: hidden;
+        }
+
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: white;
+        }
+
+        .controls {
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 70px;
+            background: white;
+        }
+
+        button {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            border: none;
+            background: #071f4d;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        button:hover {
+            background: #00a88f;
+            transform: scale(1.08);
+        }
+
+        .arrow {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="book-hub-banner.png.png" alt="Book Hub Banner" class="book-hub-banner">
+
+    <div class="book-wrapper">
+        <div id="book">
+            <div class="page"><img src="counting1.png"></div>
+            <div class="page"><img src="counting2.png"></div>
+            <div class="page"><img src="counting3.png"></div>
+            <div class="page"><img src="counting4.png"></div>
+            <div class="page"><img src="counting5.png"></div>
+            <div class="page"><img src="counting6.png"></div>
+            <div class="page"><img src="counting7.png"></div>
+            <div class="page"><img src="counting8.png"></div>
+            <div class="page"><img src="counting9.png"></div>
+            <div class="page"><img src="counting10.png"></div>
+            <div class="page"><img src="counting11.png"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="goPrevious()">
+            <span class="arrow">←</span>
+            Previous
+        </button>
+
+        <button onclick="goHome()">
+            <span class="arrow">⌂</span>
+            Book Hub
+        </button>
+
+        <button onclick="goNext()">
+            <span class="arrow">→</span>
+            Next
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+    <script>
+        const book = new St.PageFlip(document.getElementById('book'), {
+            width: 700,
+            height: 900,
+            size: "stretch",
+            minWidth: 300,
+            maxWidth: 1000,
+            minHeight: 400,
+            maxHeight: 1100,
+            showCover: false,
+            usePortrait: true,
+            mobileScrollSupport: false,
+            flippingTime: 1800,
+            drawShadow: true,
+            maxShadowOpacity: 0.6,
+            startZIndex: 20
+        });
+
+        book.loadFromHTML(document.querySelectorAll('.page'));
+
+        function goNext() {
+            book.flipNext();
+        }
+
+        function goPrevious() {
+            book.flipPrev();
+        }
+
+        function goHome() {
+            window.location.href = "storybooks.html";
+        }
+    </script>
+
+</body>
+</html>
