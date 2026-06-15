@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 
         .content {
             padding: 35px 20px;
-            max-width: 950px;
+            max-width: 1000px;
             margin: auto;
         }
 
@@ -38,8 +39,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 145px;
-            height: 145px;
+            width: 165px;
+            height: 165px;
             margin: 15px;
             background: #071f4d;
             color: white;
@@ -47,10 +48,9 @@
             border-radius: 50%;
             font-weight: bold;
             text-align: center;
-            padding: 15px;
             transition: all 0.3s ease;
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-            font-size: 17px;
+            font-size: 18px;
         }
 
         .button:hover {
@@ -60,29 +60,44 @@
 
         .icon {
             display: block;
-            margin-top: 8px;
-            font-size: 34px;
+            font-size: 80px;
+            margin-top: 10px;
             line-height: 1;
         }
 
         .motto {
             margin-top: 35px;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
             color: #008c7a;
+        }
+
+        @media (max-width: 768px) {
+            .button {
+                width: 135px;
+                height: 135px;
+                font-size: 15px;
+            }
+
+            .icon {
+                font-size: 60px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <img src="parenthub-banner.png.png" alt="Little Angels Academy Parent Hub Banner" class="banner">
+    <img src="parenthub-banner.png.png"
+         alt="Little Angels Academy Parent Hub Banner"
+         class="banner">
 
     <div class="content">
+
         <h1>Welcome to the Parent Hub</h1>
 
         <p>
-            The Little Angels Academy Parent Hub supports parents/guardians with
+            The Little Angels Academy Parent Hub supports parents and guardians with
             creative learning ideas, educational resources, storybooks, activities,
             and practical tips to help children learn, grow, and develop confidently
             at home and school.
@@ -90,12 +105,12 @@
 
         <a class="button" href="parenthub.html">
             Parent Hub
-            <span class="icon">⌂</span>
+            <span class="icon">🏠</span>
         </a>
 
         <a class="button" href="storybooks.html">
             Book Hub
-            <span class="icon">📖</span>
+            <span class="icon">📚</span>
         </a>
 
         <a class="button" href="tiphub.html">
@@ -111,7 +126,9 @@
         <p class="motto">
             Nurturing hearts. Building minds. Shaping the future.
         </p>
+
     </div>
 
 </body>
 </html>
+```
