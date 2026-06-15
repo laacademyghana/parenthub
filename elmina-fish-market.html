@@ -11,27 +11,31 @@
             overflow: hidden;
         }
 
-       .book-hub-banner {
-    width: 100%;
-    height: 280px;
-    object-fit: contain;
+        .book-hub-banner {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
             object-position: center;
             display: block;
             background: white;
         }
 
-       .book-wrapper {
-    width: 100vw;
-    height: calc(100vh - 340px);
+        .book-wrapper {
+            width: 100vw;
+            height: calc(100vh - 330px);
             display: flex;
             justify-content: center;
             align-items: center;
             background: white;
+            position: relative;
+            z-index: 1;
         }
 
         #book {
-            width: 78vw;
-            height: 62vh;
+            width: 75vw;
+            height: 58vh;
+            position: relative;
+            z-index: 1;
         }
 
         .page {
@@ -45,19 +49,22 @@
             object-fit: contain;
             display: block;
             background: white;
-      .controls {
-    position: fixed;
-    bottom: 15px;
-    left: 0;
-    right: 0;
-    height: 95px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 35px;
-    background: white;
-    z-index: 9999;
-}
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            height: 95px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 35px;
+            background: white;
+            z-index: 999999;
+            pointer-events: auto;
+        }
 
         button {
             width: 78px;
@@ -71,6 +78,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            position: relative;
+            z-index: 1000000;
+            pointer-events: auto;
         }
 
         button:hover {
@@ -112,22 +122,22 @@
     </div>
 
     <div class="controls">
-        <button onclick="goParentHub()">
+        <button type="button" onclick="goParentHub()">
             <span class="arrow">⌂</span>
             Home
         </button>
 
-        <button onclick="goPrevious()">
+        <button type="button" onclick="goPrevious()">
             <span class="arrow">←</span>
             Previous
         </button>
 
-        <button onclick="goBookHub()">
+        <button type="button" onclick="goBookHub()">
             <span class="arrow">📚</span>
             Book Hub
         </button>
 
-        <button onclick="goNext()">
+        <button type="button" onclick="goNext()">
             <span class="arrow">→</span>
             Next
         </button>
@@ -136,31 +146,39 @@
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <script>
-        const book = new St.PageFlip(document.getElementById('book'), {
-            width: 1100,
-            height: 750,
-            size: "stretch",
-            minWidth: 300,
-            maxWidth: 1600,
-            minHeight: 300,
-            maxHeight: 1000,
-            showCover: true,
-            usePortrait: true,
-            mobileScrollSupport: false,
-            flippingTime: 1800,
-            drawShadow: true,
-            maxShadowOpacity: 0.6,
-            startZIndex: 20
+        let book;
+
+        window.addEventListener("load", function () {
+            book = new St.PageFlip(document.getElementById("book"), {
+                width: 1100,
+                height: 750,
+                size: "stretch",
+                minWidth: 300,
+                maxWidth: 1500,
+                minHeight: 300,
+                maxHeight: 950,
+                showCover: true,
+                usePortrait: true,
+                mobileScrollSupport: false,
+                flippingTime: 1800,
+                drawShadow: true,
+                maxShadowOpacity: 0.6,
+                startZIndex: 20
+            });
+
+            book.loadFromHTML(document.querySelectorAll(".page"));
         });
 
-        book.loadFromHTML(document.querySelectorAll('.page'));
-
         function goNext() {
-            book.flipNext();
+            if (book) {
+                book.flipNext();
+            }
         }
 
         function goPrevious() {
-            book.flipPrev();
+            if (book) {
+                book.flipPrev();
+            }
         }
 
         function goParentHub() {
