@@ -88,11 +88,12 @@
             transform: scale(1.08);
         }
 
-        .arrow {
-            font-size: 26px;
-            display: block;
-            margin-bottom: 4px;
-        }
+       .arrow {
+    font-size: 42px;
+    display: block;
+    margin-bottom: 2px;
+    line-height: 1;
+}
     </style>
 </head>
 
@@ -125,20 +126,19 @@
             Home
         </button>
 
-        <button type="button" onclick="goPrevious()">
-            <span class="arrow">←</span>
-            Previous
-        </button>
+        <button class="round-btn" onclick="previousPage()">
+    <span class="icon">⏮</span>
+    Previous
+</button>
 
         <button type="button" onclick="goBookHub()">
             <span class="arrow">📚</span>
             Book Hub
         </button>
-
-        <button type="button" onclick="goNext()">
-            <span class="arrow">→</span>
-            Next
-        </button>
+<button class="round-btn" onclick="nextPage()">
+    <span class="icon">⏭</span>
+    Next
+</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
