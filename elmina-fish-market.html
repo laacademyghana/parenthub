@@ -38,14 +38,34 @@
             background: white;
         }
 
-        .controls {
-            height: 105px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            background: white;
-        }
+       <div class="controls">
+
+    <a class="round-btn" href="index.html">
+        <span class="icon">⌂</span>
+        Home
+    </a>
+
+    <button class="round-btn" type="button" onclick="goPrevious()">
+        <span class="big-icon">⏮</span>
+        Previous
+    </button>
+
+    <button class="round-btn" type="button" onclick="openZoom()">
+        <span class="big-icon">🔍</span>
+        Zoom
+    </button>
+
+    <a class="round-btn" href="storybooks.html">
+        <span class="icon">📚</span>
+        Book Hub
+    </a>
+
+    <button class="round-btn" type="button" onclick="goNext()">
+        <span class="big-icon">⏭</span>
+        Next
+    </button>
+
+</div>
 
         .round-btn {
             width: 78px;
