@@ -1,121 +1,184 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>Book Hub - Little Angels Academy Parent Hub</title>
 
-```
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f7fffd;
-        text-align: center;
-        color: #071f4d;
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7fffd;
+            text-align: center;
+            color: #071f4d;
+        }
 
-    .banner {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
+        .banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
-    .books {
-        padding: 40px 20px 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 35px;
-    }
+        .welcome-text {
+            font-size: 42px;
+            font-weight: bold;
+            color: #071f4d;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+        }
 
-    .book {
-        width: 520px;
-        max-width: 90%;
-        text-decoration: none;
-        color: #071f4d;
-    }
+        .nav-buttons {
+            padding: 20px 10px 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
 
-    .book img {
-        width: 100%;
-        height: auto;
-        border-radius: 18px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-        transition: all 0.3s ease;
-        background: white;
-        display: block;
-    }
+        .round-btn {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #071f4d;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+        }
 
-    .book img:hover {
-        transform: scale(1.03);
-    }
+        .round-btn:hover {
+            background: #00a88f;
+            transform: scale(1.08);
+        }
 
-    .book-title {
-        margin-top: 14px;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .motto {
-        margin-top: 30px;
-        margin-bottom: 40px;
-        font-size: 22px;
-        font-weight: bold;
-        color: #008c7a;
-    }
-
-    @media (max-width: 700px) {
+        .icon {
+            font-size: 30px;
+            margin-bottom: 4px;
+        }
 
         .books {
-            gap: 25px;
-            padding: 25px 10px;
+            padding: 35px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
         }
 
         .book {
-            width: 95%;
+            width: 560px;
+            max-width: 92%;
+            text-decoration: none;
+            color: #071f4d;
         }
 
-        .book-title {
-            font-size: 22px;
+        .book img {
+            width: 100%;
+            height: auto;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+            background: white;
+            display: block;
+        }
+
+        .book img:hover {
+            transform: scale(1.03);
         }
 
         .motto {
-            font-size: 18px;
-            padding: 0 15px;
+            margin-top: 35px;
+            margin-bottom: 40px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #008c7a;
         }
-    }
-</style>
-```
 
+        @media (max-width: 700px) {
+            .welcome-text {
+                font-size: 30px;
+                padding: 0 15px;
+            }
+
+            .nav-buttons {
+                gap: 12px;
+            }
+
+            .round-btn {
+                width: 75px;
+                height: 75px;
+                font-size: 10px;
+            }
+
+            .icon {
+                font-size: 24px;
+            }
+
+            .books {
+                gap: 28px;
+                padding: 25px 10px;
+            }
+
+            .book {
+                width: 96%;
+            }
+
+            .motto {
+                font-size: 18px;
+                padding: 0 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-```
-<img src="book-hub-banner.png.png" alt="Book Hub Banner" class="banner">
+    <img src="book-hub-banner.png.png" alt="Book Hub Banner" class="banner">
 
-<div class="books">
+    <div class="welcome-text">
+        Click on a book to read it!
+    </div>
 
-    <a class="book" href="elmina-fish-market.html">
-        <img src="elmina1.png" alt="Elmina Fish Market">
-        <div class="book-title">Elmina Fish Market</div>
-    </a>
+    <div class="nav-buttons">
+        <a class="round-btn" href="index.html">
+            <span class="icon">⌂</span>
+            Home
+        </a>
 
-    <a class="book" href="counting-book.html">
-        <img src="counting1.png" alt="Counting">
-        <div class="book-title">Counting</div>
-    </a>
+        <a class="round-btn" href="storybooks.html">
+            <span class="icon">📚</span>
+            Book Hub
+        </a>
 
-    <a class="book" href="ananse-book.html">
-        <img src="Ananse%201.png" alt="Ananse and the Greedy Friend">
-        <div class="book-title">Ananse and the Greedy Friend</div>
-    </a>
+        <a class="round-btn" href="tiphub.html">
+            <span class="icon">🤝</span>
+            Tip Hub
+        </a>
+    </div>
 
-</div>
+    <div class="books">
 
-<div class="motto">
-    Nurturing hearts. Building minds. Shaping the future.
-</div>
-```
+        <a class="book" href="elmina-fish-market.html">
+            <img src="elmina1.png" alt="Elmina Fish Market">
+        </a>
+
+        <a class="book" href="counting-book.html">
+            <img src="counting1.png" alt="Counting">
+        </a>
+
+        <a class="book" href="ananse-book.html">
+            <img src="Ananse%201.png" alt="Ananse and the Greedy Friend">
+        </a>
+
+    </div>
+
+    <div class="motto">
+        Nurturing hearts. Building minds. Shaping the future.
+    </div>
 
 </body>
 </html>
