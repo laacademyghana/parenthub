@@ -154,18 +154,26 @@
             margin: 0 auto 16px;
         }
 
-        .level-label {
+        .score-label {
             color: #008c7a;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .level-label {
+            color: #e84393;
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 15px;
         }
 
         .question-text {
-            font-size: 36px;
+            font-size: 34px;
             font-weight: bold;
-            line-height: 1.25;
+            line-height: 1.3;
             margin-bottom: 22px;
+            white-space: pre-line;
         }
 
         .answer-input {
@@ -218,17 +226,9 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
         }
 
-        .check-btn {
-            background: #22a947;
-        }
-
-        .show-btn {
-            background: #f39c12;
-        }
-
-        .next-btn {
-            background: #087bdc;
-        }
+        .check-btn { background: #22a947; }
+        .show-btn { background: #f39c12; }
+        .next-btn { background: #087bdc; }
 
         .side-panel {
             background: #fff8d9;
@@ -261,14 +261,14 @@
             border-radius: 20px;
         }
 
-        .progress-count {
+        .progress-count, .score-count {
             font-size: 22px;
             font-weight: bold;
             margin: 12px 0 20px;
             color: #008c7a;
         }
 
-        .level-box {
+        .level-box, .encourage {
             background: white;
             border-radius: 18px;
             padding: 14px;
@@ -278,13 +278,53 @@
             margin-bottom: 14px;
         }
 
-        .encourage {
-            background: white;
-            border-radius: 18px;
-            padding: 14px;
-            font-size: 18px;
-            font-weight: bold;
+        .star-popup {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 31, 77, 0.75);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .star-card {
+            background: #ffd54f;
             color: #071f4d;
+            width: 330px;
+            min-height: 330px;
+            clip-path: polygon(50% 0%, 61% 32%, 95% 25%, 70% 50%, 95% 75%, 61% 68%, 50% 100%, 39% 68%, 5% 75%, 30% 50%, 5% 25%, 39% 32%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            padding: 45px;
+            box-sizing: border-box;
+            animation: pop 0.5s ease;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .final-score {
+            font-size: 34px;
+            margin: 10px 0;
+        }
+
+        .restart-btn {
+            margin-top: 20px;
+            background: #071f4d;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         @media (max-width: 900px) {
@@ -311,7 +351,7 @@
             }
 
             .question-text {
-                font-size: 28px;
+                font-size: 27px;
             }
 
             .answer-input {
@@ -335,27 +375,15 @@
         <div class="subtitle">Let's Learn, Play and Grow!</div>
 
         <div class="nav-buttons">
-            <a class="nav-btn" href="index.html">
-                <span class="nav-icon">⌂</span>
-                Home
-            </a>
-
-            <a class="nav-btn" href="storybooks.html">
-                <span class="nav-icon">📚</span>
-                Book Hub
-            </a>
-
-            <a class="nav-btn" href="tiphub.html">
-                <span class="nav-icon">🤝</span>
-                Tip Hub
-            </a>
+            <a class="nav-btn" href="index.html"><span class="nav-icon">⌂</span>Home</a>
+            <a class="nav-btn" href="storybooks.html"><span class="nav-icon">📚</span>Book Hub</a>
+            <a class="nav-btn" href="tiphub.html"><span class="nav-icon">🤝</span>Tip Hub</a>
         </div>
 
         <div class="difficulty-buttons">
             <button id="easyButton" class="difficulty-btn easy-btn active" onclick="setDifficulty('easy')">
                 Easy: Nursery 2 - KG1
             </button>
-
             <button id="hardButton" class="difficulty-btn hard-btn" onclick="setDifficulty('hard')">
                 Hard: KG2 - Basic 1
             </button>
@@ -374,6 +402,7 @@
             <div>
                 <div class="question-card">
                     <div class="question-number" id="questionNumber">Question 1 of 20</div>
+                    <div class="score-label" id="scoreLabel">Score: 0 / 20</div>
                     <div class="level-label" id="levelLabel">Easy Level</div>
                     <div class="question-text" id="questionText">Loading question...</div>
 
@@ -397,20 +426,31 @@
                 </div>
                 <div class="progress-count" id="progressCount">1 / 20</div>
 
+                <div class="progress-title">Score</div>
+                <div class="score-count" id="scoreCount">0 / 20</div>
+
                 <div class="level-box" id="levelBox">
-                    Easy Level<br>
-                    Nursery 2 - KG1
+                    Easy Level<br>Nursery 2 - KG1
                 </div>
 
                 <div class="encourage" id="encourageBox">
-                    Great job!<br>
-                    Keep trying!<br>
-                    You are amazing!
+                    Great job!<br>Keep trying!<br>You are amazing!
                 </div>
             </div>
 
         </div>
 
+    </div>
+
+    <div class="star-popup" id="starPopup">
+        <div>
+            <div class="star-card">
+                <div>🎉 Well Done! 🎉</div>
+                <div class="final-score" id="finalScore">0 / 20</div>
+                <div id="finalMessage">Great effort!</div>
+            </div>
+            <button class="restart-btn" onclick="restartQuiz()">Play Again</button>
+        </div>
     </div>
 
     <script>
@@ -420,21 +460,22 @@
             { question: "What number comes after 5?", answer: "6" },
             { question: "What number comes before 4?", answer: "3" },
             { question: "Which is bigger: 2 or 5?", answer: "5" },
+            { question: "Which is smaller: 8 or 3?", answer: "3" },
+            { question: "What is 1 + 1?", answer: "2" },
+            { question: "What is 4 + 1?", answer: "5" },
+            { question: "What number comes after 9?", answer: "10" },
+            { question: "Write the missing number: 1, 2, __", answer: "3" },
+
             { question: "Write the first letter of apple.", answer: "a" },
             { question: "Write the first letter of ball.", answer: "b" },
             { question: "What letter comes after A?", answer: "b" },
             { question: "What letter comes after C?", answer: "d" },
-            { question: "Spell cat.", answer: "cat" },
-            { question: "Spell dog.", answer: "dog" },
             { question: "Fill in the missing letter: c_t", answer: "a" },
             { question: "Fill in the missing letter: d_g", answer: "o" },
-            { question: "What is 1 + 1?", answer: "2" },
-            { question: "What is 4 + 1?", answer: "5" },
-            { question: "What number comes after 9?", answer: "10" },
-            { question: "Spell sun.", answer: "sun" },
-            { question: "Spell pen.", answer: "pen" },
-            { question: "Which is smaller: 8 or 3?", answer: "3" },
-            { question: "Write the missing number: 1, 2, __", answer: "3" }
+            { question: "Fill in the missing letter: s_n", answer: "u" },
+            { question: "Which word is correct?\nA) kat\nB) cat\nC) cot", answer: "b", accepted: ["b", "cat"] },
+            { question: "Which word is correct?\nA) dog\nB) dag\nC) dug", answer: "a", accepted: ["a", "dog"] },
+            { question: "Which word is correct?\nA) pn\nB) pen\nC) pan", answer: "b", accepted: ["b", "pen"] }
         ];
 
         const hardQuestions = [
@@ -446,18 +487,19 @@
             { question: "What number comes after 19?", answer: "20" },
             { question: "Which is bigger: 18 or 12?", answer: "18" },
             { question: "Write the missing number: 5, 10, 15, __", answer: "20" },
-            { question: "Spell fish.", answer: "fish" },
-            { question: "Spell book.", answer: "book" },
-            { question: "Spell school.", answer: "school" },
-            { question: "Fill in the missing letters: b__k", answer: "oo" },
-            { question: "Fill in the missing letter: f_sh", answer: "i" },
-            { question: "Which is correct: school or skool?", answer: "school" },
-            { question: "Which is correct: book or buk?", answer: "book" },
-            { question: "Write a word that starts with M.", answer: "mum" },
-            { question: "What letter comes after M?", answer: "n" },
             { question: "What is 20 - 10?", answer: "10" },
             { question: "What is 8 + 4?", answer: "12" },
-            { question: "Spell friend.", answer: "friend" }
+
+            { question: "Fill in the missing letter: f_sh", answer: "i" },
+            { question: "Fill in the missing letters: b__k", answer: "oo" },
+            { question: "Fill in the missing letters: fr__nd", answer: "ie" },
+            { question: "Which word is correct?\nA) skool\nB) school\nC) scool", answer: "b", accepted: ["b", "school"] },
+            { question: "Which word is correct?\nA) buk\nB) booc\nC) book", answer: "c", accepted: ["c", "book"] },
+            { question: "Which word is correct?\nA) frend\nB) friend\nC) freind", answer: "b", accepted: ["b", "friend"] },
+            { question: "Which word is correct?\nA) shoo\nB) sho\nC) shoe", answer: "c", accepted: ["c", "shoe"] },
+            { question: "What letter comes after M?", answer: "n" },
+            { question: "Write a word that starts with M.", answer: "mum", accepted: ["mum", "man", "mat", "moon", "milk"] },
+            { question: "Write the missing letter: c_p", answer: "u" }
         ];
 
         const encouragements = [
@@ -471,6 +513,8 @@
         let difficulty = "easy";
         let currentQuestions = [];
         let currentIndex = 0;
+        let score = 0;
+        let answeredCorrectly = false;
 
         function shuffle(array) {
             return array.sort(() => Math.random() - 0.5);
@@ -502,6 +546,9 @@
             const source = difficulty === "easy" ? easyQuestions : hardQuestions;
             currentQuestions = shuffle([...source]).slice(0, 20);
             currentIndex = 0;
+            score = 0;
+            answeredCorrectly = false;
+            document.getElementById("starPopup").style.display = "none";
             showQuestion();
         }
 
@@ -516,19 +563,29 @@
             document.getElementById("answerBox").textContent = "Answer: " + q.answer;
             document.getElementById("userAnswer").value = "";
             document.getElementById("feedback").textContent = "";
+            answeredCorrectly = false;
 
             const progress = ((currentIndex + 1) / currentQuestions.length) * 100;
             document.getElementById("progressFill").style.width = progress + "%";
             document.getElementById("progressCount").textContent =
                 (currentIndex + 1) + " / " + currentQuestions.length;
 
+            updateScore();
+
             document.getElementById("encourageBox").innerHTML =
                 encouragements[Math.floor(Math.random() * encouragements.length)];
         }
 
+        function updateScore() {
+            document.getElementById("scoreLabel").textContent = "Score: " + score + " / " + currentQuestions.length;
+            document.getElementById("scoreCount").textContent = score + " / " + currentQuestions.length;
+        }
+
         function checkAnswer() {
             const userAnswer = normalize(document.getElementById("userAnswer").value);
-            const correctAnswer = normalize(currentQuestions[currentIndex].answer);
+            const q = currentQuestions[currentIndex];
+            const correctAnswer = normalize(q.answer);
+            const accepted = q.accepted ? q.accepted.map(normalize) : [correctAnswer];
 
             if (userAnswer === "") {
                 document.getElementById("feedback").textContent = "Type your answer first.";
@@ -536,9 +593,15 @@
                 return;
             }
 
-            if (userAnswer === correctAnswer) {
+            if (accepted.includes(userAnswer)) {
                 document.getElementById("feedback").textContent = "Correct! Well done!";
                 document.getElementById("feedback").style.color = "#22a947";
+
+                if (!answeredCorrectly) {
+                    score++;
+                    answeredCorrectly = true;
+                    updateScore();
+                }
             } else {
                 document.getElementById("feedback").textContent = "Good try! Check again or show the answer.";
                 document.getElementById("feedback").style.color = "#e84393";
@@ -554,13 +617,32 @@
                 currentIndex++;
                 showQuestion();
             } else {
-                document.getElementById("questionText").textContent =
-                    "Well done! You finished all the questions!";
-                document.getElementById("answerBox").style.display = "block";
-                document.getElementById("answerBox").textContent =
-                    "You are a superstar!";
-                document.getElementById("feedback").textContent = "";
+                showFinalScore();
             }
+        }
+
+        function showFinalScore() {
+            const total = currentQuestions.length;
+            const percent = Math.round((score / total) * 100);
+            let message = "";
+
+            if (score === total) {
+                message = "Superstar Learner!";
+            } else if (percent >= 80) {
+                message = "Gold Star Learner!";
+            } else if (percent >= 60) {
+                message = "Great Job!";
+            } else {
+                message = "Keep Practising!";
+            }
+
+            document.getElementById("finalScore").textContent = score + " / " + total + " (" + percent + "%)";
+            document.getElementById("finalMessage").textContent = message;
+            document.getElementById("starPopup").style.display = "flex";
+        }
+
+        function restartQuiz() {
+            startQuiz();
         }
 
         startQuiz();
