@@ -9,48 +9,38 @@
             margin: 0;
             background: white;
             font-family: Arial, sans-serif;
-            overflow: hidden;
+            text-align: center;
         }
 
-        .book-wrapper {
+        .page-viewer {
             width: 100vw;
-            height: calc(100vh - 115px);
+            height: calc(100vh - 100px);
+            overflow: auto;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             background: white;
         }
 
-        #book {
-            width: 90vw;
-            height: 72vh;
-        }
-
-        .page {
-            background: white;
-            overflow: hidden;
-        }
-
-        .page img {
+        #tipImage {
             width: 100%;
-            height: 100%;
-            object-fit: contain;
+            max-width: 900px;
+            height: auto;
             display: block;
-            background: white;
         }
 
         .controls {
-            height: 105px;
+            height: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: white;
         }
 
         .round-btn {
-            width: 72px;
-            height: 72px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             border: none;
             background: #071f4d;
@@ -64,18 +54,16 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-            transition: all 0.3s ease;
         }
 
         .round-btn:hover {
             background: #00a88f;
-            transform: scale(1.08);
         }
 
         .icon {
-            font-size: 21px;
+            font-size: 22px;
             line-height: 1;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .big-icon {
@@ -84,44 +72,20 @@
             margin-bottom: 2px;
         }
 
-        #zoomBox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: white;
-            z-index: 9999999;
-            overflow: auto;
-            text-align: center;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        #zoomImage {
-            width: 100%;
-            max-width: none;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
         @media (max-width: 700px) {
-            .book-wrapper {
-                height: calc(100vh - 95px);
-            }
-
-            #book {
-                width: 96vw;
-                height: 72vh;
+            #tipImage {
+                width: 100%;
+                max-width: none;
             }
 
             .controls {
                 height: 90px;
-                gap: 5px;
+                gap: 8px;
             }
 
             .round-btn {
-                width: 60px;
-                height: 60px;
+                width: 62px;
+                height: 62px;
                 font-size: 8px;
             }
 
@@ -132,41 +96,14 @@
             .big-icon {
                 font-size: 23px;
             }
-
-            #zoomImage {
-                width: 100%;
-            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="book-wrapper">
-        <div id="book">
-            <div class="page"><img src="phwk1.png"></div>
-            <div class="page"><img src="phwk2.png"></div>
-            <div class="page"><img src="phwk3.png"></div>
-            <div class="page"><img src="phwk4.png"></div>
-            <div class="page"><img src="phwk5.png"></div>
-            <div class="page"><img src="phwk6.png"></div>
-            <div class="page"><img src="phwk7.png"></div>
-            <div class="page"><img src="phwk8.png"></div>
-            <div class="page"><img src="phwk9.png"></div>
-            <div class="page"><img src="phwk10.png"></div>
-            <div class="page"><img src="phwk11.png"></div>
-            <div class="page"><img src="phwk12.png"></div>
-            <div class="page"><img src="phwk13.png"></div>
-            <div class="page"><img src="phwk14.png"></div>
-            <div class="page"><img src="phwk15.png"></div>
-            <div class="page"><img src="phwk16.png"></div>
-            <div class="page"><img src="phwk17.png"></div>
-            <div class="page"><img src="phwk18.png"></div>
-            <div class="page"><img src="phwk19.png"></div>
-            <div class="page"><img src="phwk20.png"></div>
-            <div class="page"><img src="phwk21.png"></div>
-            <div class="page"><img src="phwk22.png"></div>
-        </div>
+    <div class="page-viewer">
+        <img id="tipImage" src="phwk1.png" alt="Tip Hub Page">
     </div>
 
     <div class="controls">
@@ -180,31 +117,18 @@
             Previous
         </button>
 
-        <button class="round-btn" type="button" onclick="openZoom()">
-            <span class="big-icon">🔍</span>
-            Zoom
+        <button class="round-btn" type="button" onclick="goNext()">
+            <span class="big-icon">⏭</span>
+            Next
         </button>
 
         <a class="round-btn" href="index.html">
             <span class="icon">🤝</span>
             Tip Hub
         </a>
-
-        <button class="round-btn" type="button" onclick="goNext()">
-            <span class="big-icon">⏭</span>
-            Next
-        </button>
     </div>
-
-    <div id="zoomBox" onclick="closeZoom()">
-        <img id="zoomImage" src="" alt="Zoomed tip page">
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <script>
-        let book;
-
         const pages = [
             "phwk1.png",
             "phwk2.png",
@@ -230,44 +154,25 @@
             "phwk22.png"
         ];
 
-        window.addEventListener("load", function () {
-            book = new St.PageFlip(document.getElementById("book"), {
-                width: 1100,
-                height: 750,
-                size: "stretch",
-                minWidth: 280,
-                maxWidth: 1500,
-                minHeight: 220,
-                maxHeight: 950,
-                showCover: true,
-                usePortrait: true,
-                mobileScrollSupport: true,
-                flippingTime: 1800,
-                drawShadow: true,
-                maxShadowOpacity: 0.6
-            });
+        let currentPage = 0;
 
-            book.loadFromHTML(document.querySelectorAll(".page"));
-        });
+        function showPage() {
+            document.getElementById("tipImage").src = pages[currentPage];
+            document.querySelector(".page-viewer").scrollTop = 0;
+        }
 
         function goNext() {
-            if (book) book.flipNext();
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                showPage();
+            }
         }
 
         function goPrevious() {
-            if (book) book.flipPrev();
-        }
-
-      function openZoom() {
-    if (!book) return;
-
-    const currentPage = book.getCurrentPageIndex();
-    const safePage = Math.max(0, Math.min(currentPage, pages.length - 1));
-
-    window.open(pages[safePage], "_blank");
-}
-        function closeZoom() {
-            document.getElementById("zoomBox").style.display = "none";
+            if (currentPage > 0) {
+                currentPage--;
+                showPage();
+            }
         }
     </script>
 
