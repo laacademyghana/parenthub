@@ -15,46 +15,46 @@
 
         .page {
             min-height: 100vh;
-            padding: 20px;
+            padding: 18px;
             box-sizing: border-box;
             background: linear-gradient(#fff4d8, #ffffff);
         }
 
         .title {
-            font-size: 52px;
+            font-size: 48px;
             font-weight: bold;
+            margin: 5px 0;
             color: #071f4d;
-            margin: 10px 0;
         }
 
         .subtitle {
             display: inline-block;
             background: #008c7a;
             color: white;
-            padding: 10px 25px;
+            padding: 10px 24px;
             border-radius: 30px;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .nav-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
         }
 
         .nav-btn {
-            width: 82px;
-            height: 82px;
+            width: 78px;
+            height: 78px;
             border-radius: 50%;
             background: #071f4d;
             color: white;
             text-decoration: none;
             font-weight: bold;
-            font-size: 11px;
+            font-size: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -67,13 +67,44 @@
         }
 
         .nav-icon {
-            font-size: 28px;
-            margin-bottom: 4px;
+            font-size: 26px;
+            margin-bottom: 3px;
+        }
+
+        .difficulty-buttons {
+            margin: 10px 0 22px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .difficulty-btn {
+            border: none;
+            border-radius: 25px;
+            padding: 14px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.22);
+        }
+
+        .easy-btn {
+            background: #22a947;
+        }
+
+        .hard-btn {
+            background: #e84393;
+        }
+
+        .difficulty-btn.active {
+            outline: 5px solid #ffd54f;
         }
 
         .activity-area {
             display: grid;
-            grid-template-columns: 220px minmax(300px, 1fr) 260px;
+            grid-template-columns: 230px minmax(300px, 1fr) 250px;
             gap: 20px;
             max-width: 1200px;
             margin: auto;
@@ -83,56 +114,78 @@
         .guide {
             background: white;
             border: 4px solid #8a3fc7;
-            border-radius: 30px;
-            padding: 15px;
+            border-radius: 28px;
+            padding: 12px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
 
-        .guide-face {
-            font-size: 90px;
+        .guide img {
+            width: 100%;
+            border-radius: 20px;
+            display: block;
         }
 
         .speech {
-            font-size: 19px;
+            margin-top: 10px;
+            font-size: 17px;
             font-weight: bold;
             line-height: 1.4;
-            color: #071f4d;
         }
 
         .question-card {
             background: #fffef8;
             border: 6px solid #8a3fc7;
             border-radius: 28px;
-            padding: 30px 20px;
+            padding: 28px 20px;
             box-shadow: 0 8px 18px rgba(0,0,0,0.22);
-            min-height: 330px;
+            min-height: 360px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
         .question-number {
-            display: inline-block;
             background: #8a3fc7;
             color: white;
             padding: 10px 22px;
             border-radius: 25px;
-            font-size: 22px;
+            font-size: 21px;
             font-weight: bold;
-            margin: 0 auto 25px;
+            margin: 0 auto 16px;
         }
 
-        .category-label {
-            font-size: 20px;
+        .level-label {
+            color: #008c7a;
+            font-size: 18px;
             font-weight: bold;
             margin-bottom: 15px;
         }
 
         .question-text {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: bold;
             line-height: 1.25;
-            margin-bottom: 25px;
+            margin-bottom: 22px;
+        }
+
+        .answer-input {
+            width: 80%;
+            max-width: 420px;
+            margin: 0 auto 15px;
+            padding: 15px;
+            font-size: 26px;
+            border: 4px solid #071f4d;
+            border-radius: 18px;
+            text-align: center;
+            color: #071f4d;
+            font-weight: bold;
+        }
+
+        .feedback {
+            min-height: 35px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 6px;
         }
 
         .answer-box {
@@ -140,34 +193,37 @@
             background: #dff8ea;
             border: 3px dashed #00a88f;
             border-radius: 18px;
-            padding: 15px;
-            font-size: 32px;
+            padding: 12px;
+            font-size: 28px;
             font-weight: bold;
-            color: #071f4d;
             margin-top: 10px;
         }
 
         .action-buttons {
-            margin-top: 25px;
+            margin-top: 24px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 14px;
             flex-wrap: wrap;
         }
 
-        .answer-btn, .next-btn {
+        .action-btn {
             border: none;
-            border-radius: 30px;
+            border-radius: 28px;
             color: white;
             font-weight: bold;
-            font-size: 22px;
-            padding: 18px 30px;
+            font-size: 18px;
+            padding: 15px 22px;
             cursor: pointer;
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
         }
 
-        .answer-btn {
+        .check-btn {
             background: #22a947;
+        }
+
+        .show-btn {
+            background: #f39c12;
         }
 
         .next-btn {
@@ -178,12 +234,12 @@
             background: #fff8d9;
             border: 4px solid #ffd54f;
             border-radius: 25px;
-            padding: 20px;
+            padding: 18px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
 
         .progress-title {
-            font-size: 24px;
+            font-size: 23px;
             font-weight: bold;
             color: #8a3fc7;
             margin-bottom: 12px;
@@ -208,36 +264,24 @@
         .progress-count {
             font-size: 22px;
             font-weight: bold;
-            margin: 12px 0 25px;
+            margin: 12px 0 20px;
             color: #008c7a;
         }
 
-        .category-box {
-            color: white;
-            font-weight: bold;
-            border-radius: 14px;
-            padding: 12px;
-            margin: 10px 0;
+        .level-box {
+            background: white;
+            border-radius: 18px;
+            padding: 14px;
             font-size: 18px;
-        }
-
-        .numeracy {
-            background: #e84393;
-        }
-
-        .literacy {
-            background: #1e88e5;
-        }
-
-        .spelling {
-            background: #43a047;
+            font-weight: bold;
+            color: #071f4d;
+            margin-bottom: 14px;
         }
 
         .encourage {
-            margin-top: 22px;
             background: white;
             border-radius: 18px;
-            padding: 15px;
+            padding: 14px;
             font-size: 18px;
             font-weight: bold;
             color: #071f4d;
@@ -249,7 +293,7 @@
             }
 
             .guide {
-                max-width: 340px;
+                max-width: 240px;
                 margin: auto;
             }
 
@@ -259,24 +303,25 @@
             }
 
             .title {
-                font-size: 38px;
+                font-size: 36px;
             }
 
             .subtitle {
-                font-size: 18px;
+                font-size: 17px;
             }
 
             .question-text {
-                font-size: 30px;
+                font-size: 28px;
             }
 
-            .answer-box {
-                font-size: 25px;
+            .answer-input {
+                font-size: 22px;
+                width: 88%;
             }
 
-            .answer-btn, .next-btn {
-                font-size: 18px;
-                padding: 15px 22px;
+            .action-btn {
+                font-size: 16px;
+                padding: 13px 18px;
             }
         }
     </style>
@@ -306,27 +351,42 @@
             </a>
         </div>
 
+        <div class="difficulty-buttons">
+            <button id="easyButton" class="difficulty-btn easy-btn active" onclick="setDifficulty('easy')">
+                Easy: Nursery 2 - KG1
+            </button>
+
+            <button id="hardButton" class="difficulty-btn hard-btn" onclick="setDifficulty('hard')">
+                Hard: KG2 - Basic 1
+            </button>
+        </div>
+
         <div class="activity-area">
 
             <div class="guide">
-                <div class="guide-face">👧🏾</div>
+                <img src="ama.png" alt="Ama guide character">
                 <div class="speech">
                     Hi! I'm Ama.<br>
-                    Let's have fun and learn together!
+                    Type your answer and let's learn together!
                 </div>
             </div>
 
             <div>
                 <div class="question-card">
                     <div class="question-number" id="questionNumber">Question 1 of 20</div>
-                    <div class="category-label" id="categoryLabel">Numeracy</div>
+                    <div class="level-label" id="levelLabel">Easy Level</div>
                     <div class="question-text" id="questionText">Loading question...</div>
+
+                    <input id="userAnswer" class="answer-input" type="text" placeholder="Type answer here">
+
+                    <div class="feedback" id="feedback"></div>
                     <div class="answer-box" id="answerBox">Answer</div>
                 </div>
 
                 <div class="action-buttons">
-                    <button class="answer-btn" onclick="showAnswer()">👁 Show Answer</button>
-                    <button class="next-btn" onclick="nextQuestion()">➡ Next Question</button>
+                    <button class="action-btn check-btn" onclick="checkAnswer()">✅ Check Answer</button>
+                    <button class="action-btn show-btn" onclick="showAnswer()">👁 Show Answer</button>
+                    <button class="action-btn next-btn" onclick="nextQuestion()">➡ Next Question</button>
                 </div>
             </div>
 
@@ -337,10 +397,10 @@
                 </div>
                 <div class="progress-count" id="progressCount">1 / 20</div>
 
-                <div class="progress-title">Category</div>
-                <div class="category-box numeracy">1 Numeracy 🧮</div>
-                <div class="category-box literacy">A Literacy 📖</div>
-                <div class="category-box spelling">✏️ Spelling</div>
+                <div class="level-box" id="levelBox">
+                    Easy Level<br>
+                    Nursery 2 - KG1
+                </div>
 
                 <div class="encourage" id="encourageBox">
                     Great job!<br>
@@ -354,29 +414,50 @@
     </div>
 
     <script>
-        const questions = [
-            { category: "Numeracy", question: "What is 7 + 5?", answer: "12" },
-            { category: "Numeracy", question: "What is 10 - 3?", answer: "7" },
-            { category: "Numeracy", question: "What comes after 14?", answer: "15" },
-            { category: "Numeracy", question: "What is 2 + 2?", answer: "4" },
-            { category: "Numeracy", question: "Count by twos: 2, 4, 6, ___", answer: "8" },
-            { category: "Numeracy", question: "Which number is bigger: 9 or 6?", answer: "9" },
-            { category: "Numeracy", question: "What is 5 + 5?", answer: "10" },
+        const easyQuestions = [
+            { question: "What is 2 + 1?", answer: "3" },
+            { question: "What is 3 + 2?", answer: "5" },
+            { question: "What number comes after 5?", answer: "6" },
+            { question: "What number comes before 4?", answer: "3" },
+            { question: "Which is bigger: 2 or 5?", answer: "5" },
+            { question: "Write the first letter of apple.", answer: "a" },
+            { question: "Write the first letter of ball.", answer: "b" },
+            { question: "What letter comes after A?", answer: "b" },
+            { question: "What letter comes after C?", answer: "d" },
+            { question: "Spell cat.", answer: "cat" },
+            { question: "Spell dog.", answer: "dog" },
+            { question: "Fill in the missing letter: c_t", answer: "a" },
+            { question: "Fill in the missing letter: d_g", answer: "o" },
+            { question: "What is 1 + 1?", answer: "2" },
+            { question: "What is 4 + 1?", answer: "5" },
+            { question: "What number comes after 9?", answer: "10" },
+            { question: "Spell sun.", answer: "sun" },
+            { question: "Spell pen.", answer: "pen" },
+            { question: "Which is smaller: 8 or 3?", answer: "3" },
+            { question: "Write the missing number: 1, 2, __", answer: "3" }
+        ];
 
-            { category: "Literacy", question: "Which letter comes after B?", answer: "C" },
-            { category: "Literacy", question: "What sound does M make?", answer: "mmm" },
-            { category: "Literacy", question: "Which word rhymes with cat: hat or sun?", answer: "hat" },
-            { category: "Literacy", question: "Is A a capital letter?", answer: "Yes" },
-            { category: "Literacy", question: "What is the first letter in ball?", answer: "B" },
-            { category: "Literacy", question: "Which word starts with S: sun or dog?", answer: "sun" },
-
-            { category: "Spelling", question: "Spell the word cat.", answer: "C-A-T" },
-            { category: "Spelling", question: "Fill the missing letter: d_g", answer: "o — dog" },
-            { category: "Spelling", question: "Spell the word mum.", answer: "M-U-M" },
-            { category: "Spelling", question: "Which is correct: pen or pn?", answer: "pen" },
-            { category: "Spelling", question: "Fill the missing letter: b__k", answer: "oo — book" },
-            { category: "Spelling", question: "Spell the word fish.", answer: "F-I-S-H" },
-            { category: "Spelling", question: "Fill the missing letter: c_p", answer: "u — cup" }
+        const hardQuestions = [
+            { question: "What is 7 + 5?", answer: "12" },
+            { question: "What is 10 - 3?", answer: "7" },
+            { question: "What is 6 + 6?", answer: "12" },
+            { question: "What is 15 - 5?", answer: "10" },
+            { question: "Count by twos: 2, 4, 6, __", answer: "8" },
+            { question: "What number comes after 19?", answer: "20" },
+            { question: "Which is bigger: 18 or 12?", answer: "18" },
+            { question: "Write the missing number: 5, 10, 15, __", answer: "20" },
+            { question: "Spell fish.", answer: "fish" },
+            { question: "Spell book.", answer: "book" },
+            { question: "Spell school.", answer: "school" },
+            { question: "Fill in the missing letters: b__k", answer: "oo" },
+            { question: "Fill in the missing letter: f_sh", answer: "i" },
+            { question: "Which is correct: school or skool?", answer: "school" },
+            { question: "Which is correct: book or buk?", answer: "book" },
+            { question: "Write a word that starts with M.", answer: "mum" },
+            { question: "What letter comes after M?", answer: "n" },
+            { question: "What is 20 - 10?", answer: "10" },
+            { question: "What is 8 + 4?", answer: "12" },
+            { question: "Spell friend.", answer: "friend" }
         ];
 
         const encouragements = [
@@ -387,37 +468,81 @@
             "Super star!<br>Learning is fun!"
         ];
 
-        let shuffledQuestions = [];
+        let difficulty = "easy";
+        let currentQuestions = [];
         let currentIndex = 0;
 
         function shuffle(array) {
             return array.sort(() => Math.random() - 0.5);
         }
 
+        function normalize(text) {
+            return text.toLowerCase().trim();
+        }
+
+        function setDifficulty(level) {
+            difficulty = level;
+            document.getElementById("easyButton").classList.remove("active");
+            document.getElementById("hardButton").classList.remove("active");
+
+            if (level === "easy") {
+                document.getElementById("easyButton").classList.add("active");
+                document.getElementById("levelLabel").textContent = "Easy Level";
+                document.getElementById("levelBox").innerHTML = "Easy Level<br>Nursery 2 - KG1";
+            } else {
+                document.getElementById("hardButton").classList.add("active");
+                document.getElementById("levelLabel").textContent = "Hard Level";
+                document.getElementById("levelBox").innerHTML = "Hard Level<br>KG2 - Basic 1";
+            }
+
+            startQuiz();
+        }
+
         function startQuiz() {
-            shuffledQuestions = shuffle([...questions]).slice(0, 20);
+            const source = difficulty === "easy" ? easyQuestions : hardQuestions;
+            currentQuestions = shuffle([...source]).slice(0, 20);
             currentIndex = 0;
             showQuestion();
         }
 
         function showQuestion() {
-            const q = shuffledQuestions[currentIndex];
+            const q = currentQuestions[currentIndex];
 
             document.getElementById("questionNumber").textContent =
-                "Question " + (currentIndex + 1) + " of " + shuffledQuestions.length;
+                "Question " + (currentIndex + 1) + " of " + currentQuestions.length;
 
-            document.getElementById("categoryLabel").textContent = q.category;
             document.getElementById("questionText").textContent = q.question;
             document.getElementById("answerBox").style.display = "none";
-            document.getElementById("answerBox").textContent = q.answer;
+            document.getElementById("answerBox").textContent = "Answer: " + q.answer;
+            document.getElementById("userAnswer").value = "";
+            document.getElementById("feedback").textContent = "";
 
-            const progress = ((currentIndex + 1) / shuffledQuestions.length) * 100;
+            const progress = ((currentIndex + 1) / currentQuestions.length) * 100;
             document.getElementById("progressFill").style.width = progress + "%";
             document.getElementById("progressCount").textContent =
-                (currentIndex + 1) + " / " + shuffledQuestions.length;
+                (currentIndex + 1) + " / " + currentQuestions.length;
 
             document.getElementById("encourageBox").innerHTML =
                 encouragements[Math.floor(Math.random() * encouragements.length)];
+        }
+
+        function checkAnswer() {
+            const userAnswer = normalize(document.getElementById("userAnswer").value);
+            const correctAnswer = normalize(currentQuestions[currentIndex].answer);
+
+            if (userAnswer === "") {
+                document.getElementById("feedback").textContent = "Type your answer first.";
+                document.getElementById("feedback").style.color = "#e67e22";
+                return;
+            }
+
+            if (userAnswer === correctAnswer) {
+                document.getElementById("feedback").textContent = "Correct! Well done!";
+                document.getElementById("feedback").style.color = "#22a947";
+            } else {
+                document.getElementById("feedback").textContent = "Good try! Check again or show the answer.";
+                document.getElementById("feedback").style.color = "#e84393";
+            }
         }
 
         function showAnswer() {
@@ -425,7 +550,7 @@
         }
 
         function nextQuestion() {
-            if (currentIndex < shuffledQuestions.length - 1) {
+            if (currentIndex < currentQuestions.length - 1) {
                 currentIndex++;
                 showQuestion();
             } else {
@@ -434,6 +559,7 @@
                 document.getElementById("answerBox").style.display = "block";
                 document.getElementById("answerBox").textContent =
                     "You are a superstar!";
+                document.getElementById("feedback").textContent = "";
             }
         }
 
