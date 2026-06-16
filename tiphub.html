@@ -22,7 +22,7 @@
         }
 
         #book {
-            width: 80vw;
+            width: 90vw;
             height: 72vh;
         }
 
@@ -84,37 +84,24 @@
             margin-bottom: 2px;
         }
 
-       #zoomBox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: white;
-    z-index: 9999999;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    overflow: auto;
-}
-
-        #zoomImage {
-            width: 80%;
-            max-width: none;
-            height: auto;
+        #zoomBox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 9999999;
+            overflow: auto;
+            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .zoom-note {
-            position: fixed;
-            top: 2px;
-            left: 0;
-            right: 0;
-            z-index: 10000000;
-            color: #071f4d;
-            font-size: 14px;
-            font-weight: bold;
-            background: white;
-            padding: 8px;
+        #zoomImage {
+            width: 100%;
+            max-width: none;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         @media (max-width: 700px) {
@@ -147,7 +134,7 @@
             }
 
             #zoomImage {
-                width: 90%;
+                width: 100%;
             }
         }
     </style>
@@ -209,9 +196,8 @@
         </button>
     </div>
 
-    <div id="zoomBox">
-        <div class="zoom-note">Pinch or scroll to zoom. Tap here to close.</div>
-        <img id="zoomImage" src="" alt="Zoomed tip page" onclick="closeZoom()">
+    <div id="zoomBox" onclick="closeZoom()">
+        <img id="zoomImage" src="" alt="Zoomed tip page">
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
@@ -280,6 +266,11 @@
 
             document.getElementById("zoomImage").src = pages[safePage];
             document.getElementById("zoomBox").style.display = "block";
+
+            setTimeout(function () {
+                document.getElementById("zoomBox").scrollTop = 120;
+                document.getElementById("zoomBox").scrollLeft = 0;
+            }, 100);
         }
 
         function closeZoom() {
