@@ -1,7 +1,10 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
     <title>Little Angels Academy Parent Hub</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
@@ -12,11 +15,11 @@
             text-align: center;
         }
 
-       .banner {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+        .banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
         .content {
             padding: 30px 20px;
@@ -26,23 +29,32 @@
 
         h1 {
             color: #008c7a;
-            font-size: 36px;
+            font-size: 38px;
             margin-bottom: 20px;
         }
 
-        p {
-            font-size: 18px;
-            line-height: 1.6;
+        .welcome-text {
+            font-size: 20px;
+            line-height: 1.7;
+            max-width: 850px;
+            margin: 0 auto 35px auto;
+        }
+
+        .hub-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 20px;
         }
 
         .button {
-            display: inline-flex;
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 170px;
-            height: 170px;
-            margin: 15px;
+            width: 190px;
+            height: 190px;
             background: #071f4d;
             color: white;
             text-decoration: none;
@@ -50,8 +62,8 @@
             font-weight: bold;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-            font-size: 18px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            font-size: 22px;
         }
 
         .button:hover {
@@ -61,17 +73,42 @@
 
         .icon {
             display: block;
-            font-size: 80px;
-            margin-top: 12px;
+            font-size: 85px;
             line-height: 1;
+            margin-top: 10px;
         }
 
         .motto {
-            margin-top: 35px;
+            margin-top: 45px;
             margin-bottom: 30px;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
             color: #008c7a;
+        }
+
+        @media (max-width: 768px) {
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .welcome-text {
+                font-size: 18px;
+            }
+
+            .button {
+                width: 150px;
+                height: 150px;
+                font-size: 18px;
+            }
+
+            .icon {
+                font-size: 65px;
+            }
+
+            .motto {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
@@ -79,38 +116,37 @@
 <body>
 
     <img src="parenthub-banner-v2.png.png"
-     alt="Little Angels Academy Parent Hub Banner"
-     class="banner">
+         alt="Little Angels Academy Parent Hub Banner"
+         class="banner">
+
     <div class="content">
 
         <h1>Welcome to the Parent Hub</h1>
 
-        <p>
+        <p class="welcome-text">
             The Little Angels Academy Parent Hub supports parents and guardians with
-            creative learning ideas, educational resources, storybooks, activities
-            and practical tips to help children learn, grow and develop confidently
-            at home and school.
+            storybooks, learning activities, educational resources and practical tips
+            to help children learn, grow and develop confidently at home and school.
         </p>
 
-        <a class="button" href="parenthub.html">
-            Parent Hub
-            <span class="icon">⌂</span>
-        </a>
+        <div class="hub-buttons">
 
-        <a class="button" href="storybooks.html">
-            Book Hub
-            <span class="icon">📚</span>
-        </a>
+            <a class="button" href="storybooks.html">
+                Book Hub
+                <span class="icon">📚</span>
+            </a>
 
-        <a class="button" href="tiphub.html">
-            Tip Hub
-            <span class="icon">🤝</span>
-        </a>
+            <a class="button" href="tiphub.html">
+                Tip Hub
+                <span class="icon">🤝</span>
+            </a>
 
-        <a class="button" href="activityhub.html">
-            Activity Hub
-            <span class="icon">✏️</span>
-        </a>
+            <a class="button" href="activityhub.html">
+                Activity Hub
+                <span class="icon">✏️</span>
+            </a>
+
+        </div>
 
         <p class="motto">
             Nurturing hearts. Building minds. Shaping the future.
@@ -120,3 +156,4 @@
 
 </body>
 </html>
+```
