@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Activity Hub - Little Angels Academy Parent Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff8e8;
+            color: #071f4d;
+            text-align: center;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            background: linear-gradient(#fff4d8, #ffffff);
+        }
+
+        .title {
+            font-size: 52px;
+            font-weight: bold;
+            color: #071f4d;
+            margin: 10px 0;
+        }
+
+        .subtitle {
+            display: inline-block;
+            background: #008c7a;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: #071f4d;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        .nav-btn:hover {
+            background: #00a88f;
+        }
+
+        .nav-icon {
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .activity-area {
+            display: grid;
+            grid-template-columns: 220px minmax(300px, 1fr) 260px;
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+            align-items: center;
+        }
+
+        .guide {
+            background: white;
+            border: 4px solid #8a3fc7;
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .guide-face {
+            font-size: 90px;
+        }
+
+        .speech {
+            font-size: 19px;
+            font-weight: bold;
+            line-height: 1.4;
+            color: #071f4d;
+        }
+
+        .question-card {
+            background: #fffef8;
+            border: 6px solid #8a3fc7;
+            border-radius: 28px;
+            padding: 30px 20px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+            min-height: 330px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: #8a3fc7;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 auto 25px;
+        }
+
+        .category-label {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 42px;
+            font-weight: bold;
+            line-height: 1.25;
+            margin-bottom: 25px;
+        }
+
+        .answer-box {
+            display: none;
+            background: #dff8ea;
+            border: 3px dashed #00a88f;
+            border-radius: 18px;
+            padding: 15px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #071f4d;
+            margin-top: 10px;
+        }
+
+        .action-buttons {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .answer-btn, .next-btn {
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+            padding: 18px 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        .answer-btn {
+            background: #22a947;
+        }
+
+        .next-btn {
+            background: #087bdc;
+        }
+
+        .side-panel {
+            background: #fff8d9;
+            border: 4px solid #ffd54f;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .progress-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8a3fc7;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background: #eee3c8;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #d5c39b;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 5%;
+            background: #52c41a;
+            border-radius: 20px;
+        }
+
+        .progress-count {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 12px 0 25px;
+            color: #008c7a;
+        }
+
+        .category-box {
+            color: white;
+            font-weight: bold;
+            border-radius: 14px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .numeracy {
+            background: #e84393;
+        }
+
+        .literacy {
+            background: #1e88e5;
+        }
+
+        .spelling {
+            background: #43a047;
+        }
+
+        .encourage {
+            margin-top: 22px;
+            background: white;
+            border-radius: 18px;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #071f4d;
+        }
+
+        @media (max-width: 900px) {
+            .activity-area {
+                grid-template-columns: 1fr;
+            }
+
+            .guide {
+                max-width: 340px;
+                margin: auto;
+            }
+
+            .side-panel {
+                max-width: 340px;
+                margin: auto;
+            }
+
+            .title {
+                font-size: 38px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .question-text {
+                font-size: 30px;
+            }
+
+            .answer-box {
+                font-size: 25px;
+            }
+
+            .answer-btn, .next-btn {
+                font-size: 18px;
+                padding: 15px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <div class="title">🌟 Activity Hub 🌟</div>
+        <div class="subtitle">Let's Learn, Play and Grow!</div>
+
+        <div class="nav-buttons">
+            <a class="nav-btn" href="index.html">
+                <span class="nav-icon">⌂</span>
+                Home
+            </a>
+
+            <a class="nav-btn" href="storybooks.html">
+                <span class="nav-icon">📚</span>
+                Book Hub
+            </a>
+
+            <a class="nav-btn" href="tiphub.html">
+                <span class="nav-icon">🤝</span>
+                Tip Hub
+            </a>
+        </div>
+
+        <div class="activity-area">
+
+            <div class="guide">
+                <div class="guide-face">👧🏾</div>
+                <div class="speech">
+                    Hi! I'm Ama.<br>
+                    Let's have fun and learn together!
+                </div>
+            </div>
+
+            <div>
+                <div class="question-card">
+                    <div class="question-number" id="questionNumber">Question 1 of 20</div>
+                    <div class="category-label" id="categoryLabel">Numeracy</div>
+                    <div class="question-text" id="questionText">Loading question...</div>
+                    <div class="answer-box" id="answerBox">Answer</div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="answer-btn" onclick="showAnswer()">👁 Show Answer</button>
+                    <button class="next-btn" onclick="nextQuestion()">➡ Next Question</button>
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="progress-title">Your Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-count" id="progressCount">1 / 20</div>
+
+                <div class="progress-title">Category</div>
+                <div class="category-box numeracy">1 Numeracy 🧮</div>
+                <div class="category-box literacy">A Literacy 📖</div>
+                <div class="category-box spelling">✏️ Spelling</div>
+
+                <div class="encourage" id="encourageBox">
+                    Great job!<br>
+                    Keep trying!<br>
+                    You are amazing!
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            { category: "Numeracy", question: "What is 7 + 5?", answer: "12" },
+            { category: "Numeracy", question: "What is 10 - 3?", answer: "7" },
+            { category: "Numeracy", question: "What comes after 14?", answer: "15" },
+            { category: "Numeracy", question: "What is 2 + 2?", answer: "4" },
+            { category: "Numeracy", question: "Count by twos: 2, 4, 6, ___", answer: "8" },
+            { category: "Numeracy", question: "Which number is bigger: 9 or 6?", answer: "9" },
+            { category: "Numeracy", question: "What is 5 + 5?", answer: "10" },
+
+            { category: "Literacy", question: "Which letter comes after B?", answer: "C" },
+            { category: "Literacy", question: "What sound does M make?", answer: "mmm" },
+            { category: "Literacy", question: "Which word rhymes with cat: hat or sun?", answer: "hat" },
+            { category: "Literacy", question: "Is A a capital letter?", answer: "Yes" },
+            { category: "Literacy", question: "What is the first letter in ball?", answer: "B" },
+            { category: "Literacy", question: "Which word starts with S: sun or dog?", answer: "sun" },
+
+            { category: "Spelling", question: "Spell the word cat.", answer: "C-A-T" },
+            { category: "Spelling", question: "Fill the missing letter: d_g", answer: "o — dog" },
+            { category: "Spelling", question: "Spell the word mum.", answer: "M-U-M" },
+            { category: "Spelling", question: "Which is correct: pen or pn?", answer: "pen" },
+            { category: "Spelling", question: "Fill the missing letter: b__k", answer: "oo — book" },
+            { category: "Spelling", question: "Spell the word fish.", answer: "F-I-S-H" },
+            { category: "Spelling", question: "Fill the missing letter: c_p", answer: "u — cup" }
+        ];
+
+        const encouragements = [
+            "Great job!<br>Keep trying!<br>You are amazing!",
+            "Fantastic work!<br>You are learning so well!",
+            "Well done!<br>Keep going!",
+            "Excellent thinking!<br>You can do it!",
+            "Super star!<br>Learning is fun!"
+        ];
+
+        let shuffledQuestions = [];
+        let currentIndex = 0;
+
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function startQuiz() {
+            shuffledQuestions = shuffle([...questions]).slice(0, 20);
+            currentIndex = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = shuffledQuestions[currentIndex];
+
+            document.getElementById("questionNumber").textContent =
+                "Question " + (currentIndex + 1) + " of " + shuffledQuestions.length;
+
+            document.getElementById("categoryLabel").textContent = q.category;
+            document.getElementById("questionText").textContent = q.question;
+            document.getElementById("answerBox").style.display = "none";
+            document.getElementById("answerBox").textContent = q.answer;
+
+            const progress = ((currentIndex + 1) / shuffledQuestions.length) * 100;
+            document.getElementById("progressFill").style.width = progress + "%";
+            document.getElementById("progressCount").textContent =
+                (currentIndex + 1) + " / " + shuffledQuestions.length;
+
+            document.getElementById("encourageBox").innerHTML =
+                encouragements[Math.floor(Math.random() * encouragements.length)];
+        }
+
+        function showAnswer() {
+            document.getElementById("answerBox").style.display = "block";
+        }
+
+        function nextQuestion() {
+            if (currentIndex < shuffledQuestions.length - 1) {
+                currentIndex++;
+                showQuestion();
+            } else {
+                document.getElementById("questionText").textContent =
+                    "Well done! You finished all the questions!";
+                document.getElementById("answerBox").style.display = "block";
+                document.getElementById("answerBox").textContent =
+                    "You are a superstar!";
+            }
+        }
+
+        startQuiz();
+    </script>
+
+</body>
+</html>
