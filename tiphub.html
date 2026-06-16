@@ -258,21 +258,14 @@
             if (book) book.flipPrev();
         }
 
-        function openZoom() {
-            if (!book) return;
+      function openZoom() {
+    if (!book) return;
 
-            const currentPage = book.getCurrentPageIndex();
-            const safePage = Math.max(0, Math.min(currentPage, pages.length - 1));
+    const currentPage = book.getCurrentPageIndex();
+    const safePage = Math.max(0, Math.min(currentPage, pages.length - 1));
 
-            document.getElementById("zoomImage").src = pages[safePage];
-            document.getElementById("zoomBox").style.display = "block";
-
-            setTimeout(function () {
-                document.getElementById("zoomBox").scrollTop = 120;
-                document.getElementById("zoomBox").scrollLeft = 0;
-            }, 100);
-        }
-
+    window.open(pages[safePage], "_blank");
+}
         function closeZoom() {
             document.getElementById("zoomBox").style.display = "none";
         }
