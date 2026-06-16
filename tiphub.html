@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Tip Hub</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
     <style>
         body {
@@ -26,6 +26,11 @@
             height: 72vh;
         }
 
+        .page {
+            background: white;
+            overflow: hidden;
+        }
+
         .page img {
             width: 100%;
             height: 100%;
@@ -39,19 +44,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 10px;
             background: white;
         }
 
         .round-btn {
-            width: 78px;
-            height: 78px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             border: none;
             background: #071f4d;
             color: white;
             font-weight: bold;
-            font-size: 11px;
+            font-size: 9px;
             cursor: pointer;
             text-decoration: none;
             display: flex;
@@ -59,20 +64,89 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
         }
 
         .round-btn:hover {
             background: #00a88f;
+            transform: scale(1.08);
         }
 
         .icon {
-            font-size: 26px;
+            font-size: 21px;
+            line-height: 1;
             margin-bottom: 4px;
         }
 
         .big-icon {
-            font-size: 34px;
+            font-size: 28px;
+            line-height: 1;
             margin-bottom: 2px;
+        }
+
+        #zoomBox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 9999999;
+            overflow: auto;
+            text-align: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        #zoomImage {
+            width: 130%;
+            max-width: none;
+            height: auto;
+        }
+
+        .zoom-note {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            right: 0;
+            z-index: 10000000;
+            color: #071f4d;
+            font-size: 14px;
+            font-weight: bold;
+            background: white;
+            padding: 8px;
+        }
+
+        @media (max-width: 700px) {
+            .book-wrapper {
+                height: calc(100vh - 95px);
+            }
+
+            #book {
+                width: 96vw;
+                height: 72vh;
+            }
+
+            .controls {
+                height: 90px;
+                gap: 5px;
+            }
+
+            .round-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 8px;
+            }
+
+            .icon {
+                font-size: 18px;
+            }
+
+            .big-icon {
+                font-size: 23px;
+            }
+
+            #zoomImage {
+                width: 180%;
+            }
         }
     </style>
 </head>
@@ -107,16 +181,66 @@
     </div>
 
     <div class="controls">
-        <a class="round-btn" href="index.html"><span class="icon">⌂</span>Home</a>
-        <button class="round-btn" onclick="goPrevious()"><span class="big-icon">⏮</span>Previous</button>
-        <a class="round-btn" href="index.html"><span class="icon">🤝</span>Tip Hub</a>
-        <button class="round-btn" onclick="goNext()"><span class="big-icon">⏭</span>Next</button>
+        <a class="round-btn" href="index.html">
+            <span class="icon">⌂</span>
+            Home
+        </a>
+
+        <button class="round-btn" type="button" onclick="goPrevious()">
+            <span class="big-icon">⏮</span>
+            Previous
+        </button>
+
+        <button class="round-btn" type="button" onclick="openZoom()">
+            <span class="big-icon">🔍</span>
+            Zoom
+        </button>
+
+        <a class="round-btn" href="index.html">
+            <span class="icon">🤝</span>
+            Tip Hub
+        </a>
+
+        <button class="round-btn" type="button" onclick="goNext()">
+            <span class="big-icon">⏭</span>
+            Next
+        </button>
+    </div>
+
+    <div id="zoomBox">
+        <div class="zoom-note">Pinch or scroll to zoom. Tap here to close.</div>
+        <img id="zoomImage" src="" alt="Zoomed tip page" onclick="closeZoom()">
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <script>
         let book;
+
+        const pages = [
+            "phwk1.png",
+            "phwk2.png",
+            "phwk3.png",
+            "phwk4.png",
+            "phwk5.png",
+            "phwk6.png",
+            "phwk7.png",
+            "phwk8.png",
+            "phwk9.png",
+            "phwk10.png",
+            "phwk11.png",
+            "phwk12.png",
+            "phwk13.png",
+            "phwk14.png",
+            "phwk15.png",
+            "phwk16.png",
+            "phwk17.png",
+            "phwk18.png",
+            "phwk19.png",
+            "phwk20.png",
+            "phwk21.png",
+            "phwk22.png"
+        ];
 
         window.addEventListener("load", function () {
             book = new St.PageFlip(document.getElementById("book"), {
@@ -144,6 +268,20 @@
 
         function goPrevious() {
             if (book) book.flipPrev();
+        }
+
+        function openZoom() {
+            if (!book) return;
+
+            const currentPage = book.getCurrentPageIndex();
+            const safePage = Math.max(0, Math.min(currentPage, pages.length - 1));
+
+            document.getElementById("zoomImage").src = pages[safePage];
+            document.getElementById("zoomBox").style.display = "block";
+        }
+
+        function closeZoom() {
+            document.getElementById("zoomBox").style.display = "none";
         }
     </script>
 
