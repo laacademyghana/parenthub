@@ -84,17 +84,19 @@
             margin-bottom: 2px;
         }
 
-        #zoomBox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: white;
-            z-index: 9999999;
-            overflow: auto;
-            text-align: center;
-            padding: 0;
-            box-sizing: border-box;
-        }
+       #zoomBox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 9999999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: auto;
+}
 
         #zoomImage {
             width: 80%;
