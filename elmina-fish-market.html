@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Elmina Fish Market</title>
+    <title>Counting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
     <style>
@@ -44,19 +44,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 14px;
+            gap: 20px;
             background: white;
         }
 
         .round-btn {
-            width: 74px;
-            height: 74px;
+            width: 78px;
+            height: 78px;
             border-radius: 50%;
             border: none;
             background: #071f4d;
             color: white;
             font-weight: bold;
-            font-size: 10px;
+            font-size: 11px;
             cursor: pointer;
             text-decoration: none;
             display: flex;
@@ -73,33 +73,15 @@
         }
 
         .icon {
-            font-size: 22px;
+            font-size: 26px;
             line-height: 1;
             margin-bottom: 4px;
         }
 
         .big-icon {
-            font-size: 30px;
+            font-size: 34px;
             line-height: 1;
             margin-bottom: 2px;
-        }
-
-        #zoomBox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: white;
-            z-index: 9999999;
-            overflow: auto;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        #zoomImage {
-            width: 100%;
-            max-width: none;
-            height: auto;
         }
 
         @media (max-width: 700px) {
@@ -114,21 +96,21 @@
 
             .controls {
                 height: 90px;
-                gap: 6px;
+                gap: 10px;
             }
 
             .round-btn {
-                width: 62px;
-                height: 62px;
-                font-size: 8px;
+                width: 66px;
+                height: 66px;
+                font-size: 9px;
             }
 
             .icon {
-                font-size: 18px;
+                font-size: 21px;
             }
 
             .big-icon {
-                font-size: 24px;
+                font-size: 28px;
             }
         }
     </style>
@@ -138,22 +120,18 @@
 
     <div class="book-wrapper">
         <div id="book">
-            <div class="page"><img src="elmina1.png"></div>
-            <div class="page"><img src="elmina2.png"></div>
-            <div class="page"><img src="elmina3.png"></div>
-            <div class="page"><img src="elmina4.png"></div>
-            <div class="page"><img src="elmina5.png"></div>
-            <div class="page"><img src="elmina6.png"></div>
-            <div class="page"><img src="elmina7.png"></div>
-            <div class="page"><img src="elmina8.png"></div>
-            <div class="page"><img src="elmina9.png"></div>
-            <div class="page"><img src="elmina10.png"></div>
-            <div class="page"><img src="elmina11.png"></div>
-            <div class="page"><img src="elmina12.png"></div>
-            <div class="page"><img src="elmina13.png"></div>
-            <div class="page"><img src="elmina14.png"></div>
-            <div class="page"><img src="elmina15.png"></div>
-            <div class="page"><img src="elmina16.png"></div>
+            <div class="page"><img src="counting1.png" alt="Counting page 1"></div>
+            <div class="page"><img src="counting2.png" alt="Counting page 2"></div>
+            <div class="page"><img src="counting3.png" alt="Counting page 3"></div>
+            <div class="page"><img src="counting4.png" alt="Counting page 4"></div>
+            <div class="page"><img src="counting5.png" alt="Counting page 5"></div>
+            <div class="page"><img src="counting6.png" alt="Counting page 6"></div>
+            <div class="page"><img src="counting7.png" alt="Counting page 7"></div>
+            <div class="page"><img src="counting8.png" alt="Counting page 8"></div>
+            <div class="page"><img src="counting9.png" alt="Counting page 9"></div>
+            <div class="page"><img src="counting10.png" alt="Counting page 10"></div>
+            <div class="page"><img src="counting11.png" alt="Counting page 11"></div>
+            <div class="page"><img src="counting12.png" alt="Counting page 12"></div>
         </div>
     </div>
 
@@ -169,11 +147,6 @@
             Previous
         </button>
 
-        <button class="round-btn" type="button" onclick="openZoom()">
-            <span class="big-icon">🔍</span>
-            Zoom
-        </button>
-
         <a class="round-btn" href="storybooks.html">
             <span class="icon">📚</span>
             Book Hub
@@ -186,33 +159,43 @@
 
     </div>
 
-    <div id="zoomBox" onclick="closeZoom()">
-        <img id="zoomImage" src="" alt="Zoomed book page">
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <script>
         let book;
+        let soundsUnlocked = false;
+        let isButtonFlip = false;
 
-        const pages = [
-            "elmina1.png",
-            "elmina2.png",
-            "elmina3.png",
-            "elmina4.png",
-            "elmina5.png",
-            "elmina6.png",
-            "elmina7.png",
-            "elmina8.png",
-            "elmina9.png",
-            "elmina10.png",
-            "elmina11.png",
-            "elmina12.png",
-            "elmina13.png",
-            "elmina14.png",
-            "elmina15.png",
-            "elmina16.png"
-        ];
+        const pageSound = new Audio("page.mp3");
+        pageSound.preload = "auto";
+        pageSound.volume = 1;
+
+        function unlockPageSound() {
+            if (soundsUnlocked) return;
+            soundsUnlocked = true;
+
+            pageSound.muted = true;
+            pageSound.play()
+                .then(() => {
+                    pageSound.pause();
+                    pageSound.currentTime = 0;
+                    pageSound.muted = false;
+                })
+                .catch(() => {
+                    pageSound.muted = false;
+                });
+        }
+
+        function playPageSound() {
+            unlockPageSound();
+
+            try {
+                const freshSound = pageSound.cloneNode(true);
+                freshSound.currentTime = 0;
+                freshSound.volume = 1;
+                freshSound.play().catch(() => {});
+            } catch (error) {}
+        }
 
         window.addEventListener("load", function () {
             book = new St.PageFlip(document.getElementById("book"), {
@@ -233,32 +216,37 @@
             });
 
             book.loadFromHTML(document.querySelectorAll(".page"));
+
+            book.on("flip", function () {
+                if (!isButtonFlip) {
+                    playPageSound();
+                }
+
+                isButtonFlip = false;
+            });
         });
 
+        document.addEventListener("click", unlockPageSound, { once: false });
+        document.addEventListener("touchstart", unlockPageSound, { once: false });
+
         function goNext() {
+            unlockPageSound();
+
             if (book) {
+                isButtonFlip = true;
+                playPageSound();
                 book.flipNext();
             }
         }
 
         function goPrevious() {
+            unlockPageSound();
+
             if (book) {
+                isButtonFlip = true;
+                playPageSound();
                 book.flipPrev();
             }
-        }
-
-        function openZoom() {
-            if (!book) return;
-
-            const currentPage = book.getCurrentPageIndex();
-            const safePage = Math.max(0, Math.min(currentPage, pages.length - 1));
-
-            document.getElementById("zoomImage").src = pages[safePage];
-            document.getElementById("zoomBox").style.display = "block";
-        }
-
-        function closeZoom() {
-            document.getElementById("zoomBox").style.display = "none";
         }
     </script>
 
