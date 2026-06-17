@@ -1378,7 +1378,7 @@
          if (lcGame && !lcGame.baddieActive && !lcGame.ended) {
         releaseBaddie();
     }
-   }, 5000);
+   }, 6000);
     
         function drawLetterMaze() {
             const grid = document.getElementById("lcMazeGrid");
@@ -1623,7 +1623,7 @@
             lcGame.baddieActive = true;
             document.getElementById("lcMessage").textContent = "Oh no! The purple baddie is coming!";
             renderLetterObjects();
-            lcBaddieTimer = setInterval(moveBaddie, lcGame.level === "easy" ? 950 : 750);
+           lcBaddieTimer = setInterval(moveBaddie, 2000);
         }
 
         function moveBaddie() {
