@@ -1374,13 +1374,15 @@
             updateLetterHud();
             updateLetterPlayer();
           
-       setTimeout(() => {
-         if (lcGame && !lcGame.baddieActive && !lcGame.ended) {
+      setTimeout(() => {
+    if (lcGame && !lcGame.baddieActive && !lcGame.ended) {
         releaseBaddie();
     }
-   }, 6000);
-    
-        function drawLetterMaze() {
+}, 60000);
+
+}
+
+function drawLetterMaze() {
             const grid = document.getElementById("lcMazeGrid");
             grid.innerHTML = "";
             const layout = LC_MAZES[lcGame.puzzle];
