@@ -644,6 +644,97 @@
                 font-size: 22px;
             }
         }
+
+
+        /* UPDATED LETTER CHOP LAYOUT */
+        .letter-play-layout {
+            display: grid;
+            grid-template-columns: 210px minmax(0, 1fr);
+            gap: 18px;
+            align-items: start;
+        }
+        .letter-guide {
+            background: white;
+            border: 4px solid #8a3fc7;
+            border-radius: 28px;
+            padding: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        .letter-guide video {
+            width: 100%;
+            border-radius: 20px;
+            display: block;
+        }
+        .target-word {
+            color: #ffd54f;
+            font-size: 30px;
+            letter-spacing: 4px;
+            margin-left: 8px;
+            display: inline-block;
+        }
+        .timer-box {
+            color: #e84393 !important;
+            font-size: 22px !important;
+        }
+        .maze-dot::after {
+            width: 12px;
+            height: 12px;
+        }
+        .maze-dot.eaten::after { display: none; }
+        .player-sprite {
+            background: transparent !important;
+            mix-blend-mode: normal;
+            width: calc(100% / 16 * 0.92);
+            height: calc(100% / 10 * 0.92);
+        }
+        .letter-object {
+            width: calc(100% / 16 * 1.02);
+            height: calc(100% / 10 * 1.02);
+        }
+        .letter-object.spit { animation: spit 0.45s ease; }
+        @keyframes spit {
+            0% { transform: translate(-50%, -50%) scale(1.15); }
+            50% { transform: translate(-50%, -80%) scale(1.3) rotate(-14deg); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        .berry-object {
+            width: calc(100% / 16 * 0.68);
+            height: calc(100% / 10 * 0.68);
+        }
+        .bad-object {
+            width: calc(100% / 16 * 0.9);
+            height: calc(100% / 10 * 0.9);
+            transition: left 0.45s linear, top 0.45s linear;
+        }
+        @media (max-width: 900px) {
+            .letter-play-layout { grid-template-columns: 1fr; }
+            .letter-guide { max-width: 250px; margin: 0 auto 12px; }
+            .letter-card { padding: 10px 6px; border-radius: 22px; border-width: 4px; }
+            .maze-wrap {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                border-left: 0;
+                border-right: 0;
+                border-radius: 0;
+                aspect-ratio: 16 / 13;
+            }
+            .letter-object {
+                width: calc(100% / 16 * 1.18);
+                height: calc(100% / 10 * 1.18);
+            }
+            .player-sprite {
+                width: calc(100% / 16 * 1.08);
+                height: calc(100% / 10 * 1.08);
+            }
+            .word-bar { font-size: 18px; padding: 9px; }
+            .target-word { display: block; font-size: 28px; margin-top: 5px; }
+            .letter-controls {
+                grid-template-columns: 88px 88px 88px;
+                grid-template-rows: 72px 72px 72px;
+            }
+            .control-btn { width: 84px; height: 68px; }
+        }
+
     </style>
 </head>
 
@@ -765,57 +856,81 @@
 
         <div class="letter-start-screen" id="letterStartScreen">
             <div class="start-card">
+                <video class="ama-start" autoplay loop muted playsinline>
+                    <source src="ama.mp4" type="video/mp4">
+                </video>
+
                 <img src="letterchopcover.png" alt="Letter Chop" class="game-cover" style="max-width:620px;margin:auto;">
-                <h1>Letter Chop</h1>
-                <h2>Choose your level</h2>
+
+                <h1>Hi! I'm Ama.</h1>
+                <h2>What is your name?</h2>
+
+                <input id="letterChildName" class="name-input" type="text" placeholder="Type your name">
+
+                <h2>Choose your Letter Chop level</h2>
 
                 <div class="difficulty-buttons">
                     <button class="difficulty-btn easy-btn" onclick="beginLetterChop('easy')">
-                        Easy: 5 simple words
+                        Easy: 4 minutes
                     </button>
 
                     <button class="difficulty-btn hard-btn" onclick="beginLetterChop('hard')">
-                        Hard: 5 longer words
+                        Hard: 3 minutes
                     </button>
                 </div>
             </div>
         </div>
 
         <div class="letter-game-screen" id="letterGameScreen">
-            <div class="letter-card">
-                <div class="letter-hud">
-                    <div>Level: <span id="lcLevel">Easy</span></div>
-                    <div>Puzzle: <span id="lcPuzzle">1</span> / 5</div>
-                    <div>Score: <span id="lcScore">0</span></div>
-                    <div>Idle: <span id="lcIdle">0</span>s</div>
+            <div class="letter-play-layout">
+
+                <div class="letter-guide">
+                    <video id="lcAmaGuide" autoplay loop muted playsinline>
+                        <source src="amatalking.mp4" type="video/mp4">
+                    </video>
+
+                    <div class="speech" id="lcAmaSpeech">
+                        Come on, you can do it!
+                    </div>
                 </div>
 
-                <div class="word-bar">
-                    Build Word:
-                    <span id="lcWordSlots" class="word-slots"></span>
+                <div class="letter-card">
+                    <div class="letter-hud">
+                        <div>Level: <span id="lcLevel">Easy</span></div>
+                        <div>Puzzle: <span id="lcPuzzle">1</span> / 5</div>
+                        <div>Score: <span id="lcScore">0</span></div>
+                        <div class="timer-box">Time: <span id="lcTimer">04:00</span></div>
+                    </div>
+
+                    <div class="word-bar">
+                        Build Word:
+                        <span id="lcTargetWord" class="target-word">CAT</span>
+                        <span id="lcWordSlots" class="word-slots"></span>
+                    </div>
+
+                    <div id="lcMazeWrap" class="maze-wrap">
+                        <div id="lcMazeGrid" class="maze-grid"></div>
+                        <img id="lcPlayer" class="player-sprite" src="pmclosed.png" alt="">
+                    </div>
+
+                    <div id="lcMessage" class="letter-message">Eat the letters in the correct order.</div>
+
+                    <div class="letter-controls">
+                        <button class="control-btn ctrl-up" onclick="moveLetterPlayer('up')" aria-label="Move up">
+                            <img src="up.PNG" alt="Up">
+                        </button>
+                        <button class="control-btn ctrl-left" onclick="moveLetterPlayer('left')" aria-label="Move left">
+                            <img src="left.PNG" alt="Left">
+                        </button>
+                        <button class="control-btn ctrl-right" onclick="moveLetterPlayer('right')" aria-label="Move right">
+                            <img src="right.PNG" alt="Right">
+                        </button>
+                        <button class="control-btn ctrl-down" onclick="moveLetterPlayer('down')" aria-label="Move down">
+                            <img src="down.PNG" alt="Down">
+                        </button>
+                    </div>
                 </div>
 
-                <div id="lcMazeWrap" class="maze-wrap">
-                    <div id="lcMazeGrid" class="maze-grid"></div>
-                    <img id="lcPlayer" class="player-sprite" src="pmclosed.png" alt="">
-                </div>
-
-                <div id="lcMessage" class="letter-message">Eat the letters in the correct order.</div>
-
-                <div class="letter-controls">
-                    <button class="control-btn ctrl-up" onclick="moveLetterPlayer('up')" aria-label="Move up">
-                        <img src="up.PNG" alt="Up">
-                    </button>
-                    <button class="control-btn ctrl-left" onclick="moveLetterPlayer('left')" aria-label="Move left">
-                        <img src="left.PNG" alt="Left">
-                    </button>
-                    <button class="control-btn ctrl-right" onclick="moveLetterPlayer('right')" aria-label="Move right">
-                        <img src="right.PNG" alt="Right">
-                    </button>
-                    <button class="control-btn ctrl-down" onclick="moveLetterPlayer('down')" aria-label="Move down">
-                        <img src="down.PNG" alt="Down">
-                    </button>
-                </div>
             </div>
         </div>
 
@@ -850,7 +965,7 @@
 
             <div class="score-card">
                 <h2>Try Again!</h2>
-                <div>The purple baddie caught you.</div>
+                <div id="tryAgainReason">The purple baddie caught you.</div>
                 <div class="score-big">0</div>
                 <div>Your points have been lost.</div>
             </div>
@@ -1199,10 +1314,13 @@
 
         let lcGame = null;
         let lcMouthTimer = null;
+        let lcCountdownTimer = null;
         let lcIdleTimer = null;
         let lcBaddieTimer = null;
 
         function beginLetterChop(level) {
+            const typedName = document.getElementById("letterChildName").value.trim();
+            childName = typedName || "Friend";
             hideAllScreens();
             document.getElementById("letterGameScreen").style.display = "block";
             startLetterGame(level);
@@ -1214,15 +1332,17 @@
             lcGame = {
                 level: level,
                 words: level === "easy" ? LC_EASY_WORDS : LC_HARD_WORDS,
-                idleLimit: level === "easy" ? 60 : 45,
+                idleLimit: level === "easy" ? 60 : 30,
+                timeLeft: level === "easy" ? 240 : 180,
                 puzzle: 0,
                 score: 0,
-                maxScore: 5 * 10 + 15 * 5,
+                maxScore: 5 * 10 + 15 * 5 + 5 * 100,
                 word: "",
                 nextLetter: 0,
                 player: { x: 1, y: 1, dir: "right", moving: false },
                 letters: [],
                 berries: [],
+                eatenDots: new Set(),
                 baddie: null,
                 baddieActive: false,
                 idleSeconds: 0,
@@ -1230,6 +1350,7 @@
             };
 
             document.getElementById("lcLevel").textContent = level === "easy" ? "Easy" : "Hard";
+            document.getElementById("lcAmaSpeech").innerHTML = "Come on " + childName + ",<br>you can do it!";
             loadLetterPuzzle();
             startLetterTimers();
         }
@@ -1240,12 +1361,14 @@
             lcGame.player = { x: 1, y: 1, dir: "right", moving: false };
             lcGame.letters = [];
             lcGame.berries = [];
+            lcGame.eatenDots = new Set();
             lcGame.baddie = null;
             lcGame.baddieActive = false;
             lcGame.idleSeconds = 0;
             lcGame.ended = false;
 
             document.getElementById("lcPuzzle").textContent = lcGame.puzzle + 1;
+            document.getElementById("lcTargetWord").textContent = lcGame.word;
             document.getElementById("lcMessage").textContent = "Eat the letters in the correct order.";
             drawLetterMaze();
             placeLetterObjects();
@@ -1263,7 +1386,10 @@
             for (let y = 0; y < layout.length; y++) {
                 for (let x = 0; x < layout[y].length; x++) {
                     const cell = document.createElement("div");
+                    cell.dataset.x = x;
+                    cell.dataset.y = y;
                     cell.className = layout[y][x] === "W" ? "maze-cell maze-wall" : "maze-cell maze-dot";
+                    if (layout[y][x] !== "W" && x === 1 && y === 1) cell.classList.add("eaten");
                     grid.appendChild(cell);
                 }
             }
@@ -1275,12 +1401,9 @@
 
             for (let y = 0; y < layout.length; y++) {
                 for (let x = 0; x < layout[y].length; x++) {
-                    if (layout[y][x] !== "W" && !(x === 1 && y === 1)) {
-                        cells.push({ x: x, y: y });
-                    }
+                    if (layout[y][x] !== "W" && !(x === 1 && y === 1)) cells.push({ x: x, y: y });
                 }
             }
-
             return cells;
         }
 
@@ -1292,17 +1415,13 @@
                 letter: letter,
                 x: cells[index].x,
                 y: cells[index].y,
-                collected: false
+                collected: false,
+                wrongBounce: false
             }));
 
             const occupied = new Set(lcGame.letters.map(item => item.x + "," + item.y));
             const berryCells = cells.filter(cell => !occupied.has(cell.x + "," + cell.y)).slice(0, 3);
-
-            lcGame.berries = berryCells.map(cell => ({
-                x: cell.x,
-                y: cell.y,
-                collected: false
-            }));
+            lcGame.berries = berryCells.map(cell => ({ x: cell.x, y: cell.y, collected: false }));
         }
 
         function renderLetterSlots() {
@@ -1323,18 +1442,17 @@
 
             lcGame.letters.forEach(item => {
                 if (item.collected) return;
-
                 const img = document.createElement("img");
-                img.className = "letter-object";
+                img.className = item.wrongBounce ? "letter-object spit" : "letter-object";
                 img.src = item.letter + ".png";
                 img.alt = item.letter;
                 positionInMaze(img, item.x, item.y);
                 wrap.appendChild(img);
+                item.wrongBounce = false;
             });
 
             lcGame.berries.forEach(item => {
                 if (item.collected) return;
-
                 const img = document.createElement("img");
                 img.className = "berry-object";
                 img.src = "strawberry.PNG";
@@ -1360,29 +1478,28 @@
 
         function updateLetterPlayer() {
             const player = document.getElementById("lcPlayer");
-            player.style.left = (lcGame.player.x * 100 / 16 + (100 / 16 * 0.09)) + "%";
-            player.style.top = (lcGame.player.y * 100 / 10 + (100 / 10 * 0.09)) + "%";
+            player.style.left = (lcGame.player.x * 100 / 16 + (100 / 16 * 0.04)) + "%";
+            player.style.top = (lcGame.player.y * 100 / 10 + (100 / 10 * 0.04)) + "%";
             player.style.transform = "rotate(" + LC_ANGLES[lcGame.player.dir] + "deg)";
         }
 
         function updateLetterHud() {
             document.getElementById("lcScore").textContent = lcGame.score;
-            document.getElementById("lcIdle").textContent = lcGame.idleSeconds;
+            document.getElementById("lcTimer").textContent = formatTime(lcGame.timeLeft);
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return String(mins).padStart(2, "0") + ":" + String(secs).padStart(2, "0");
         }
 
         function moveLetterPlayer(direction) {
             if (!lcGame || lcGame.ended) return;
-
             resetLetterIdle();
             lcGame.player.dir = direction;
 
-            const moves = {
-                right: { x: 1, y: 0 },
-                left: { x: -1, y: 0 },
-                up: { x: 0, y: -1 },
-                down: { x: 0, y: 1 }
-            };
-
+            const moves = { right: { x: 1, y: 0 }, left: { x: -1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
             const nextX = lcGame.player.x + moves[direction].x;
             const nextY = lcGame.player.y + moves[direction].y;
 
@@ -1396,12 +1513,22 @@
             lcGame.player.moving = true;
 
             updateLetterPlayer();
+            eatYellowDot(nextX, nextY);
             checkLetterCollections();
             checkBaddieCatch();
 
-            setTimeout(() => {
-                if (lcGame) lcGame.player.moving = false;
-            }, 180);
+            setTimeout(() => { if (lcGame) lcGame.player.moving = false; }, 180);
+        }
+
+        function eatYellowDot(x, y) {
+            const key = x + "," + y;
+            if (!lcGame.eatenDots.has(key)) {
+                lcGame.eatenDots.add(key);
+                lcGame.score += 1;
+                const cell = document.querySelector('.maze-cell[data-x="' + x + '"][data-y="' + y + '"]');
+                if (cell) cell.classList.add("eaten");
+                updateLetterHud();
+            }
         }
 
         function isLetterWall(x, y) {
@@ -1438,7 +1565,9 @@
                         return;
                     }
                 } else {
-                    document.getElementById("lcMessage").textContent = "Find " + targetLetter + " first.";
+                    lcGame.score = Math.max(0, lcGame.score - 1);
+                    foundLetter.wrongBounce = true;
+                    document.getElementById("lcMessage").textContent = "Oops! Find " + targetLetter + " first. -1 point.";
                 }
             }
 
@@ -1449,12 +1578,7 @@
 
         function nextLetterPuzzle() {
             if (!lcGame) return;
-
-            if (lcGame.puzzle >= 4) {
-                finishLetterGame();
-                return;
-            }
-
+            if (lcGame.puzzle >= 4) { finishLetterGame(); return; }
             lcGame.puzzle++;
             loadLetterPuzzle();
         }
@@ -1462,9 +1586,7 @@
         function startLetterTimers() {
             lcMouthTimer = setInterval(() => {
                 if (!lcGame || lcGame.ended) return;
-
                 const player = document.getElementById("lcPlayer");
-
                 if (lcGame.player.moving) {
                     const isOpen = player.getAttribute("src") === "pmopen.png";
                     player.setAttribute("src", isOpen ? "pmclosed.png" : "pmopen.png");
@@ -1473,40 +1595,40 @@
                 }
             }, 160);
 
+            lcCountdownTimer = setInterval(() => {
+                if (!lcGame || lcGame.ended) return;
+                lcGame.timeLeft--;
+                if (lcGame.timeLeft <= 0) {
+                    lcGame.timeLeft = 0;
+                    updateLetterHud();
+                    showTryAgain("Time is up.");
+                    return;
+                }
+                updateLetterHud();
+            }, 1000);
+
             lcIdleTimer = setInterval(() => {
                 if (!lcGame || lcGame.ended) return;
-
                 lcGame.idleSeconds++;
-                updateLetterHud();
-
-                if (lcGame.idleSeconds >= lcGame.idleLimit && !lcGame.baddieActive) {
-                    releaseBaddie();
-                }
+                if (lcGame.idleSeconds >= lcGame.idleLimit && !lcGame.baddieActive) releaseBaddie();
             }, 1000);
         }
 
         function resetLetterIdle() {
             if (!lcGame || lcGame.ended) return;
             lcGame.idleSeconds = 0;
-            updateLetterHud();
         }
 
         function releaseBaddie() {
             const farCell = getOpenCells()
-                .map(cell => ({
-                    x: cell.x,
-                    y: cell.y,
-                    distance: Math.abs(cell.x - lcGame.player.x) + Math.abs(cell.y - lcGame.player.y)
-                }))
+                .map(cell => ({ x: cell.x, y: cell.y, distance: Math.abs(cell.x - lcGame.player.x) + Math.abs(cell.y - lcGame.player.y) }))
                 .sort((a, b) => b.distance - a.distance)[0];
 
             lcGame.baddie = { x: farCell.x, y: farCell.y };
             lcGame.baddieActive = true;
-
             document.getElementById("lcMessage").textContent = "Oh no! The purple baddie is coming!";
             renderLetterObjects();
-
-            lcBaddieTimer = setInterval(moveBaddie, lcGame.level === "easy" ? 850 : 650);
+            lcBaddieTimer = setInterval(moveBaddie, lcGame.level === "easy" ? 950 : 750);
         }
 
         function moveBaddie() {
@@ -1529,24 +1651,22 @@
 
             lcGame.baddie.x = options[0].x;
             lcGame.baddie.y = options[0].y;
-
             renderLetterObjects();
             checkBaddieCatch();
         }
 
         function checkBaddieCatch() {
             if (!lcGame || !lcGame.baddieActive || !lcGame.baddie) return;
-
-            if (lcGame.player.x === lcGame.baddie.x && lcGame.player.y === lcGame.baddie.y) {
-                lcGame.score = 0;
-                updateLetterHud();
-                showTryAgain();
-            }
+            if (lcGame.player.x === lcGame.baddie.x && lcGame.player.y === lcGame.baddie.y) showTryAgain("The purple baddie caught you.");
         }
 
-        function showTryAgain() {
+        function showTryAgain(reason) {
+            if (!lcGame) return;
+            lcGame.score = 0;
             lcGame.ended = true;
+            updateLetterHud();
             stopLetterTimers();
+            document.getElementById("tryAgainReason").textContent = reason || "Game over.";
             document.getElementById("tryAgainPopup").style.display = "flex";
         }
 
@@ -1554,27 +1674,19 @@
             lcGame.ended = true;
             stopLetterTimers();
 
-            const percent = Math.round((lcGame.score / lcGame.maxScore) * 100);
+            const percent = Math.min(100, Math.round((lcGame.score / lcGame.maxScore) * 100));
             let videoName = "keeptryingstar.mp4";
             let message = "Keep Trying!";
-
-            if (percent >= 90) {
-                videoName = "excellentstar.mp4";
-                message = "Excellent!";
-            } else if (percent >= 70) {
-                videoName = "greatjobstar.mp4";
-                message = "Great Job!";
-            } else if (percent >= 50) {
-                videoName = "welldonestar.mp4";
-                message = "Well Done!";
-            }
+            if (percent >= 90) { videoName = "excellentstar.mp4"; message = "Excellent!"; }
+            else if (percent >= 70) { videoName = "greatjobstar.mp4"; message = "Great Job!"; }
+            else if (percent >= 50) { videoName = "welldonestar.mp4"; message = "Well Done!"; }
 
             const video = document.getElementById("resultVideo");
             video.src = videoName;
             video.load();
             video.play();
 
-            document.getElementById("congratsName").textContent = message;
+            document.getElementById("congratsName").textContent = message + " " + childName + "!";
             document.getElementById("finalScore").textContent = lcGame.score + " points";
             document.getElementById("finalPercent").textContent = percent + "%";
             document.getElementById("popupRestartBtn").setAttribute("onclick", "restartLetterChop()");
@@ -1589,9 +1701,11 @@
 
         function stopLetterTimers() {
             if (lcMouthTimer) clearInterval(lcMouthTimer);
+            if (lcCountdownTimer) clearInterval(lcCountdownTimer);
             if (lcIdleTimer) clearInterval(lcIdleTimer);
             if (lcBaddieTimer) clearInterval(lcBaddieTimer);
             lcMouthTimer = null;
+            lcCountdownTimer = null;
             lcIdleTimer = null;
             lcBaddieTimer = null;
         }
