@@ -118,13 +118,8 @@
             box-shadow: 0 5px 10px rgba(0,0,0,0.22);
         }
 
-        .easy-btn {
-            background: #22a947;
-        }
-
-        .hard-btn {
-            background: #e84393;
-        }
+        .easy-btn { background: #22a947; }
+        .hard-btn { background: #e84393; }
 
         .difficulty-btn.active {
             outline: 5px solid #ffd54f;
@@ -338,9 +333,10 @@
             align-items: center;
         }
 
-        .result-star {
-            max-width: 360px;
+        .result-video {
             width: 90%;
+            max-width: 420px;
+            border-radius: 20px;
             animation: pop 0.5s ease;
         }
 
@@ -527,11 +523,18 @@
     <div class="result-popup" id="resultPopup">
         <div class="result-inner">
 
-            <img id="resultStar" class="result-star" src="excellentstar.png" alt="Result Star">
+            <video id="resultVideo"
+                   class="result-video"
+                   autoplay
+                   loop
+                   muted
+                   playsinline>
+                <source src="excellentstar.mp4" type="video/mp4">
+            </video>
 
             <div class="score-card">
                 <h2 id="congratsName">Congratulations!</h2>
-                <div>Your Score</div>
+                <div>Your score is</div>
                 <div class="score-big" id="finalScore">10 / 10</div>
                 <div id="finalPercent">100%</div>
             </div>
@@ -753,26 +756,30 @@
             }
         }
 
-        function getStarImage() {
+        function getRewardVideo() {
             if (score === 10) {
-                return "excellentstar.png";
+                return "excellentstar.mp4";
             }
 
             if (score >= 8) {
-                return "greatjobstar.png";
+                return "greatjobstar.mp4";
             }
 
             if (score >= 5) {
-                return "welldonedstar.png";
+                return "welldonestar.mp4";
             }
 
-            return "keeptryingstar.png";
+            return "keeptryingstar.mp4";
         }
 
         function showFinalScore() {
             const percent = Math.round((score / quizLength) * 100);
+            const video = document.getElementById("resultVideo");
 
-            document.getElementById("resultStar").src = getStarImage();
+            video.src = getRewardVideo();
+            video.load();
+            video.play();
+
             document.getElementById("congratsName").textContent = "Congratulations " + childName + "!";
             document.getElementById("finalScore").textContent = score + " / " + quizLength;
             document.getElementById("finalPercent").textContent = percent + "%";
