@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Book Hub - Little Angels Academy Parent Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
@@ -74,6 +75,7 @@
             max-width: 92%;
             text-decoration: none;
             color: #071f4d;
+            cursor: pointer;
         }
 
         .book img {
@@ -179,6 +181,77 @@
     <div class="motto">
         Nurturing hearts. Building minds. Shaping the future.
     </div>
+
+    <script>
+        /*
+            SOUND FILES NEEDED IN THE SAME FOLDER:
+            - win.mp3   = plays when a book cover is clicked
+            - page.mp3  = stored for reader pages to use when pages turn
+        */
+
+        let soundsUnlocked = false;
+        const winSound = new Audio("win.mp3");
+        const pageSound = new Audio("page.mp3");
+
+        winSound.preload = "auto";
+        pageSound.preload = "auto";
+
+        function unlockBookHubSounds() {
+            if (soundsUnlocked) return;
+            soundsUnlocked = true;
+
+            const allSounds = [winSound, pageSound];
+
+            allSounds.forEach(sound => {
+                sound.muted = true;
+                sound.play()
+                    .then(() => {
+                        sound.pause();
+                        sound.currentTime = 0;
+                        sound.muted = false;
+                    })
+                    .catch(() => {
+                        sound.muted = false;
+                    });
+            });
+        }
+
+        function playSound(sound) {
+            try {
+                const freshSound = sound.cloneNode(true);
+                freshSound.currentTime = 0;
+                freshSound.play().catch(() => {});
+            } catch (error) {}
+        }
+
+        function openBookWithSound(event, bookUrl) {
+            event.preventDefault();
+            unlockBookHubSounds();
+
+            playSound(winSound);
+
+            /*
+                This tells the book reader page that the child came from Book Hub.
+                The reader pages can then use page.mp3 when Next / Previous is pressed.
+            */
+            sessionStorage.setItem("parentHubPageSound", "page.mp3");
+
+            setTimeout(() => {
+                window.location.href = bookUrl;
+            }, 500);
+        }
+
+        document.addEventListener("click", unlockBookHubSounds, { once: false });
+        document.addEventListener("touchstart", unlockBookHubSounds, { once: false });
+
+        document.querySelectorAll(".book").forEach(book => {
+            const bookUrl = book.getAttribute("href");
+
+            book.addEventListener("click", function(event) {
+                openBookWithSound(event, bookUrl);
+            });
+        });
+    </script>
 
 </body>
 </html>
