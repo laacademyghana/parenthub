@@ -120,20 +120,20 @@
 
     <div class="book-wrapper">
         <div id="book">
-            <div class="page"><img src="Ananse%201.png"></div>
-            <div class="page"><img src="Ananse%202.png"></div>
-            <div class="page"><img src="Ananse%203.png"></div>
-            <div class="page"><img src="Ananse%204.png"></div>
-            <div class="page"><img src="Ananse%205.png"></div>
-            <div class="page"><img src="Ananse%206.png"></div>
-            <div class="page"><img src="Ananse%207.png"></div>
-            <div class="page"><img src="Ananse%208.png"></div>
-            <div class="page"><img src="Ananse%209.png"></div>
-            <div class="page"><img src="Ananse%2010.png"></div>
-            <div class="page"><img src="Ananse%2011.png"></div>
-            <div class="page"><img src="Ananse%2012.png"></div>
-            <div class="page"><img src="Ananse%2013.png"></div>
-            <div class="page"><img src="Ananse%2014.png"></div>
+            <div class="page"><img src="Ananse%201.png" alt="Ananse page 1"></div>
+            <div class="page"><img src="Ananse%202.png" alt="Ananse page 2"></div>
+            <div class="page"><img src="Ananse%203.png" alt="Ananse page 3"></div>
+            <div class="page"><img src="Ananse%204.png" alt="Ananse page 4"></div>
+            <div class="page"><img src="Ananse%205.png" alt="Ananse page 5"></div>
+            <div class="page"><img src="Ananse%206.png" alt="Ananse page 6"></div>
+            <div class="page"><img src="Ananse%207.png" alt="Ananse page 7"></div>
+            <div class="page"><img src="Ananse%208.png" alt="Ananse page 8"></div>
+            <div class="page"><img src="Ananse%209.png" alt="Ananse page 9"></div>
+            <div class="page"><img src="Ananse%2010.png" alt="Ananse page 10"></div>
+            <div class="page"><img src="Ananse%2011.png" alt="Ananse page 11"></div>
+            <div class="page"><img src="Ananse%2012.png" alt="Ananse page 12"></div>
+            <div class="page"><img src="Ananse%2013.png" alt="Ananse page 13"></div>
+            <div class="page"><img src="Ananse%2014.png" alt="Ananse page 14"></div>
         </div>
     </div>
 
@@ -165,6 +165,38 @@
 
     <script>
         let book;
+        let soundsUnlocked = false;
+
+        const pageSound = new Audio("page.mp3");
+        pageSound.preload = "auto";
+        pageSound.volume = 1;
+
+        function unlockPageSound() {
+            if (soundsUnlocked) return;
+            soundsUnlocked = true;
+
+            pageSound.muted = true;
+            pageSound.play()
+                .then(() => {
+                    pageSound.pause();
+                    pageSound.currentTime = 0;
+                    pageSound.muted = false;
+                })
+                .catch(() => {
+                    pageSound.muted = false;
+                });
+        }
+
+        function playPageSound() {
+            unlockPageSound();
+
+            try {
+                const freshSound = pageSound.cloneNode(true);
+                freshSound.currentTime = 0;
+                freshSound.volume = 1;
+                freshSound.play().catch(() => {});
+            } catch (error) {}
+        }
 
         window.addEventListener("load", function () {
             book = new St.PageFlip(document.getElementById("book"), {
@@ -177,7 +209,7 @@
                 maxHeight: 950,
                 showCover: true,
                 usePortrait: true,
-               mobileScrollSupport: true,
+                mobileScrollSupport: true,
                 flippingTime: 1800,
                 drawShadow: true,
                 maxShadowOpacity: 0.6,
@@ -185,16 +217,29 @@
             });
 
             book.loadFromHTML(document.querySelectorAll(".page"));
+
+            book.on("flip", function () {
+                playPageSound();
+            });
         });
 
+        document.addEventListener("click", unlockPageSound, { once: false });
+        document.addEventListener("touchstart", unlockPageSound, { once: false });
+
         function goNext() {
+            unlockPageSound();
+
             if (book) {
+                playPageSound();
                 book.flipNext();
             }
         }
 
         function goPrevious() {
+            unlockPageSound();
+
             if (book) {
+                playPageSound();
                 book.flipPrev();
             }
         }
