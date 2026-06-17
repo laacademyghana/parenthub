@@ -21,22 +21,13 @@
             background: linear-gradient(#fff4d8, #ffffff);
         }
 
-        .title {
-            font-size: 48px;
-            font-weight: bold;
-            color: #071f4d;
-            margin: 5px 0;
-        }
-
-        .subtitle {
-            display: inline-block;
-            background: #008c7a;
-            color: white;
-            padding: 10px 24px;
-            border-radius: 30px;
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 18px;
+        .activity-banner {
+            width: 100%;
+            max-width: 1400px;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 22px;
         }
 
         .nav-buttons {
@@ -163,7 +154,7 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
 
-        .guide img {
+        .guide video {
             width: 100%;
             border-radius: 20px;
             display: block;
@@ -347,20 +338,9 @@
             align-items: center;
         }
 
-        .star-card {
-            background: #ffd54f;
-            color: #071f4d;
-            width: 340px;
-            height: 340px;
-            clip-path: polygon(50% 0%, 61% 32%, 95% 25%, 70% 50%, 95% 75%, 61% 68%, 50% 100%, 39% 68%, 5% 75%, 30% 50%, 5% 25%, 39% 32%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 34px;
-            font-weight: bold;
-            text-align: center;
-            padding: 70px;
-            box-sizing: border-box;
+        .result-star {
+            max-width: 360px;
+            width: 90%;
             animation: pop 0.5s ease;
         }
 
@@ -422,14 +402,6 @@
                 margin: auto;
             }
 
-            .title {
-                font-size: 36px;
-            }
-
-            .subtitle {
-                font-size: 17px;
-            }
-
             .question-text {
                 font-size: 25px;
             }
@@ -444,13 +416,6 @@
                 padding: 13px 18px;
             }
 
-            .star-card {
-                width: 300px;
-                height: 300px;
-                font-size: 29px;
-                padding: 60px;
-            }
-
             .score-card {
                 width: 285px;
             }
@@ -462,8 +427,7 @@
 
     <div class="page">
 
-        <div class="title">🌟 Activity Hub 🌟</div>
-        <div class="subtitle">Let's Learn, Play and Grow!</div>
+        <img src="activitybanner.png" alt="Activity Hub Banner" class="activity-banner">
 
         <div class="nav-buttons">
             <a class="nav-btn" href="index.html"><span class="nav-icon">⌂</span>Home</a>
@@ -473,7 +437,11 @@
 
         <div class="start-screen" id="startScreen">
             <div class="start-card">
-                <img src="ama.png" alt="Ama guide character" class="ama-start">
+
+                <video class="ama-start" autoplay loop muted playsinline>
+                    <source src="ama.mp4" type="video/mp4">
+                </video>
+
                 <h1>Hi! I'm Ama.</h1>
                 <h2>What is your name?</h2>
 
@@ -500,7 +468,10 @@
             <div class="activity-area">
 
                 <div class="guide">
-                    <img src="ama.png" alt="Ama guide character">
+                    <video id="amaGuide" autoplay loop muted playsinline>
+                        <source src="amatalking.mp4" type="video/mp4">
+                    </video>
+
                     <div class="speech" id="amaSpeech">
                         Let's learn together!
                     </div>
@@ -555,7 +526,8 @@
 
     <div class="result-popup" id="resultPopup">
         <div class="result-inner">
-            <div class="star-card" id="starMessage">Excellent!</div>
+
+            <img id="resultStar" class="result-star" src="excellentstar.png" alt="Result Star">
 
             <div class="score-card">
                 <h2 id="congratsName">Congratulations!</h2>
@@ -727,11 +699,28 @@
             document.getElementById("scoreCount").textContent = score + " / " + quizLength;
         }
 
-        function checkAnswer() {
+        function isCurrentAnswerCorrect() {
             const userAnswer = normalize(document.getElementById("userAnswer").value);
             const q = currentQuestions[currentIndex];
             const correctAnswer = normalize(q.answer);
             const accepted = q.accepted ? q.accepted.map(normalize) : [correctAnswer];
+
+            return userAnswer !== "" && accepted.includes(userAnswer);
+        }
+
+        function markCurrentQuestion() {
+            if (isCurrentAnswerCorrect() && !answeredCorrectly) {
+                score++;
+                answeredCorrectly = true;
+                updateScore();
+                return true;
+            }
+
+            return false;
+        }
+
+        function checkAnswer() {
+            const userAnswer = normalize(document.getElementById("userAnswer").value);
 
             if (userAnswer === "") {
                 document.getElementById("feedback").textContent = "Type your answer first.";
@@ -739,15 +728,10 @@
                 return;
             }
 
-            if (accepted.includes(userAnswer)) {
+            if (isCurrentAnswerCorrect()) {
+                markCurrentQuestion();
                 document.getElementById("feedback").textContent = "Correct! Well done, " + childName + "!";
                 document.getElementById("feedback").style.color = "#22a947";
-
-                if (!answeredCorrectly) {
-                    score++;
-                    answeredCorrectly = true;
-                    updateScore();
-                }
             } else {
                 document.getElementById("feedback").textContent = "Good try! Check again or show the answer.";
                 document.getElementById("feedback").style.color = "#e84393";
@@ -759,6 +743,8 @@
         }
 
         function nextQuestion() {
+            markCurrentQuestion();
+
             if (currentIndex < quizLength - 1) {
                 currentIndex++;
                 showQuestion();
@@ -767,18 +753,26 @@
             }
         }
 
-        function getStarMessage() {
-            if (score === 10) return "Excellent!";
-            if (score >= 8) return "Great Job!";
-            if (score >= 6) return "Well Done!";
-            if (score >= 4) return "Good Try!";
-            return "Keep Trying!";
+        function getStarImage() {
+            if (score === 10) {
+                return "excellentstar.png";
+            }
+
+            if (score >= 8) {
+                return "greatjobstar.png";
+            }
+
+            if (score >= 5) {
+                return "welldonedstar.png";
+            }
+
+            return "keeptryingstar.png";
         }
 
         function showFinalScore() {
             const percent = Math.round((score / quizLength) * 100);
 
-            document.getElementById("starMessage").textContent = getStarMessage();
+            document.getElementById("resultStar").src = getStarImage();
             document.getElementById("congratsName").textContent = "Congratulations " + childName + "!";
             document.getElementById("finalScore").textContent = score + " / " + quizLength;
             document.getElementById("finalPercent").textContent = percent + "%";
