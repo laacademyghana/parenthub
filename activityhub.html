@@ -1329,25 +1329,23 @@
         function startLetterGame(level) {
             stopLetterTimers();
 
-            lcGame = {
-                level: level,
-                words: level === "easy" ? LC_EASY_WORDS : LC_HARD_WORDS,
-                idleLimit: level === "easy" ? 2 : 1,
-                timeLeft: level === "easy" ? 300 : 300,
-                puzzle: 0,
-                score: 0,
-                maxScore: 5 * 10 + 15 * 5 + 5 * 100,
-                word: "",
-                nextLetter: 0,
-                player: { x: 1, y: 1, dir: "right", moving: false },
-                letters: [],
-                berries: [],
-                eatenDots: new Set(),
-                baddie: null,
-                baddieActive: false,
-                idleSeconds: 0,
-                ended: false
-            };
+           lcGame = {
+    level: level,
+    words: level === "easy" ? LC_EASY_WORDS : LC_HARD_WORDS,
+    timeLeft: level === "easy" ? 300 : 300,
+    puzzle: 0,
+    score: 0,
+    maxScore: 5 * 10 + 15 * 5 + 5 * 100,
+    word: "",
+    nextLetter: 0,
+    player: { x: 1, y: 1, dir: "right", moving: false },
+    letters: [],
+    berries: [],
+    eatenDots: new Set(),
+    baddie: null,
+    baddieActive: false,
+    ended: false
+};
 
             document.getElementById("lcLevel").textContent = level === "easy" ? "Easy" : "Hard";
             document.getElementById("lcAmaSpeech").innerHTML = "Come on " + childName + ",<br>you can do it!";
@@ -1364,7 +1362,6 @@
             lcGame.eatenDots = new Set();
             lcGame.baddie = null;
             lcGame.baddieActive = false;
-            lcGame.idleSeconds = 0;
             lcGame.ended = false;
 
             document.getElementById("lcPuzzle").textContent = lcGame.puzzle + 1;
@@ -1376,8 +1373,13 @@
             renderLetterObjects();
             updateLetterHud();
             updateLetterPlayer();
-        }
-
+          
+       setTimeout(() => {
+         if (lcGame && !lcGame.baddieActive && !lcGame.ended) {
+        releaseBaddie();
+    }
+   }, 5000);
+    
         function drawLetterMaze() {
             const grid = document.getElementById("lcMazeGrid");
             grid.innerHTML = "";
@@ -1496,7 +1498,7 @@
 
         function moveLetterPlayer(direction) {
             if (!lcGame || lcGame.ended) return;
-            resetLetterIdle();
+        
             lcGame.player.dir = direction;
 
             const moves = { right: { x: 1, y: 0 }, left: { x: -1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
@@ -1607,17 +1609,10 @@
                 updateLetterHud();
             }, 1000);
 
-            lcIdleTimer = setInterval(() => {
-                if (!lcGame || lcGame.ended) return;
-                lcGame.idleSeconds++;
-                if (lcGame.idleSeconds >= lcGame.idleLimit && !lcGame.baddieActive) releaseBaddie();
-            }, 1000);
+         
         }
 
-        function resetLetterIdle() {
-            if (!lcGame || lcGame.ended) return;
-            lcGame.idleSeconds = 0;
-        }
+      
 
         function releaseBaddie() {
             const farCell = getOpenCells()
