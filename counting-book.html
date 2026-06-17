@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Counting</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
     <style>
         body {
             margin: 0;
@@ -119,18 +120,18 @@
 
     <div class="book-wrapper">
         <div id="book">
-            <div class="page"><img src="counting1.png"></div>
-            <div class="page"><img src="counting2.png"></div>
-            <div class="page"><img src="counting3.png"></div>
-            <div class="page"><img src="counting4.png"></div>
-            <div class="page"><img src="counting5.png"></div>
-            <div class="page"><img src="counting6.png"></div>
-            <div class="page"><img src="counting7.png"></div>
-            <div class="page"><img src="counting8.png"></div>
-            <div class="page"><img src="counting9.png"></div>
-            <div class="page"><img src="counting10.png"></div>
-            <div class="page"><img src="counting11.png"></div>
-            <div class="page"><img src="counting12.png"></div>
+            <div class="page"><img src="counting1.png" alt="Counting page 1"></div>
+            <div class="page"><img src="counting2.png" alt="Counting page 2"></div>
+            <div class="page"><img src="counting3.png" alt="Counting page 3"></div>
+            <div class="page"><img src="counting4.png" alt="Counting page 4"></div>
+            <div class="page"><img src="counting5.png" alt="Counting page 5"></div>
+            <div class="page"><img src="counting6.png" alt="Counting page 6"></div>
+            <div class="page"><img src="counting7.png" alt="Counting page 7"></div>
+            <div class="page"><img src="counting8.png" alt="Counting page 8"></div>
+            <div class="page"><img src="counting9.png" alt="Counting page 9"></div>
+            <div class="page"><img src="counting10.png" alt="Counting page 10"></div>
+            <div class="page"><img src="counting11.png" alt="Counting page 11"></div>
+            <div class="page"><img src="counting12.png" alt="Counting page 12"></div>
         </div>
     </div>
 
@@ -162,6 +163,39 @@
 
     <script>
         let book;
+        let soundsUnlocked = false;
+        let isButtonFlip = false;
+
+        const pageSound = new Audio("page.mp3");
+        pageSound.preload = "auto";
+        pageSound.volume = 1;
+
+        function unlockPageSound() {
+            if (soundsUnlocked) return;
+            soundsUnlocked = true;
+
+            pageSound.muted = true;
+            pageSound.play()
+                .then(() => {
+                    pageSound.pause();
+                    pageSound.currentTime = 0;
+                    pageSound.muted = false;
+                })
+                .catch(() => {
+                    pageSound.muted = false;
+                });
+        }
+
+        function playPageSound() {
+            unlockPageSound();
+
+            try {
+                const freshSound = pageSound.cloneNode(true);
+                freshSound.currentTime = 0;
+                freshSound.volume = 1;
+                freshSound.play().catch(() => {});
+            } catch (error) {}
+        }
 
         window.addEventListener("load", function () {
             book = new St.PageFlip(document.getElementById("book"), {
@@ -174,7 +208,7 @@
                 maxHeight: 950,
                 showCover: true,
                 usePortrait: true,
-               mobileScrollSupport: true,
+                mobileScrollSupport: true,
                 flippingTime: 1800,
                 drawShadow: true,
                 maxShadowOpacity: 0.6,
@@ -182,16 +216,35 @@
             });
 
             book.loadFromHTML(document.querySelectorAll(".page"));
+
+            book.on("flip", function () {
+                if (!isButtonFlip) {
+                    playPageSound();
+                }
+
+                isButtonFlip = false;
+            });
         });
 
+        document.addEventListener("click", unlockPageSound, { once: false });
+        document.addEventListener("touchstart", unlockPageSound, { once: false });
+
         function goNext() {
+            unlockPageSound();
+
             if (book) {
+                isButtonFlip = true;
+                playPageSound();
                 book.flipNext();
             }
         }
 
         function goPrevious() {
+            unlockPageSound();
+
             if (book) {
+                isButtonFlip = true;
+                playPageSound();
                 book.flipPrev();
             }
         }
