@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,20 +51,57 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            cursor: pointer;
         }
 
-        .nav-btn:hover {
-            background: #00a88f;
-        }
+        .nav-btn:hover { background: #00a88f; }
 
         .nav-icon {
             font-size: 26px;
             margin-bottom: 3px;
         }
 
-        .start-screen, .quiz-screen {
+        .hub-screen, .start-screen, .quiz-screen, .letter-start-screen, .letter-game-screen {
             max-width: 1200px;
             margin: auto;
+        }
+
+        .hub-title {
+            font-size: 34px;
+            color: #8a3fc7;
+            margin: 20px 0 10px;
+        }
+
+        .game-choice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
+            gap: 26px;
+            max-width: 1050px;
+            margin: 25px auto;
+        }
+
+        .game-choice {
+            background: white;
+            border: 6px solid #8a3fc7;
+            border-radius: 30px;
+            padding: 16px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .game-choice:hover { transform: translateY(-4px); }
+
+        .game-cover {
+            width: 100%;
+            border-radius: 22px;
+            display: block;
+        }
+
+        .game-choice h2 {
+            margin: 14px 0 5px;
+            color: #071f4d;
+            font-size: 28px;
         }
 
         .start-card {
@@ -121,16 +157,14 @@
         .easy-btn { background: #22a947; }
         .hard-btn { background: #e84393; }
 
-        .difficulty-btn.active {
-            outline: 5px solid #ffd54f;
-        }
+        .difficulty-btn.active { outline: 5px solid #ffd54f; }
 
         .start-btn {
             background: #087bdc;
             font-size: 22px;
         }
 
-        .quiz-screen {
+        .start-screen, .quiz-screen, .letter-start-screen, .letter-game-screen {
             display: none;
         }
 
@@ -316,6 +350,187 @@
             margin-bottom: 14px;
         }
 
+        /* LETTER CHOP */
+        .letter-card {
+            background: white;
+            border: 6px solid #8a3fc7;
+            border-radius: 30px;
+            padding: 22px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+            max-width: 1050px;
+            margin: 10px auto;
+        }
+
+        .letter-hud {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .letter-hud div {
+            background: #fff8d9;
+            border: 3px solid #ffd54f;
+            border-radius: 18px;
+            padding: 10px 6px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #071f4d;
+        }
+
+        .word-bar {
+            background: #071f4d;
+            color: white;
+            border-radius: 24px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .word-slots {
+            display: inline-flex;
+            gap: 8px;
+            margin-left: 8px;
+            vertical-align: middle;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .slot {
+            width: 44px;
+            height: 44px;
+            background: white;
+            color: #071f4d;
+            border: 3px solid #ffd54f;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .maze-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #061742;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 8px solid #00a8ff;
+            touch-action: none;
+        }
+
+        .maze-grid {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+        }
+
+        .maze-cell { position: relative; background: #061742; }
+
+        .maze-wall {
+            background: linear-gradient(135deg, #071f4d, #087bdc, #00a8ff);
+            border: 2px solid rgba(255,255,255,0.25);
+            box-shadow: inset 0 0 14px rgba(255,255,255,0.25);
+        }
+
+        .maze-dot::after {
+            content: "";
+            width: 7px;
+            height: 7px;
+            background: #ffd54f;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 8px #ffd54f;
+        }
+
+        .player-sprite {
+            position: absolute;
+            width: calc(100% / 16 * 0.82);
+            height: calc(100% / 10 * 0.82);
+            object-fit: contain;
+            z-index: 10;
+            transition: left 0.14s linear, top 0.14s linear, transform 0.08s linear;
+            transform-origin: center;
+            pointer-events: none;
+        }
+
+        .letter-object, .berry-object, .bad-object {
+            position: absolute;
+            object-fit: contain;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .letter-object {
+            width: calc(100% / 16 * 0.82);
+            height: calc(100% / 10 * 0.82);
+            z-index: 6;
+        }
+
+        .berry-object {
+            width: calc(100% / 16 * 0.58);
+            height: calc(100% / 10 * 0.58);
+            z-index: 5;
+        }
+
+        .bad-object {
+            width: calc(100% / 16 * 0.78);
+            height: calc(100% / 10 * 0.78);
+            z-index: 9;
+            transition: left 0.28s linear, top 0.28s linear;
+        }
+
+        .letter-message {
+            min-height: 30px;
+            font-size: 20px;
+            color: #8a3fc7;
+            font-weight: bold;
+            margin: 10px 0 0;
+        }
+
+        .letter-controls {
+            margin: 12px auto 0;
+            display: grid;
+            grid-template-columns: 74px 74px 74px;
+            grid-template-rows: 64px 64px 64px;
+            gap: 7px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .control-btn {
+            width: 70px;
+            height: 60px;
+            border-radius: 18px;
+            background: linear-gradient(#00a8ff, #087bdc);
+            border: 4px solid white;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7px;
+            cursor: pointer;
+        }
+
+        .control-btn img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .ctrl-up { grid-column: 2; grid-row: 1; }
+        .ctrl-left { grid-column: 1; grid-row: 2; }
+        .ctrl-right { grid-column: 3; grid-row: 2; }
+        .ctrl-down { grid-column: 2; grid-row: 3; }
+
         .result-popup {
             display: none;
             position: fixed;
@@ -338,6 +553,15 @@
             max-width: 420px;
             border-radius: 20px;
             animation: pop 0.5s ease;
+            background: white;
+        }
+
+        .try-again-img {
+            width: 90%;
+            max-width: 420px;
+            border-radius: 20px;
+            animation: pop 0.5s ease;
+            background: white;
         }
 
         @keyframes pop {
@@ -379,14 +603,10 @@
             cursor: pointer;
         }
 
-        .restart-btn:hover {
-            background: #00a88f;
-        }
+        .restart-btn:hover { background: #00a88f; }
 
         @media (max-width: 900px) {
-            .activity-area {
-                grid-template-columns: 1fr;
-            }
+            .activity-area { grid-template-columns: 1fr; }
 
             .guide {
                 max-width: 230px;
@@ -398,9 +618,7 @@
                 margin: auto;
             }
 
-            .question-text {
-                font-size: 25px;
-            }
+            .question-text { font-size: 25px; }
 
             .answer-input {
                 font-size: 22px;
@@ -412,8 +630,18 @@
                 padding: 13px 18px;
             }
 
-            .score-card {
-                width: 285px;
+            .score-card { width: 285px; }
+
+            .game-choice-grid { grid-template-columns: 1fr; }
+
+            .letter-hud { grid-template-columns: repeat(2, 1fr); }
+
+            .maze-wrap { aspect-ratio: 16 / 12; }
+
+            .slot {
+                width: 36px;
+                height: 36px;
+                font-size: 22px;
             }
         }
     </style>
@@ -429,6 +657,23 @@
             <a class="nav-btn" href="index.html"><span class="nav-icon">⌂</span>Home</a>
             <a class="nav-btn" href="storybooks.html"><span class="nav-icon">📚</span>Book Hub</a>
             <a class="nav-btn" href="tiphub.html"><span class="nav-icon">🤝</span>Tip Hub</a>
+            <a class="nav-btn" onclick="showHub()"><span class="nav-icon">🎮</span>Activity Hub</a>
+        </div>
+
+        <div class="hub-screen" id="hubScreen">
+            <h1 class="hub-title">Choose Your Activity</h1>
+
+            <div class="game-choice-grid">
+                <div class="game-choice" onclick="showQuizStart()">
+                    <img src="superquizcover.png" alt="Super Quiz" class="game-cover">
+                    <h2>Super Quiz</h2>
+                </div>
+
+                <div class="game-choice" onclick="showLetterStart()">
+                    <img src="letterchopcover.png" alt="Letter Chop" class="game-cover">
+                    <h2>Letter Chop</h2>
+                </div>
+            </div>
         </div>
 
         <div class="start-screen" id="startScreen">
@@ -518,6 +763,62 @@
             </div>
         </div>
 
+        <div class="letter-start-screen" id="letterStartScreen">
+            <div class="start-card">
+                <img src="letterchopcover.png" alt="Letter Chop" class="game-cover" style="max-width:620px;margin:auto;">
+                <h1>Letter Chop</h1>
+                <h2>Choose your level</h2>
+
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn easy-btn" onclick="beginLetterChop('easy')">
+                        Easy: 5 simple words
+                    </button>
+
+                    <button class="difficulty-btn hard-btn" onclick="beginLetterChop('hard')">
+                        Hard: 5 longer words
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-game-screen" id="letterGameScreen">
+            <div class="letter-card">
+                <div class="letter-hud">
+                    <div>Level: <span id="lcLevel">Easy</span></div>
+                    <div>Puzzle: <span id="lcPuzzle">1</span> / 5</div>
+                    <div>Score: <span id="lcScore">0</span></div>
+                    <div>Idle: <span id="lcIdle">0</span>s</div>
+                </div>
+
+                <div class="word-bar">
+                    Build Word:
+                    <span id="lcWordSlots" class="word-slots"></span>
+                </div>
+
+                <div id="lcMazeWrap" class="maze-wrap">
+                    <div id="lcMazeGrid" class="maze-grid"></div>
+                    <img id="lcPlayer" class="player-sprite" src="pmclosed.png" alt="">
+                </div>
+
+                <div id="lcMessage" class="letter-message">Eat the letters in the correct order.</div>
+
+                <div class="letter-controls">
+                    <button class="control-btn ctrl-up" onclick="moveLetterPlayer('up')" aria-label="Move up">
+                        <img src="up.PNG" alt="Up">
+                    </button>
+                    <button class="control-btn ctrl-left" onclick="moveLetterPlayer('left')" aria-label="Move left">
+                        <img src="left.PNG" alt="Left">
+                    </button>
+                    <button class="control-btn ctrl-right" onclick="moveLetterPlayer('right')" aria-label="Move right">
+                        <img src="right.PNG" alt="Right">
+                    </button>
+                    <button class="control-btn ctrl-down" onclick="moveLetterPlayer('down')" aria-label="Move down">
+                        <img src="down.PNG" alt="Down">
+                    </button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="result-popup" id="resultPopup">
@@ -539,7 +840,23 @@
                 <div id="finalPercent">100%</div>
             </div>
 
-            <button class="restart-btn" onclick="restartQuiz()">🎲 Play Again</button>
+            <button class="restart-btn" id="popupRestartBtn" onclick="restartQuiz()">🎲 Play Again</button>
+        </div>
+    </div>
+
+    <div class="result-popup" id="tryAgainPopup">
+        <div class="result-inner">
+            <img src="tryagain.png" alt="Try again" class="try-again-img">
+
+            <div class="score-card">
+                <h2>Try Again!</h2>
+                <div>The purple baddie caught you.</div>
+                <div class="score-big">0</div>
+                <div>Your points have been lost.</div>
+            </div>
+
+            <button class="restart-btn" onclick="restartLetterChop()">Play Again</button>
+            <button class="restart-btn" onclick="showHub()">Activity Hub</button>
         </div>
     </div>
 
@@ -610,6 +927,34 @@
         let answeredCorrectly = false;
         const quizLength = 10;
 
+        function hideAllScreens() {
+            document.getElementById("hubScreen").style.display = "none";
+            document.getElementById("startScreen").style.display = "none";
+            document.getElementById("quizScreen").style.display = "none";
+            document.getElementById("letterStartScreen").style.display = "none";
+            document.getElementById("letterGameScreen").style.display = "none";
+            document.getElementById("resultPopup").style.display = "none";
+            document.getElementById("tryAgainPopup").style.display = "none";
+        }
+
+        function showHub() {
+            stopLetterTimers();
+            hideAllScreens();
+            document.getElementById("hubScreen").style.display = "block";
+        }
+
+        function showQuizStart() {
+            stopLetterTimers();
+            hideAllScreens();
+            document.getElementById("startScreen").style.display = "block";
+        }
+
+        function showLetterStart() {
+            stopLetterTimers();
+            hideAllScreens();
+            document.getElementById("letterStartScreen").style.display = "block";
+        }
+
         function shuffle(array) {
             return array.sort(() => Math.random() - 0.5);
         }
@@ -634,7 +979,7 @@
             const typedName = document.getElementById("childName").value.trim();
             childName = typedName || "Friend";
 
-            document.getElementById("startScreen").style.display = "none";
+            hideAllScreens();
             document.getElementById("quizScreen").style.display = "block";
 
             startQuiz();
@@ -757,18 +1102,9 @@
         }
 
         function getRewardVideo() {
-            if (score === 10) {
-                return "excellentstar.mp4";
-            }
-
-            if (score >= 8) {
-                return "greatjobstar.mp4";
-            }
-
-            if (score >= 5) {
-                return "welldonestar.mp4";
-            }
-
+            if (score === 10) return "excellentstar.mp4";
+            if (score >= 8) return "greatjobstar.mp4";
+            if (score >= 5) return "welldonestar.mp4";
             return "keeptryingstar.mp4";
         }
 
@@ -783,6 +1119,7 @@
             document.getElementById("congratsName").textContent = "Congratulations " + childName + "!";
             document.getElementById("finalScore").textContent = score + " / " + quizLength;
             document.getElementById("finalPercent").textContent = percent + "%";
+            document.getElementById("popupRestartBtn").setAttribute("onclick", "restartQuiz()");
             document.getElementById("resultPopup").style.display = "flex";
         }
 
@@ -790,8 +1127,489 @@
             document.getElementById("resultPopup").style.display = "none";
             startQuiz();
         }
+
+        /* LETTER CHOP GAME */
+
+        const LC_ANGLES = { right: 0, down: 90, left: 180, up: 270 };
+        const LC_EASY_WORDS = ["CAT", "DOG", "SUN", "HAT", "PEN"];
+        const LC_HARD_WORDS = ["FISH", "BOOK", "APPLE", "HOUSE", "SCHOOL"];
+
+        const LC_MAZES = [
+            [
+                "WWWWWWWWWWWWWWWW",
+                "W..............W",
+                "W.WWWW.WWWW.WW.W",
+                "W.W..........W.W",
+                "W.W.WWWW.WW.WW.W",
+                "W...W....W.....W",
+                "WWW.W.WWWW.WWW.W",
+                "W.....W........W",
+                "W.WWW...WWWW...W",
+                "WWWWWWWWWWWWWWWW"
+            ],
+            [
+                "WWWWWWWWWWWWWWWW",
+                "W..............W",
+                "W.WW.WWWWWW.WW.W",
+                "W....W....W....W",
+                "WWW.WW.WW.WW.WWW",
+                "W......W.......W",
+                "W.WWWW.W.WWWW.W",
+                "W.W..........W.W",
+                "W...WWWWWWWW...W",
+                "WWWWWWWWWWWWWWWW"
+            ],
+            [
+                "WWWWWWWWWWWWWWWW",
+                "W..............W",
+                "W.WWW.WW.WWWWW.W",
+                "W...W....W.....W",
+                "WWW.WWWW.W.WWW.W",
+                "W.......W.W....W",
+                "W.WWWWW.W.WW.WWW",
+                "W.W..........W.W",
+                "W...WWWW.WW....W",
+                "WWWWWWWWWWWWWWWW"
+            ],
+            [
+                "WWWWWWWWWWWWWWWW",
+                "W..............W",
+                "W.WWWW.W.WWWW.WW",
+                "W......W.......W",
+                "WW.WWWWWWWW.WW.W",
+                "W....W.....W...W",
+                "W.WW.W.WWW.WWW.W",
+                "W.W....W.......W",
+                "W...WWWWWWWW...W",
+                "WWWWWWWWWWWWWWWW"
+            ],
+            [
+                "WWWWWWWWWWWWWWWW",
+                "W..............W",
+                "W.WW.WWW.WWWW.WW",
+                "W....W.....W...W",
+                "WWW.W.WWW.W.WW.W",
+                "W...W...W......W",
+                "W.WWWWW.WWWW.W.W",
+                "W.....W......W.W",
+                "W.WW.....WW....W",
+                "WWWWWWWWWWWWWWWW"
+            ]
+        ];
+
+        let lcGame = null;
+        let lcMouthTimer = null;
+        let lcIdleTimer = null;
+        let lcBaddieTimer = null;
+
+        function beginLetterChop(level) {
+            hideAllScreens();
+            document.getElementById("letterGameScreen").style.display = "block";
+            startLetterGame(level);
+        }
+
+        function startLetterGame(level) {
+            stopLetterTimers();
+
+            lcGame = {
+                level: level,
+                words: level === "easy" ? LC_EASY_WORDS : LC_HARD_WORDS,
+                idleLimit: level === "easy" ? 60 : 45,
+                puzzle: 0,
+                score: 0,
+                maxScore: 5 * 10 + 15 * 5,
+                word: "",
+                nextLetter: 0,
+                player: { x: 1, y: 1, dir: "right", moving: false },
+                letters: [],
+                berries: [],
+                baddie: null,
+                baddieActive: false,
+                idleSeconds: 0,
+                ended: false
+            };
+
+            document.getElementById("lcLevel").textContent = level === "easy" ? "Easy" : "Hard";
+            loadLetterPuzzle();
+            startLetterTimers();
+        }
+
+        function loadLetterPuzzle() {
+            lcGame.word = lcGame.words[lcGame.puzzle];
+            lcGame.nextLetter = 0;
+            lcGame.player = { x: 1, y: 1, dir: "right", moving: false };
+            lcGame.letters = [];
+            lcGame.berries = [];
+            lcGame.baddie = null;
+            lcGame.baddieActive = false;
+            lcGame.idleSeconds = 0;
+            lcGame.ended = false;
+
+            document.getElementById("lcPuzzle").textContent = lcGame.puzzle + 1;
+            document.getElementById("lcMessage").textContent = "Eat the letters in the correct order.";
+            drawLetterMaze();
+            placeLetterObjects();
+            renderLetterSlots();
+            renderLetterObjects();
+            updateLetterHud();
+            updateLetterPlayer();
+        }
+
+        function drawLetterMaze() {
+            const grid = document.getElementById("lcMazeGrid");
+            grid.innerHTML = "";
+            const layout = LC_MAZES[lcGame.puzzle];
+
+            for (let y = 0; y < layout.length; y++) {
+                for (let x = 0; x < layout[y].length; x++) {
+                    const cell = document.createElement("div");
+                    cell.className = layout[y][x] === "W" ? "maze-cell maze-wall" : "maze-cell maze-dot";
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        function getOpenCells() {
+            const layout = LC_MAZES[lcGame.puzzle];
+            const cells = [];
+
+            for (let y = 0; y < layout.length; y++) {
+                for (let x = 0; x < layout[y].length; x++) {
+                    if (layout[y][x] !== "W" && !(x === 1 && y === 1)) {
+                        cells.push({ x: x, y: y });
+                    }
+                }
+            }
+
+            return cells;
+        }
+
+        function placeLetterObjects() {
+            const cells = shuffle([...getOpenCells()]);
+            const wordLetters = lcGame.word.split("");
+
+            lcGame.letters = wordLetters.map((letter, index) => ({
+                letter: letter,
+                x: cells[index].x,
+                y: cells[index].y,
+                collected: false
+            }));
+
+            const occupied = new Set(lcGame.letters.map(item => item.x + "," + item.y));
+            const berryCells = cells.filter(cell => !occupied.has(cell.x + "," + cell.y)).slice(0, 3);
+
+            lcGame.berries = berryCells.map(cell => ({
+                x: cell.x,
+                y: cell.y,
+                collected: false
+            }));
+        }
+
+        function renderLetterSlots() {
+            const slots = document.getElementById("lcWordSlots");
+            slots.innerHTML = "";
+
+            for (let i = 0; i < lcGame.word.length; i++) {
+                const slot = document.createElement("span");
+                slot.className = "slot";
+                slot.textContent = i < lcGame.nextLetter ? lcGame.word[i] : "_";
+                slots.appendChild(slot);
+            }
+        }
+
+        function renderLetterObjects() {
+            const wrap = document.getElementById("lcMazeWrap");
+            wrap.querySelectorAll(".letter-object, .berry-object, .bad-object").forEach(el => el.remove());
+
+            lcGame.letters.forEach(item => {
+                if (item.collected) return;
+
+                const img = document.createElement("img");
+                img.className = "letter-object";
+                img.src = item.letter + ".png";
+                img.alt = item.letter;
+                positionInMaze(img, item.x, item.y);
+                wrap.appendChild(img);
+            });
+
+            lcGame.berries.forEach(item => {
+                if (item.collected) return;
+
+                const img = document.createElement("img");
+                img.className = "berry-object";
+                img.src = "strawberry.PNG";
+                img.alt = "Strawberry";
+                positionInMaze(img, item.x, item.y);
+                wrap.appendChild(img);
+            });
+
+            if (lcGame.baddieActive && lcGame.baddie) {
+                const img = document.createElement("img");
+                img.className = "bad-object";
+                img.src = "purple.png";
+                img.alt = "Purple baddie";
+                positionInMaze(img, lcGame.baddie.x, lcGame.baddie.y);
+                wrap.appendChild(img);
+            }
+        }
+
+        function positionInMaze(el, x, y) {
+            el.style.left = ((x + 0.5) * 100 / 16) + "%";
+            el.style.top = ((y + 0.5) * 100 / 10) + "%";
+        }
+
+        function updateLetterPlayer() {
+            const player = document.getElementById("lcPlayer");
+            player.style.left = (lcGame.player.x * 100 / 16 + (100 / 16 * 0.09)) + "%";
+            player.style.top = (lcGame.player.y * 100 / 10 + (100 / 10 * 0.09)) + "%";
+            player.style.transform = "rotate(" + LC_ANGLES[lcGame.player.dir] + "deg)";
+        }
+
+        function updateLetterHud() {
+            document.getElementById("lcScore").textContent = lcGame.score;
+            document.getElementById("lcIdle").textContent = lcGame.idleSeconds;
+        }
+
+        function moveLetterPlayer(direction) {
+            if (!lcGame || lcGame.ended) return;
+
+            resetLetterIdle();
+            lcGame.player.dir = direction;
+
+            const moves = {
+                right: { x: 1, y: 0 },
+                left: { x: -1, y: 0 },
+                up: { x: 0, y: -1 },
+                down: { x: 0, y: 1 }
+            };
+
+            const nextX = lcGame.player.x + moves[direction].x;
+            const nextY = lcGame.player.y + moves[direction].y;
+
+            if (isLetterWall(nextX, nextY)) {
+                updateLetterPlayer();
+                return;
+            }
+
+            lcGame.player.x = nextX;
+            lcGame.player.y = nextY;
+            lcGame.player.moving = true;
+
+            updateLetterPlayer();
+            checkLetterCollections();
+            checkBaddieCatch();
+
+            setTimeout(() => {
+                if (lcGame) lcGame.player.moving = false;
+            }, 180);
+        }
+
+        function isLetterWall(x, y) {
+            const layout = LC_MAZES[lcGame.puzzle];
+            return !layout[y] || layout[y][x] === "W";
+        }
+
+        function checkLetterCollections() {
+            const p = lcGame.player;
+
+            lcGame.berries.forEach(berry => {
+                if (!berry.collected && berry.x === p.x && berry.y === p.y) {
+                    berry.collected = true;
+                    lcGame.score += 5;
+                    document.getElementById("lcMessage").textContent = "+5 points! You found a strawberry.";
+                }
+            });
+
+            const targetLetter = lcGame.word[lcGame.nextLetter];
+            const foundLetter = lcGame.letters.find(item => !item.collected && item.x === p.x && item.y === p.y);
+
+            if (foundLetter) {
+                if (foundLetter.letter === targetLetter) {
+                    foundLetter.collected = true;
+                    lcGame.nextLetter++;
+                    document.getElementById("lcMessage").textContent = "Good chopping! You collected " + foundLetter.letter + ".";
+
+                    if (lcGame.nextLetter === lcGame.word.length) {
+                        lcGame.score += 10;
+                        updateLetterHud();
+                        renderLetterSlots();
+                        renderLetterObjects();
+                        setTimeout(nextLetterPuzzle, 700);
+                        return;
+                    }
+                } else {
+                    document.getElementById("lcMessage").textContent = "Find " + targetLetter + " first.";
+                }
+            }
+
+            updateLetterHud();
+            renderLetterSlots();
+            renderLetterObjects();
+        }
+
+        function nextLetterPuzzle() {
+            if (!lcGame) return;
+
+            if (lcGame.puzzle >= 4) {
+                finishLetterGame();
+                return;
+            }
+
+            lcGame.puzzle++;
+            loadLetterPuzzle();
+        }
+
+        function startLetterTimers() {
+            lcMouthTimer = setInterval(() => {
+                if (!lcGame || lcGame.ended) return;
+
+                const player = document.getElementById("lcPlayer");
+
+                if (lcGame.player.moving) {
+                    const isOpen = player.getAttribute("src") === "pmopen.png";
+                    player.setAttribute("src", isOpen ? "pmclosed.png" : "pmopen.png");
+                } else {
+                    player.setAttribute("src", "pmclosed.png");
+                }
+            }, 160);
+
+            lcIdleTimer = setInterval(() => {
+                if (!lcGame || lcGame.ended) return;
+
+                lcGame.idleSeconds++;
+                updateLetterHud();
+
+                if (lcGame.idleSeconds >= lcGame.idleLimit && !lcGame.baddieActive) {
+                    releaseBaddie();
+                }
+            }, 1000);
+        }
+
+        function resetLetterIdle() {
+            if (!lcGame || lcGame.ended) return;
+            lcGame.idleSeconds = 0;
+            updateLetterHud();
+        }
+
+        function releaseBaddie() {
+            const farCell = getOpenCells()
+                .map(cell => ({
+                    x: cell.x,
+                    y: cell.y,
+                    distance: Math.abs(cell.x - lcGame.player.x) + Math.abs(cell.y - lcGame.player.y)
+                }))
+                .sort((a, b) => b.distance - a.distance)[0];
+
+            lcGame.baddie = { x: farCell.x, y: farCell.y };
+            lcGame.baddieActive = true;
+
+            document.getElementById("lcMessage").textContent = "Oh no! The purple baddie is coming!";
+            renderLetterObjects();
+
+            lcBaddieTimer = setInterval(moveBaddie, lcGame.level === "easy" ? 850 : 650);
+        }
+
+        function moveBaddie() {
+            if (!lcGame || !lcGame.baddieActive || lcGame.ended) return;
+
+            const options = [
+                { x: lcGame.baddie.x + 1, y: lcGame.baddie.y },
+                { x: lcGame.baddie.x - 1, y: lcGame.baddie.y },
+                { x: lcGame.baddie.x, y: lcGame.baddie.y + 1 },
+                { x: lcGame.baddie.x, y: lcGame.baddie.y - 1 }
+            ].filter(cell => !isLetterWall(cell.x, cell.y));
+
+            if (options.length === 0) return;
+
+            options.sort((a, b) => {
+                const da = Math.abs(a.x - lcGame.player.x) + Math.abs(a.y - lcGame.player.y);
+                const db = Math.abs(b.x - lcGame.player.x) + Math.abs(b.y - lcGame.player.y);
+                return da - db;
+            });
+
+            lcGame.baddie.x = options[0].x;
+            lcGame.baddie.y = options[0].y;
+
+            renderLetterObjects();
+            checkBaddieCatch();
+        }
+
+        function checkBaddieCatch() {
+            if (!lcGame || !lcGame.baddieActive || !lcGame.baddie) return;
+
+            if (lcGame.player.x === lcGame.baddie.x && lcGame.player.y === lcGame.baddie.y) {
+                lcGame.score = 0;
+                updateLetterHud();
+                showTryAgain();
+            }
+        }
+
+        function showTryAgain() {
+            lcGame.ended = true;
+            stopLetterTimers();
+            document.getElementById("tryAgainPopup").style.display = "flex";
+        }
+
+        function finishLetterGame() {
+            lcGame.ended = true;
+            stopLetterTimers();
+
+            const percent = Math.round((lcGame.score / lcGame.maxScore) * 100);
+            let videoName = "keeptryingstar.mp4";
+            let message = "Keep Trying!";
+
+            if (percent >= 90) {
+                videoName = "excellentstar.mp4";
+                message = "Excellent!";
+            } else if (percent >= 70) {
+                videoName = "greatjobstar.mp4";
+                message = "Great Job!";
+            } else if (percent >= 50) {
+                videoName = "welldonestar.mp4";
+                message = "Well Done!";
+            }
+
+            const video = document.getElementById("resultVideo");
+            video.src = videoName;
+            video.load();
+            video.play();
+
+            document.getElementById("congratsName").textContent = message;
+            document.getElementById("finalScore").textContent = lcGame.score + " points";
+            document.getElementById("finalPercent").textContent = percent + "%";
+            document.getElementById("popupRestartBtn").setAttribute("onclick", "restartLetterChop()");
+            document.getElementById("resultPopup").style.display = "flex";
+        }
+
+        function restartLetterChop() {
+            document.getElementById("resultPopup").style.display = "none";
+            document.getElementById("tryAgainPopup").style.display = "none";
+            beginLetterChop(lcGame ? lcGame.level : "easy");
+        }
+
+        function stopLetterTimers() {
+            if (lcMouthTimer) clearInterval(lcMouthTimer);
+            if (lcIdleTimer) clearInterval(lcIdleTimer);
+            if (lcBaddieTimer) clearInterval(lcBaddieTimer);
+            lcMouthTimer = null;
+            lcIdleTimer = null;
+            lcBaddieTimer = null;
+        }
+
+        document.addEventListener("keydown", function(e) {
+            const map = {
+                ArrowUp: "up",
+                ArrowDown: "down",
+                ArrowLeft: "left",
+                ArrowRight: "right"
+            };
+
+            if (map[e.key] && document.getElementById("letterGameScreen").style.display === "block") {
+                e.preventDefault();
+                moveLetterPlayer(map[e.key]);
+            }
+        });
     </script>
 
 </body>
 </html>
-```
