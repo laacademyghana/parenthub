@@ -7,9 +7,15 @@
 body{margin:0;font-family:Arial,sans-serif;background:#fff8e8;color:#071f4d;text-align:center}
 .page{min-height:100vh;padding:18px;box-sizing:border-box;background:linear-gradient(#fff4d8,#fff)}
 .activity-banner{width:100%;max-width:1400px;display:block;margin:0 auto 15px;border-radius:22px}
-.nav-buttons{display:flex;justify-content:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
-.nav-btn{width:78px;height:78px;border-radius:50%;background:#071f4d;color:white;text-decoration:none;font-weight:bold;font-size:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 6px 12px rgba(0,0,0,.25);cursor:pointer}
-.nav-btn:hover{background:#00a88f}.nav-icon{font-size:26px;margin-top:4px}.home-icon-img{width:54px;height:54px;object-fit:contain;margin-top:2px;display:block}
+/* Top navigation buttons */
+.nav-buttons{display:flex;justify-content:center;gap:18px;margin:8px auto 22px;flex-wrap:wrap;align-items:flex-start}
+.nav-btn{width:92px;height:92px;border-radius:50%;background:#071f4d;color:white;text-decoration:none;font-weight:bold;font-size:11px;line-height:1.05;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;box-shadow:0 7px 14px rgba(0,0,0,.28);cursor:pointer;padding-top:9px;box-sizing:border-box;border:0}
+.nav-btn:hover{background:#00a88f;transform:translateY(-2px)}
+.nav-label{display:block;width:100%;text-align:center;margin:0 0 5px;font-weight:900;color:#fff}
+.nav-icon{font-size:32px;line-height:1;margin:0;display:block}
+.home-icon-img{width:66px;height:66px;object-fit:contain;margin:0;display:block}
+.nav-btn.home-btn .nav-label{margin-bottom:1px}
+.nav-btn.home-btn .home-icon-img{width:72px;height:72px;margin-top:-2px}
 .hub-screen,.start-screen,.quiz-screen,.letter-start-screen,.letter-game-screen{max-width:1200px;margin:auto}
 .start-screen,.quiz-screen,.letter-start-screen,.letter-game-screen{display:none}
 .hub-title{font-size:34px;color:#8a3fc7;margin:20px 0 10px}
@@ -42,17 +48,17 @@ body{margin:0;font-family:Arial,sans-serif;background:#fff8e8;color:#071f4d;text
 .letter-message{min-height:30px;font-size:20px;color:#8a3fc7;font-weight:bold;margin:10px 0 0}.letter-controls{margin:12px auto 0;display:grid;grid-template-columns:88px 88px 88px;grid-template-rows:72px 72px 72px;gap:8px;justify-content:center;align-items:center}.control-btn{width:84px;height:68px;border-radius:18px;background:linear-gradient(#00a8ff,#087bdc);border:4px solid white;box-shadow:0 6px 10px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;padding:7px;cursor:pointer}.control-btn img{max-width:100%;max-height:100%;object-fit:contain}.ctrl-up{grid-column:2;grid-row:1}.ctrl-left{grid-column:1;grid-row:2}.ctrl-right{grid-column:3;grid-row:2}.ctrl-down{grid-column:2;grid-row:3}
 .result-popup{display:none;position:fixed;inset:0;background:rgba(7,31,77,.75);z-index:99999;justify-content:center;align-items:center;padding:20px}.result-inner{display:flex;flex-direction:column;align-items:center}.result-video,.try-again-img{width:90%;max-width:420px;border-radius:20px;animation:pop .5s ease;background:white}@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}.score-card{background:white;color:#071f4d;border:5px solid #00a88f;border-radius:25px;padding:20px;margin-top:18px;width:320px;box-shadow:0 8px 18px rgba(0,0,0,.25);font-weight:bold}.score-card h2{margin:5px 0;color:#8a3fc7}.score-big{font-size:38px;margin:10px 0}.restart-btn{margin-top:18px;background:#071f4d}
 .level-popup{display:none;position:fixed;inset:0;background:rgba(7,31,77,.75);z-index:99999;justify-content:center;align-items:center;padding:20px}.level-img{width:90%;max-width:480px;border-radius:25px;animation:pop .45s ease}
-@media(max-width:900px){.page{padding:10px}.activity-area,.letter-play-layout{grid-template-columns:1fr}.guide,.letter-guide{max-width:230px;margin:auto}.side-panel{max-width:340px;margin:auto}.question-text{font-size:25px}.answer-input{font-size:22px;width:88%}.action-btn{font-size:16px;padding:13px 18px}.score-card{width:285px}.game-choice-grid{grid-template-columns:1fr}.letter-guide{margin:0 auto 12px}.letter-hud{grid-template-columns:repeat(2,1fr)}.letter-card{padding:10px 6px;border-radius:22px;border-width:4px}.maze-wrap{width:100vw;margin-left:calc(50% - 50vw);border-left:0;border-right:0;border-radius:0;aspect-ratio:16/13}.letter-object{width:calc(100%/16*1.18);height:calc(100%/10*1.18)}.player-sprite{width:calc(100%/16*1.08);height:calc(100%/10*1.08)}.slot{width:36px;height:36px;font-size:22px}.word-bar{font-size:18px;padding:9px}.target-word{display:block;font-size:28px;margin-top:5px}.home-icon-img{width:48px;height:48px}}
+@media(max-width:900px){.page{padding:10px}.activity-area,.letter-play-layout{grid-template-columns:1fr}.guide,.letter-guide{max-width:230px;margin:auto}.side-panel{max-width:340px;margin:auto}.question-text{font-size:25px}.answer-input{font-size:22px;width:88%}.action-btn{font-size:16px;padding:13px 18px}.score-card{width:285px}.game-choice-grid{grid-template-columns:1fr}.letter-guide{margin:0 auto 12px}.letter-hud{grid-template-columns:repeat(2,1fr)}.letter-card{padding:10px 6px;border-radius:22px;border-width:4px}.maze-wrap{width:100vw;margin-left:calc(50% - 50vw);border-left:0;border-right:0;border-radius:0;aspect-ratio:16/13}.letter-object{width:calc(100%/16*1.18);height:calc(100%/10*1.18)}.player-sprite{width:calc(100%/16*1.08);height:calc(100%/10*1.08)}.slot{width:36px;height:36px;font-size:22px}.word-bar{font-size:18px;padding:9px}.target-word{display:block;font-size:28px;margin-top:5px}.home-icon-img{width:58px;height:58px}.nav-btn{width:86px;height:86px}.nav-btn.home-btn .home-icon-img{width:66px;height:66px}.nav-icon{font-size:30px}.nav-label{font-size:10px}}
 </style>
 </head>
 <body>
 <div class="page">
 <img src="activitybanner.png" alt="Activity Hub Banner" class="activity-banner">
 <div class="nav-buttons">
-<a class="nav-btn" href="index.html">Home<img src="home-icon.png" class="home-icon-img" alt="Home"></a>
-<a class="nav-btn" href="storybooks.html"><span class="nav-icon">📚</span>Book Hub</a>
-<a class="nav-btn" href="tiphub.html"><span class="nav-icon">🤝</span>Tip Hub</a>
-<a class="nav-btn" onclick="showHub()"><span class="nav-icon">🎮</span>Activity Hub</a>
+<a class="nav-btn home-btn" href="index.html"><span class="nav-label">Home</span><img src="home-icon.png" class="home-icon-img" alt="Home"></a>
+<a class="nav-btn" href="storybooks.html"><span class="nav-label">Book Hub</span><span class="nav-icon">📚</span></a>
+<a class="nav-btn" href="tiphub.html"><span class="nav-label">Tip Hub</span><span class="nav-icon">🤝</span></a>
+<a class="nav-btn" role="button" tabindex="0" onclick="showHub()"><span class="nav-label">Activity Hub</span><span class="nav-icon">🎮</span></a>
 </div>
 <div class="hub-screen" id="hubScreen">
 <h1 class="hub-title">Choose Your Activity</h1>
