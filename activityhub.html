@@ -19,7 +19,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#fff8e8;color:#071f4d;text
 .start-card{background:white;border:6px solid #8a3fc7;border-radius:30px;padding:30px;max-width:760px;margin:20px auto;box-shadow:0 8px 18px rgba(0,0,0,.22)}
 .ama-start{width:220px;max-width:80%;border-radius:25px;margin-bottom:15px}.name-input{width:80%;max-width:420px;padding:16px;font-size:26px;border:4px solid #071f4d;border-radius:18px;text-align:center;font-weight:bold;color:#071f4d;margin:15px auto;display:block}
 .difficulty-buttons,.action-buttons{margin:15px 0 25px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
-.difficulty-btn,.start-btn,.action-btn,.restart-btn{border:none;border-radius:28px;padding:15px 24px;font-size:18px;font-weight:bold;color:white;cursor:pointer;box-shadow:0 5px 10px rgba(0,0,0,.22)}
+.difficulty-btn,.start-btn,.action-btn,.restart-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;border-radius:28px;padding:15px 24px;font-size:18px;font-weight:bold;color:white;cursor:pointer;box-shadow:0 5px 10px rgba(0,0,0,.22)}
 .easy-btn,.check-btn{background:#22a947}.hard-btn{background:#e84393}.show-btn{background:#f39c12}.next-btn,.start-btn{background:#087bdc}
 .difficulty-btn.active{outline:5px solid #ffd54f}.start-btn{font-size:22px}
 .activity-area{display:grid;grid-template-columns:230px minmax(300px,1fr) 250px;gap:20px;align-items:center}
@@ -39,7 +39,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#fff8e8;color:#071f4d;text
 .maze-wrap{position:relative;width:100%;aspect-ratio:16/11;background:#061742;border-radius:22px;overflow:hidden;border:8px solid #00a8ff;touch-action:none}.maze-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(16,1fr);grid-template-rows:repeat(10,1fr)}.maze-cell{position:relative;background:#061742}.maze-wall{background:linear-gradient(135deg,#071f4d,#087bdc,#00a8ff);border:2px solid rgba(255,255,255,.25);box-shadow:inset 0 0 14px rgba(255,255,255,.25)}.maze-dot:after{content:"";width:12px;height:12px;background:#ffd54f;border-radius:50%;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 9px #ffd54f}.maze-dot.eaten:after{display:none}
 .player-sprite{position:absolute;width:calc(100%/16*.92);height:calc(100%/10*.92);object-fit:contain;z-index:10;transition:left .14s linear,top .14s linear,transform .08s linear;transform-origin:center;pointer-events:none;background:transparent!important}
 .letter-object,.berry-object,.bad-object{position:absolute;object-fit:contain;transform:translate(-50%,-50%);pointer-events:none}.letter-object{width:calc(100%/16*1.02);height:calc(100%/10*1.02);z-index:6}.letter-object.spit{animation:spit .45s ease}@keyframes spit{0%{transform:translate(-50%,-50%) scale(1.15)}50%{transform:translate(-50%,-80%) scale(1.3) rotate(-14deg)}100%{transform:translate(-50%,-50%) scale(1)}}.berry-object{width:calc(100%/16*.68);height:calc(100%/10*.68);z-index:5}.bad-object{width:calc(100%/16*.9);height:calc(100%/10*.9);z-index:9;transition:left .45s linear,top .45s linear}
-.letter-message{min-height:30px;font-size:20px;color:#8a3fc7;font-weight:bold;margin:10px 0 0}.letter-controls{margin:12px auto 0;display:grid;grid-template-columns:88px 88px 88px;grid-template-rows:72px 72px 72px;gap:8px;justify-content:center;align-items:center}.control-btn{width:84px;height:68px;border-radius:18px;background:linear-gradient(#00a8ff,#087bdc);border:4px solid white;box-shadow:0 6px 10px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;padding:7px;cursor:pointer}.control-btn img{max-width:100%;max-height:100%;object-fit:contain}.ctrl-up{grid-column:2;grid-row:1}.ctrl-left{grid-column:1;grid-row:2}.ctrl-right{grid-column:3;grid-row:2}.ctrl-down{grid-column:2;grid-row:3}
+.letter-message{min-height:30px;font-size:20px;color:#8a3fc7;font-weight:bold;margin:10px 0 0}.letter-controls{margin:12px auto 0;display:grid;grid-template-columns:88px 88px 88px;grid-template-rows:72px 72px 72px;gap:8px;justify-content:center;align-items:center}.control-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent;width:84px;height:68px;border-radius:18px;background:linear-gradient(#00a8ff,#087bdc);border:4px solid white;box-shadow:0 6px 10px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;padding:7px;cursor:pointer}.control-btn img{max-width:100%;max-height:100%;object-fit:contain}.ctrl-up{grid-column:2;grid-row:1}.ctrl-left{grid-column:1;grid-row:2}.ctrl-right{grid-column:3;grid-row:2}.ctrl-down{grid-column:2;grid-row:3}
 .result-popup{display:none;position:fixed;inset:0;background:rgba(7,31,77,.75);z-index:99999;justify-content:center;align-items:center;padding:20px}.result-inner{display:flex;flex-direction:column;align-items:center}.result-video,.try-again-img{width:90%;max-width:420px;border-radius:20px;animation:pop .5s ease;background:white}@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}.score-card{background:white;color:#071f4d;border:5px solid #00a88f;border-radius:25px;padding:20px;margin-top:18px;width:320px;box-shadow:0 8px 18px rgba(0,0,0,.25);font-weight:bold}.score-card h2{margin:5px 0;color:#8a3fc7}.score-big{font-size:38px;margin:10px 0}.restart-btn{margin-top:18px;background:#071f4d}
 .level-popup{display:none;position:fixed;inset:0;background:rgba(7,31,77,.75);z-index:99999;justify-content:center;align-items:center;padding:20px}.level-img{width:90%;max-width:480px;border-radius:25px;animation:pop .45s ease}
 @media(max-width:900px){.page{padding:10px}.activity-area,.letter-play-layout{grid-template-columns:1fr}.guide,.letter-guide{max-width:230px;margin:auto}.side-panel{max-width:340px;margin:auto}.question-text{font-size:25px}.answer-input{font-size:22px;width:88%}.action-btn{font-size:16px;padding:13px 18px}.score-card{width:285px}.game-choice-grid{grid-template-columns:1fr}.letter-guide{margin:0 auto 12px}.letter-hud{grid-template-columns:repeat(2,1fr)}.letter-card{padding:10px 6px;border-radius:22px;border-width:4px}.maze-wrap{width:100vw;margin-left:calc(50% - 50vw);border-left:0;border-right:0;border-radius:0;aspect-ratio:16/13}.letter-object{width:calc(100%/16*1.18);height:calc(100%/10*1.18)}.player-sprite{width:calc(100%/16*1.08);height:calc(100%/10*1.08)}.slot{width:36px;height:36px;font-size:22px}.word-bar{font-size:18px;padding:9px}.target-word{display:block;font-size:28px;margin-top:5px}.home-icon-img{width:48px;height:48px}}
@@ -88,7 +88,61 @@ body{margin:0;font-family:Arial,sans-serif;background:#fff8e8;color:#071f4d;text
 const easyQuestions=[{image:"cat.png",question:"What is this?",answer:"cat"},{image:"dog.png",question:"What is this?",answer:"dog"},{image:"sun.png",question:"What is this?",answer:"sun"},{image:"apple.png",question:"What is this?",answer:"apple"},{image:"ball.png",question:"What is this?",answer:"ball"},{image:"hat.png",question:"What is this?",answer:"hat"},{image:"pen.png",question:"What is this?",answer:"pen"},{image:"fish.png",question:"What is this?",answer:"fish"},{image:"cup.PNG",question:"What is this?",answer:"cup"},{image:"bag.PNG",question:"What is this?",answer:"bag"},{question:"What is 2 + 1?",answer:"3"},{question:"What is 3 + 2?",answer:"5"},{question:"What number comes after 5?",answer:"6"},{question:"What number comes before 4?",answer:"3"},{question:"Which is bigger: 2 or 5?",answer:"5"},{question:"Which is smaller: 8 or 3?",answer:"3"},{image:"cat.png",question:"Which word matches the picture?\nA) kat\nB) cat\nC) cot",answer:"b",accepted:["b","cat"]},{image:"dog.png",question:"Which word matches the picture?\nA) dog\nB) dig\nC) dag",answer:"a",accepted:["a","dog"]},{image:"sun.png",question:"Fill in the missing letter:\ns_n",answer:"u"},{image:"pen.png",question:"Which word matches the picture?\nA) pan\nB) pin\nC) pen",answer:"c",accepted:["c","pen"]}];
 const hardQuestions=[{image:"book.PNG",question:"What is this?",answer:"book"},{image:"shoe.png",question:"What is this?",answer:"shoe"},{image:"bowl.png",question:"What is this?",answer:"bowl"},{image:"comb.png",question:"What is this?",answer:"comb"},{image:"window.png",question:"What is this?",answer:"window"},{image:"bat.png",question:"What is this?",answer:"bat"},{question:"What is 7 + 5?",answer:"12"},{question:"What is 10 - 3?",answer:"7"},{question:"What is 6 + 6?",answer:"12"},{question:"What is 15 - 5?",answer:"10"},{question:"Count by twos: 2, 4, 6, __",answer:"8"},{question:"What number comes after 19?",answer:"20"},{question:"Write the missing number: 5, 10, 15, __",answer:"20"},{image:"fish.png",question:"Fill in the missing letter:\nf_sh",answer:"i"},{image:"book.PNG",question:"Fill in the missing letters:\nb__k",answer:"oo"},{image:"shoe.png",question:"Which word matches the picture?\nA) shoo\nB) sho\nC) shoe",answer:"c",accepted:["c","shoe"]},{image:"window.png",question:"Which word is correct?\nA) windo\nB) window\nC) wendow",answer:"b",accepted:["b","window"]},{image:"comb.png",question:"Fill in the missing letters:\nco__",answer:"mb"},{image:"bowl.png",question:"Which word matches the picture?\nA) bowl\nB) ball\nC) bell",answer:"a",accepted:["a","bowl"]},{image:"book.PNG",question:"Which word is correct?\nA) buk\nB) booc\nC) book",answer:"c",accepted:["c","book"]}];
 const encouragements=["Great job!<br>Keep trying!<br>You are amazing!","Fantastic work!<br>You are learning so well!","Well done!<br>Keep going!","Excellent thinking!<br>You can do it!","Super star!<br>Learning is fun!"];
-const soundFiles={levelup:"levelup.mp3",horn:"horn.mp3",button:"button.mp3",win:"win.mp3",strawberry:"strawberry.mp3",chomp:"chomp.mp3",crunch:"crunch.mp3",wrong:"wrong.mp3"};const sounds={};Object.keys(soundFiles).forEach(k=>{sounds[k]=new Audio(soundFiles[k]);sounds[k].preload="auto"});function playSound(name){try{const s=sounds[name];if(!s)return;s.currentTime=0;s.play().catch(()=>{})}catch(e){}}
+const soundFiles={levelup:"levelup.mp3",horn:"horn.mp3",button:"button.mp3",win:"win.mp3",strawberry:"strawberry.mp3",chomp:"chomp.mp3",crunch:"crunch.mp3",wrong:"wrong.mp3"};
+const sounds={};
+let audioUnlocked=false;
+
+Object.keys(soundFiles).forEach(k=>{
+    sounds[k]=new Audio(soundFiles[k]);
+    sounds[k].preload="auto";
+    sounds[k].playsInline=true;
+});
+
+function unlockAudio(){
+    if(audioUnlocked)return;
+    audioUnlocked=true;
+    Object.keys(sounds).forEach(k=>{
+        try{
+            const s=sounds[k];
+            s.muted=true;
+            const p=s.play();
+            if(p&&p.then){
+                p.then(()=>{
+                    s.pause();
+                    s.currentTime=0;
+                    s.muted=false;
+                }).catch(()=>{
+                    s.muted=false;
+                });
+            }else{
+                s.pause();
+                s.currentTime=0;
+                s.muted=false;
+            }
+        }catch(e){}
+    });
+}
+
+function playSound(name){
+    try{
+        const s=sounds[name];
+        if(!s)return;
+        s.pause();
+        s.currentTime=0;
+        s.muted=false;
+        s.play().catch(()=>{});
+    }catch(e){}
+}
+
+function safePlayVideo(video){
+    try{
+        if(!video)return;
+        video.muted=true;
+        video.playsInline=true;
+        const p=video.play();
+        if(p&&p.catch)p.catch(()=>{});
+    }catch(e){}
+}
 function addQuizTypingSound(){
     const answerInput=document.getElementById("userAnswer");
     if(!answerInput||answerInput.dataset.soundReady==="yes")return;
@@ -106,21 +160,55 @@ function showQuizStart(){stopLetterTimers();hideAllScreens();document.getElement
 function showLetterStart(){stopLetterTimers();hideAllScreens();document.getElementById("letterStartScreen").style.display="block"}
 function shuffle(a){return a.sort(()=>Math.random()-.5)}function normalize(t){return t.toLowerCase().trim()}
 function setDifficulty(l){difficulty=l;document.getElementById("easyButton").classList.remove("active");document.getElementById("hardButton").classList.remove("active");document.getElementById(l==="easy"?"easyButton":"hardButton").classList.add("active")}
-function beginQuiz(){childName=document.getElementById("childName").value.trim()||"Friend";hideAllScreens();document.getElementById("quizScreen").style.display="block";addQuizTypingSound();startQuiz()}
+function beginQuiz(){
+    unlockAudio();
+    childName=document.getElementById("childName").value.trim()||"Friend";
+    const input=document.getElementById("childName");
+    if(input)input.blur();
+    hideAllScreens();
+    document.getElementById("quizScreen").style.display="block";
+    addQuizTypingSound();
+    startQuiz();
+}
 function startQuiz(){const source=difficulty==="easy"?easyQuestions:hardQuestions;currentQuestions=shuffle([...source]).slice(0,quizLength);currentIndex=0;score=0;answeredCorrectly=false;document.getElementById("resultPopup").style.display="none";document.getElementById("levelLabel").textContent=difficulty==="easy"?"Easy Level":"Hard Level";document.getElementById("levelBox").innerHTML=difficulty==="easy"?"Easy Level<br>Nursery 2 - KG1":"Hard Level<br>KG2 - Basic 1";document.getElementById("amaSpeech").innerHTML="Hello "+childName+"!<br>Let's learn together!";showQuestion()}
 function showQuestion(){const q=currentQuestions[currentIndex];document.getElementById("questionNumber").textContent="Question "+(currentIndex+1)+" of "+quizLength;document.getElementById("questionText").textContent=q.question;document.getElementById("answerBox").style.display="none";document.getElementById("answerBox").textContent="Answer: "+q.answer;document.getElementById("userAnswer").value="";document.getElementById("feedback").textContent="";answeredCorrectly=false;const img=document.getElementById("questionImage");if(q.image){img.src=q.image;img.style.display="block"}else{img.src="";img.style.display="none"}document.getElementById("progressFill").style.width=((currentIndex+1)/quizLength*100)+"%";document.getElementById("progressCount").textContent=(currentIndex+1)+" / "+quizLength;updateScore();document.getElementById("encourageBox").innerHTML=encouragements[Math.floor(Math.random()*encouragements.length)]}
 function updateScore(){document.getElementById("scoreLabel").textContent="Score: "+score+" / "+quizLength;document.getElementById("scoreCount").textContent=score+" / "+quizLength}
 function isCurrentAnswerCorrect(){const ua=normalize(document.getElementById("userAnswer").value),q=currentQuestions[currentIndex],ans=normalize(q.answer),accepted=q.accepted?q.accepted.map(normalize):[ans];return ua!==""&&accepted.includes(ua)}
 function markCurrentQuestion(){if(isCurrentAnswerCorrect()&&!answeredCorrectly){score++;answeredCorrectly=true;updateScore();return true}return false}
-function checkAnswer(){const ua=normalize(document.getElementById("userAnswer").value);if(ua===""){document.getElementById("feedback").textContent="Type your answer first.";document.getElementById("feedback").style.color="#e67e22";return}if(isCurrentAnswerCorrect()){markCurrentQuestion();document.getElementById("feedback").textContent="Correct! Well done, "+childName+"!";document.getElementById("feedback").style.color="#22a947"}else{document.getElementById("feedback").textContent="Good try! Check again or show the answer.";document.getElementById("feedback").style.color="#e84393"}}
+function checkAnswer(){
+    unlockAudio();
+    const ua=normalize(document.getElementById("userAnswer").value);
+    if(ua===""){
+        document.getElementById("feedback").textContent="Type your answer first.";
+        document.getElementById("feedback").style.color="#e67e22";
+        return;
+    }
+    if(isCurrentAnswerCorrect()){
+        markCurrentQuestion();
+        document.getElementById("feedback").textContent="Correct! Well done, "+childName+"!";
+        document.getElementById("feedback").style.color="#22a947";
+    }else{
+        playSound("wrong");
+        document.getElementById("feedback").textContent="Good try! Check again or show the answer.";
+        document.getElementById("feedback").style.color="#e84393";
+    }
+}
 function showAnswer(){document.getElementById("answerBox").style.display="block"}function nextQuestion(){markCurrentQuestion();if(currentIndex<quizLength-1){currentIndex++;showQuestion()}else showFinalScore()}
 function getRewardVideo(){if(score===10)return"excellentstar.mp4";if(score>=8)return"greatjobstar.mp4";if(score>=5)return"welldonestar.mp4";return"keeptryingstar.mp4"}
-function showFinalScore(){const percent=Math.round(score/quizLength*100),video=document.getElementById("resultVideo"),reward=getRewardVideo();video.src=reward;video.load();video.play();if(reward==="keeptryingstar.mp4"){playSound("horn")}else{playSound("levelup")}document.getElementById("congratsName").textContent="Congratulations "+childName+"!";document.getElementById("finalScore").textContent=score+" / "+quizLength;document.getElementById("finalPercent").textContent=percent+"%";document.getElementById("popupRestartBtn").setAttribute("onclick","restartQuiz()");document.getElementById("resultPopup").style.display="flex"}
+function showFinalScore(){const percent=Math.round(score/quizLength*100),video=document.getElementById("resultVideo"),reward=getRewardVideo();video.src=reward;video.load();safePlayVideo(video);if(reward==="keeptryingstar.mp4"){playSound("horn")}else{playSound("levelup")}document.getElementById("congratsName").textContent="Congratulations "+childName+"!";document.getElementById("finalScore").textContent=score+" / "+quizLength;document.getElementById("finalPercent").textContent=percent+"%";document.getElementById("popupRestartBtn").setAttribute("onclick","restartQuiz()");document.getElementById("resultPopup").style.display="flex"}
 function restartQuiz(){document.getElementById("resultPopup").style.display="none";startQuiz()}
 const LC_ANGLES={right:0,down:90,left:180,up:270},LC_EASY_WORDS=["CAT","DOG","SUN","HAT","PEN"],LC_HARD_WORDS=["FISH","BOOK","APPLE","HOUSE","SCHOOL"];
 const LC_MAZES=[["WWWWWWWWWWWWWWWW","W..............W","W.WWWW.WWWW.WW.W","W.W..........W.W","W.W.WWWW.WW.WW.W","W...W....W.....W","WWW.W.WWWW.WWW.W","W.....W........W","W.WWW...WWWW...W","WWWWWWWWWWWWWWWW"],["WWWWWWWWWWWWWWWW","W..............W","W.WW.WWWWWW.WW.W","W....W....W....W","WWW.WW.WW.WW.WWW","W......W.......W","W.WWWW.W.WWWW.W","W.W..........W.W","W...WWWWWWWW...W","WWWWWWWWWWWWWWWW"],["WWWWWWWWWWWWWWWW","W..............W","W.WWW.WW.WWWWW.W","W...W....W.....W","WWW.WWWW.W.WWW.W","W.......W.W....W","W.WWWWW.W.WW.WWW","W.W..........W.W","W...WWWW.WW....W","WWWWWWWWWWWWWWWW"],["WWWWWWWWWWWWWWWW","W..............W","W.WWWW.W.WWWW.WW","W......W.......W","WW.WWWWWWWW.WW.W","W....W.....W...W","W.WW.W.WWW.WWW.W","W.W....W.......W","W...WWWWWWWW...W","WWWWWWWWWWWWWWWW"],["WWWWWWWWWWWWWWWW","W..............W","W.WW.WWW.WWWW.WW","W....W.....W...W","WWW.W.WWW.W.WW.W","W...W...W......W","W.WWWWW.WWWW.W.W","W.....W......W.W","W.WW.....WW....W","WWWWWWWWWWWWWWWW"]];
 let lcGame=null,lcMouthTimer=null,lcCountdownTimer=null,lcBaddieTimer=null,lcBaddieDelayTimer=null,lcLevelPopupTimer=null;
-function beginLetterChop(level){childName=document.getElementById("letterChildName").value.trim()||"Friend";hideAllScreens();document.getElementById("letterGameScreen").style.display="block";startLetterGame(level)}
+function beginLetterChop(level){
+    unlockAudio();
+    childName=document.getElementById("letterChildName").value.trim()||"Friend";
+    const input=document.getElementById("letterChildName");
+    if(input)input.blur();
+    hideAllScreens();
+    document.getElementById("letterGameScreen").style.display="block";
+    requestAnimationFrame(()=>startLetterGame(level));
+}
 function startLetterGame(level){stopLetterTimers();lcGame={level,words:level==="easy"?LC_EASY_WORDS:LC_HARD_WORDS,timeLeft:300,puzzle:0,score:0,maxScore:625,word:"",nextLetter:0,player:{x:1,y:1,dir:"right",moving:false},letters:[],berries:[],eatenDots:new Set(),baddie:null,baddieActive:false,ended:false,paused:true};document.getElementById("lcLevel").textContent=level==="easy"?"Easy":"Hard";document.getElementById("lcAmaSpeech").innerHTML="Come on "+childName+",<br>you can do it!";loadLetterPuzzle();startLetterTimers()}
 function loadLetterPuzzle(){if(lcBaddieTimer)clearInterval(lcBaddieTimer);if(lcBaddieDelayTimer)clearTimeout(lcBaddieDelayTimer);if(lcLevelPopupTimer)clearTimeout(lcLevelPopupTimer);lcBaddieTimer=null;lcBaddieDelayTimer=null;lcLevelPopupTimer=null;lcGame.timeLeft=300;lcGame.word=lcGame.words[lcGame.puzzle];lcGame.nextLetter=0;lcGame.player={x:1,y:1,dir:"right",moving:false};lcGame.letters=[];lcGame.berries=[];lcGame.eatenDots=new Set();lcGame.baddie=null;lcGame.baddieActive=false;lcGame.paused=true;document.getElementById("lcPuzzle").textContent=lcGame.puzzle+1;document.getElementById("lcTargetWord").textContent=lcGame.word;document.getElementById("lcMessage").textContent="Eat the letters in the correct order.";drawLetterMaze();placeLetterObjects();renderLetterSlots();renderLetterObjects();updateLetterHud();updateLetterPlayer();showLevelPopup(lcGame.puzzle+1)}
 function showLevelPopup(levelNumber){playSound("levelup");document.getElementById("levelPopupImage").src="level"+levelNumber+".png";document.getElementById("levelPopup").style.display="flex";lcLevelPopupTimer=setTimeout(()=>{document.getElementById("levelPopup").style.display="none";if(lcGame&&!lcGame.ended){lcGame.paused=false;startBaddieDelay()}},3000)}
@@ -144,12 +232,42 @@ function releaseBaddie(){const far=getOpenCells().map(c=>({x:c.x,y:c.y,distance:
 function moveBaddie(){if(!lcGame||!lcGame.baddieActive||lcGame.ended||lcGame.paused)return;const opts=[{x:lcGame.baddie.x+1,y:lcGame.baddie.y},{x:lcGame.baddie.x-1,y:lcGame.baddie.y},{x:lcGame.baddie.x,y:lcGame.baddie.y+1},{x:lcGame.baddie.x,y:lcGame.baddie.y-1}].filter(c=>!isLetterWall(c.x,c.y));if(!opts.length)return;opts.sort((a,b)=>(Math.abs(a.x-lcGame.player.x)+Math.abs(a.y-lcGame.player.y))-(Math.abs(b.x-lcGame.player.x)+Math.abs(b.y-lcGame.player.y)));lcGame.baddie.x=opts[0].x;lcGame.baddie.y=opts[0].y;renderLetterObjects();checkBaddieCatch()}
 function checkBaddieCatch(){if(!lcGame||!lcGame.baddieActive||!lcGame.baddie)return;if(lcGame.player.x===lcGame.baddie.x&&lcGame.player.y===lcGame.baddie.y)showTryAgain("The purple baddie caught you.")}
 function showTryAgain(reason){if(!lcGame)return;lcGame.score=0;lcGame.ended=true;updateLetterHud();stopLetterTimers();document.getElementById("tryAgainReason").textContent=reason||"Game over.";document.getElementById("tryAgainPopup").style.display="flex"}
-function finishLetterGame(){lcGame.ended=true;stopLetterTimers();const percent=Math.min(100,Math.round(lcGame.score/lcGame.maxScore*100));let videoName="keeptryingstar.mp4",message="Keep Trying!";if(percent>=90){videoName="excellentstar.mp4";message="Excellent!"}else if(percent>=70){videoName="greatjobstar.mp4";message="Great Job!"}else if(percent>=50){videoName="welldonestar.mp4";message="Well Done!"}const video=document.getElementById("resultVideo");video.src=videoName;video.load();video.play();document.getElementById("congratsName").textContent=message+" "+childName+"!";document.getElementById("finalScore").textContent=lcGame.score+" points";document.getElementById("finalPercent").textContent=percent+"%";document.getElementById("popupRestartBtn").setAttribute("onclick","restartLetterChop()");document.getElementById("resultPopup").style.display="flex"}
+function finishLetterGame(){lcGame.ended=true;stopLetterTimers();const percent=Math.min(100,Math.round(lcGame.score/lcGame.maxScore*100));let videoName="keeptryingstar.mp4",message="Keep Trying!";if(percent>=90){videoName="excellentstar.mp4";message="Excellent!"}else if(percent>=70){videoName="greatjobstar.mp4";message="Great Job!"}else if(percent>=50){videoName="welldonestar.mp4";message="Well Done!"}const video=document.getElementById("resultVideo");video.src=videoName;video.load();safePlayVideo(video);document.getElementById("congratsName").textContent=message+" "+childName+"!";document.getElementById("finalScore").textContent=lcGame.score+" points";document.getElementById("finalPercent").textContent=percent+"%";document.getElementById("popupRestartBtn").setAttribute("onclick","restartLetterChop()");document.getElementById("resultPopup").style.display="flex"}
 function restartLetterChop(){document.getElementById("resultPopup").style.display="none";document.getElementById("tryAgainPopup").style.display="none";beginLetterChop(lcGame?lcGame.level:"easy")}
 function stopLetterTimers(){if(lcMouthTimer)clearInterval(lcMouthTimer);if(lcCountdownTimer)clearInterval(lcCountdownTimer);if(lcBaddieTimer)clearInterval(lcBaddieTimer);if(lcBaddieDelayTimer)clearTimeout(lcBaddieDelayTimer);if(lcLevelPopupTimer)clearTimeout(lcLevelPopupTimer);lcMouthTimer=null;lcCountdownTimer=null;lcBaddieTimer=null;lcBaddieDelayTimer=null;lcLevelPopupTimer=null}
 document.addEventListener("keydown",e=>{const map={ArrowUp:"up",ArrowDown:"down",ArrowLeft:"left",ArrowRight:"right"};if(map[e.key]&&document.getElementById("letterGameScreen").style.display==="block"){e.preventDefault();moveLetterPlayer(map[e.key])}});
 
+function setupMobileControls(){
+    document.querySelectorAll("button").forEach(btn=>{
+        btn.setAttribute("type","button");
+        btn.addEventListener("touchstart",unlockAudio,{passive:true});
+    });
+
+    document.querySelectorAll(".control-btn").forEach(btn=>{
+        btn.addEventListener("touchstart",function(e){
+            e.preventDefault();
+            unlockAudio();
+            if(btn.classList.contains("ctrl-up"))moveLetterPlayer("up");
+            if(btn.classList.contains("ctrl-down"))moveLetterPlayer("down");
+            if(btn.classList.contains("ctrl-left"))moveLetterPlayer("left");
+            if(btn.classList.contains("ctrl-right"))moveLetterPlayer("right");
+        },{passive:false});
+    });
+
+    ["amaGuide","lcAmaGuide","resultVideo"].forEach(id=>{
+        const v=document.getElementById(id);
+        if(v){
+            v.muted=true;
+            v.playsInline=true;
+        }
+    });
+}
+
+document.addEventListener("touchstart",unlockAudio,{once:true,passive:true});
+document.addEventListener("click",unlockAudio,{once:true});
+
 document.addEventListener("DOMContentLoaded",function(){
+    setupMobileControls();
     addQuizTypingSound();
 });
 </script>
