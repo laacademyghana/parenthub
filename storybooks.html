@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +63,13 @@
             margin-bottom: 4px;
         }
 
+        .nav-icon-img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            margin-top: 6px;
+        }
+
         .books {
             padding: 35px 20px 20px;
             display: flex;
@@ -121,6 +128,12 @@
                 font-size: 24px;
             }
 
+            .nav-icon-img {
+                width: 34px;
+                height: 34px;
+                margin-top: 5px;
+            }
+
             .books {
                 gap: 28px;
                 padding: 25px 10px;
@@ -147,20 +160,22 @@
     </div>
 
     <div class="nav-buttons">
+
         <a class="round-btn" href="index.html">
-            <span class="icon">⌂</span>
             Home
+            <img src="home-icon.png" class="nav-icon-img" alt="Home">
         </a>
 
         <a class="round-btn" href="storybooks.html">
-            <span class="icon">📚</span>
             Book Hub
+            <span class="icon">📚</span>
         </a>
 
         <a class="round-btn" href="tiphub.html">
-            <span class="icon">🤝</span>
             Tip Hub
+            <span class="icon">🤝</span>
         </a>
+
     </div>
 
     <div class="books">
@@ -188,12 +203,6 @@
     </div>
 
     <script>
-        /*
-            SOUND FILES NEEDED:
-            - levelup.mp3 should be in the same folder as storybooks.html
-            - page.mp3 should be in the same folder as yaw-at-hospital.html
-        */
-
         let soundsUnlocked = false;
 
         const levelUpSound = new Audio("levelup.mp3");
@@ -259,4 +268,5 @@
 
 </body>
 </html>
+```
 
