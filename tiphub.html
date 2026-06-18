@@ -1,180 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tip Hub</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+```html
+<div class="controls">
 
-    <style>
-        body {
-            margin: 0;
-            background: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+    <a class="round-btn" href="index.html">
+        Home
+        <img src="home-icon.png" class="nav-icon-img" alt="Home">
+    </a>
 
-        .page-viewer {
-            width: 100vw;
-            height: calc(100vh - 100px);
-            overflow: auto;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            background: white;
-        }
+    <a class="round-btn" href="storybooks.html">
+        <span class="icon">📚</span>
+        Book Hub
+    </a>
 
-        #tipImage {
-            width: 100%;
-            max-width: 900px;
-            height: auto;
-            display: block;
-        }
+    <button class="round-btn" type="button" onclick="goPrevious()">
+        <span class="big-icon">⏮</span>
+        Previous
+    </button>
 
-        .controls {
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            background: white;
-        }
+    <button class="round-btn" type="button" onclick="goNext()">
+        <span class="big-icon">⏭</span>
+        Next
+    </button>
 
-        .round-btn {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: none;
-            background: #071f4d;
-            color: white;
-            font-weight: bold;
-            font-size: 9px;
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-        }
+    <a class="round-btn" href="tiphub.html">
+        <span class="icon">🤝</span>
+        Tip Hub
+    </a>
 
-        .round-btn:hover {
-            background: #00a88f;
-        }
+    <a class="round-btn" href="activityhub.html">
+        <span class="icon">🎮</span>
+        Activity Hub
+    </a>
 
-        .icon {
-            font-size: 22px;
-            line-height: 1;
-            margin-bottom: 3px;
-        }
-
-        .big-icon {
-            font-size: 28px;
-            line-height: 1;
-            margin-bottom: 2px;
-        }
-
-        @media (max-width: 700px) {
-            #tipImage {
-                width: 100%;
-                max-width: none;
-            }
-
-            .controls {
-                height: 90px;
-                gap: 8px;
-            }
-
-            .round-btn {
-                width: 62px;
-                height: 62px;
-                font-size: 8px;
-            }
-
-            .icon {
-                font-size: 18px;
-            }
-
-            .big-icon {
-                font-size: 23px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="page-viewer">
-        <img id="tipImage" src="phwk1.png" alt="Tip Hub Page">
-    </div>
-
-    <div class="controls">
-        <a class="round-btn" href="index.html">
-            <span class="icon">⌂</span>
-            Home
-        </a>
-
-        <button class="round-btn" type="button" onclick="goPrevious()">
-            <span class="big-icon">⏮</span>
-            Previous
-        </button>
-
-        <button class="round-btn" type="button" onclick="goNext()">
-            <span class="big-icon">⏭</span>
-            Next
-        </button>
-
-        <a class="round-btn" href="index.html">
-            <span class="icon">🤝</span>
-            Tip Hub
-        </a>
-    </div>
-
-    <script>
-        const pages = [
-            "phwk1.png",
-            "phwk2.png",
-            "phwk3.png",
-            "phwk4.png",
-            "phwk5.png",
-            "phwk6.png",
-            "phwk7.png",
-            "phwk8.png",
-            "phwk9.png",
-            "phwk10.png",
-            "phwk11.png",
-            "phwk12.png",
-            "phwk13.png",
-            "phwk14.png",
-            "phwk15.png",
-            "phwk16.png",
-            "phwk17.png",
-            "phwk18.png",
-            "phwk19.png",
-            "phwk20.png",
-            "phwk21.png",
-            "phwk22.png"
-        ];
-
-        let currentPage = 0;
-
-        function showPage() {
-            document.getElementById("tipImage").src = pages[currentPage];
-            document.querySelector(".page-viewer").scrollTop = 0;
-        }
-
-        function goNext() {
-            if (currentPage < pages.length - 1) {
-                currentPage++;
-                showPage();
-            }
-        }
-
-        function goPrevious() {
-            if (currentPage > 0) {
-                currentPage--;
-                showPage();
-            }
-        }
-    </script>
-
-</body>
-</html>
+</div>
+```
