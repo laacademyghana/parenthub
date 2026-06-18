@@ -1,35 +1,231 @@
+```html
 <!DOCTYPE html>
-<div class="controls">
+<html>
+<head>
+    <title>Tip Hub</title>
 
-    <a class="round-btn" href="index.html">
-        Home
-        <img src="home-icon.png" class="nav-icon-img" alt="Home">
-    </a>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-    <a class="round-btn" href="storybooks.html">
-        <span class="icon">📚</span>
-        Book Hub
-    </a>
+    <style>
 
-    <button class="round-btn" type="button" onclick="goPrevious()">
-        <span class="big-icon">⏮</span>
-        Previous
-    </button>
+        body {
+            margin: 0;
+            background: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
 
-    <button class="round-btn" type="button" onclick="goNext()">
-        <span class="big-icon">⏭</span>
-        Next
-    </button>
+        .page-viewer {
+            width: 100vw;
+            height: calc(100vh - 110px);
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: white;
+        }
 
-    <a class="round-btn" href="tiphub.html">
-        <span class="icon">🤝</span>
-        Tip Hub
-    </a>
+        #tipImage {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            display: block;
+        }
 
-    <a class="round-btn" href="activityhub.html">
-        <span class="icon">🎮</span>
-        Activity Hub
-    </a>
+        .controls {
+            height: 110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: white;
+            padding: 8px;
+        }
 
-</div>
+        .round-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: none;
+            background: #071f4d;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
 
+        .round-btn:hover {
+            background: #00a88f;
+        }
+
+        .icon {
+            font-size: 24px;
+            line-height: 1;
+            margin-top: 4px;
+        }
+
+        .big-icon {
+            font-size: 28px;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .nav-icon-img {
+            width: 54px;
+            height: 54px;
+            object-fit: contain;
+            margin-top: 2px;
+        }
+
+        @media (max-width:700px) {
+
+            #tipImage {
+                width: 100%;
+                max-width: none;
+            }
+
+            .controls {
+                height: auto;
+                gap: 8px;
+            }
+
+            .round-btn {
+                width: 72px;
+                height: 72px;
+                font-size: 9px;
+            }
+
+            .icon {
+                font-size: 20px;
+            }
+
+            .big-icon {
+                font-size: 24px;
+            }
+
+            .nav-icon-img {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="page-viewer">
+        <img id="tipImage" src="phwk1.png" alt="Tip Hub Page">
+    </div>
+
+    <div class="controls">
+
+        <a class="round-btn" href="index.html">
+            Home
+            <img src="home-icon.png"
+                 class="nav-icon-img"
+                 alt="Home">
+        </a>
+
+        <a class="round-btn" href="storybooks.html">
+            Book Hub
+            <span class="icon">📚</span>
+        </a>
+
+        <button class="round-btn"
+                type="button"
+                onclick="goPrevious()">
+            <span class="big-icon">⏮</span>
+            Previous
+        </button>
+
+        <button class="round-btn"
+                type="button"
+                onclick="goNext()">
+            <span class="big-icon">⏭</span>
+            Next
+        </button>
+
+        <a class="round-btn" href="tiphub.html">
+            Tip Hub
+            <span class="icon">🤝</span>
+        </a>
+
+        <a class="round-btn" href="activityhub.html">
+            Activity Hub
+            <span class="icon">🎮</span>
+        </a>
+
+    </div>
+
+    <script>
+
+        const pages = [
+            "phwk1.png",
+            "phwk2.png",
+            "phwk3.png",
+            "phwk4.png",
+            "phwk5.png",
+            "phwk6.png",
+            "phwk7.png",
+            "phwk8.png",
+            "phwk9.png",
+            "phwk10.png",
+            "phwk11.png",
+            "phwk12.png",
+            "phwk13.png",
+            "phwk14.png",
+            "phwk15.png",
+            "phwk16.png",
+            "phwk17.png",
+            "phwk18.png",
+            "phwk19.png",
+            "phwk20.png",
+            "phwk21.png",
+            "phwk22.png"
+        ];
+
+        let currentPage = 0;
+
+        function showPage() {
+
+            document.getElementById("tipImage").src =
+                pages[currentPage];
+
+            document.querySelector(".page-viewer")
+                    .scrollTop = 0;
+        }
+
+        function goNext() {
+
+            if (currentPage < pages.length - 1) {
+
+                currentPage++;
+
+                showPage();
+            }
+        }
+
+        function goPrevious() {
+
+            if (currentPage > 0) {
+
+                currentPage--;
+
+                showPage();
+            }
+        }
+
+    </script>
+
+</body>
+</html>
+```
