@@ -170,7 +170,7 @@
         </a>
 
         <a class="book" href="counting-book.html">
-            <img src="counting1.png" alt="Counting">
+            <img src="counting1.png" alt="Counting Book">
         </a>
 
         <a class="book" href="ananse-book.html">
@@ -178,7 +178,7 @@
         </a>
 
         <a class="book" href="yaw-at-hospital.html">
-            <img src="yaw1.png" alt="Yaw Goes to the Hospital">
+            <img src="main/yaw1.png" alt="Yaw Goes to the Hospital">
         </a>
 
     </div>
@@ -189,12 +189,13 @@
 
     <script>
         /*
-            SOUND FILES NEEDED IN THE SAME FOLDER:
-            - levelup.mp3 = plays when a book cover is clicked
-            - page.mp3    = used by reader pages when pages turn
+            SOUND FILES NEEDED:
+            - levelup.mp3 should be in the same folder as storybooks.html
+            - page.mp3 should be in the same folder as yaw-at-hospital.html
         */
 
         let soundsUnlocked = false;
+
         const levelUpSound = new Audio("levelup.mp3");
         const pageSound = new Audio("page.mp3");
 
@@ -203,6 +204,7 @@
 
         function unlockBookHubSounds() {
             if (soundsUnlocked) return;
+
             soundsUnlocked = true;
 
             const allSounds = [levelUpSound, pageSound];
@@ -231,6 +233,7 @@
 
         function openBookWithSound(event, bookUrl) {
             event.preventDefault();
+
             unlockBookHubSounds();
 
             playSound(levelUpSound);
