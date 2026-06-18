@@ -98,11 +98,11 @@ body {
     </div>
 
     <div class="book-frame">
-      <img id="bookPage" src="yaw1.png" alt="Yaw Goes to the Hospital page">
+        <img id="bookPage" src="yaw2.png" alt="Yaw Goes to the Hospital page">
     </div>
 
     <div class="page-count">
-        Page <span id="currentPage">1</span> of 20
+        Page <span id="currentPage">1</span> of 19
     </div>
 
     <div class="controls">
@@ -115,7 +115,15 @@ body {
 <audio id="pageSound" src="page.mp3" preload="auto"></audio>
 
 <script>
-const totalPages = 20;
+
+const totalPages = 19;
+
+/*
+    Page 1 = yaw2.png
+    Page 2 = yaw3.png
+    Page 3 = yaw4.png
+*/
+
 let currentPage = 1;
 
 const bookPage = document.getElementById("bookPage");
@@ -128,31 +136,48 @@ function playSound() {
 }
 
 function updatePage() {
-    bookPage.src = "yaw" + currentPage + ".png";
+
+    bookPage.src = "yaw" + (currentPage + 1) + ".png";
+
     currentPageText.textContent = currentPage;
+
     playSound();
 }
 
 function nextPage() {
+
     if (currentPage < totalPages) {
+
         currentPage++;
+
         updatePage();
     }
 }
 
 function previousPage() {
+
     if (currentPage > 1) {
+
         currentPage--;
+
         updatePage();
     }
 }
 
 document.addEventListener("keydown", function(event) {
-    if (event.key === "ArrowRight") nextPage();
-    if (event.key === "ArrowLeft") previousPage();
+
+    if (event.key === "ArrowRight") {
+        nextPage();
+    }
+
+    if (event.key === "ArrowLeft") {
+        previousPage();
+    }
+
 });
+
 </script>
 
 </body>
 </html>
-
+```
