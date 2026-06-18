@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -176,6 +177,10 @@
             <img src="Ananse%201.png" alt="Ananse and the Greedy Friend">
         </a>
 
+        <a class="book" href="yaw-at-hospital.html">
+            <img src="yaw1.png" alt="Yaw Goes to the Hospital">
+        </a>
+
     </div>
 
     <div class="motto">
@@ -185,22 +190,22 @@
     <script>
         /*
             SOUND FILES NEEDED IN THE SAME FOLDER:
-            - win.mp3   = plays when a book cover is clicked
-            - page.mp3  = stored for reader pages to use when pages turn
+            - levelup.mp3 = plays when a book cover is clicked
+            - page.mp3    = used by reader pages when pages turn
         */
 
         let soundsUnlocked = false;
-        const winSound = new Audio("win.mp3");
+        const levelUpSound = new Audio("levelup.mp3");
         const pageSound = new Audio("page.mp3");
 
-        winSound.preload = "auto";
+        levelUpSound.preload = "auto";
         pageSound.preload = "auto";
 
         function unlockBookHubSounds() {
             if (soundsUnlocked) return;
             soundsUnlocked = true;
 
-            const allSounds = [winSound, pageSound];
+            const allSounds = [levelUpSound, pageSound];
 
             allSounds.forEach(sound => {
                 sound.muted = true;
@@ -228,12 +233,8 @@
             event.preventDefault();
             unlockBookHubSounds();
 
-            playSound(winSound);
+            playSound(levelUpSound);
 
-            /*
-                This tells the book reader page that the child came from Book Hub.
-                The reader pages can then use page.mp3 when Next / Previous is pressed.
-            */
             sessionStorage.setItem("parentHubPageSound", "page.mp3");
 
             setTimeout(() => {
@@ -255,3 +256,4 @@
 
 </body>
 </html>
+```
