@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +68,6 @@
             width: 62px;
             height: 62px;
             object-fit: contain;
-            margin-top: 0;
             display: block;
         }
 
@@ -129,7 +127,6 @@
 
             .icon {
                 font-size: 24px;
-                margin-top: 5px;
             }
 
             .nav-icon-img {
@@ -158,12 +155,9 @@
 
     <img src="book-hub-banner.png.png" alt="Book Hub Banner" class="banner">
 
-    <div class="welcome-text">
-        Click on a book to read it!
-    </div>
+    <div class="welcome-text">Click on a book to read it!</div>
 
     <div class="nav-buttons">
-
         <a class="round-btn" href="index.html">
             Home
             <img src="home-icon.png" class="nav-icon-img" alt="Home">
@@ -183,7 +177,6 @@
             Activity Hub
             <span class="icon">🎮</span>
         </a>
-
     </div>
 
     <div class="books">
@@ -211,69 +204,38 @@
     </div>
 
     <script>
-        let soundsUnlocked = false;
+        const SOUND_VOLUME = 0.25;
 
         const levelUpSound = new Audio("levelup.mp3");
-        const pageSound = new Audio("page.mp3");
-
         levelUpSound.preload = "auto";
-        pageSound.preload = "auto";
+        levelUpSound.volume = SOUND_VOLUME;
 
-        function unlockBookHubSounds() {
-            if (soundsUnlocked) return;
+        function playLevelUpAndOpen(bookUrl) {
+            const sound = new Audio("levelup.mp3");
+            sound.volume = SOUND_VOLUME;
 
-            soundsUnlocked = true;
-
-            const allSounds = [levelUpSound, pageSound];
-
-            allSounds.forEach(sound => {
-                sound.muted = true;
-                sound.play()
-                    .then(() => {
-                        sound.pause();
-                        sound.currentTime = 0;
-                        sound.muted = false;
-                    })
-                    .catch(() => {
-                        sound.muted = false;
-                    });
+            sound.play().catch(() => {
+                window.location.href = bookUrl;
             });
-        }
-
-        function playSound(sound) {
-            try {
-                const freshSound = sound.cloneNode(true);
-                freshSound.currentTime = 0;
-                freshSound.play().catch(() => {});
-            } catch (error) {}
-        }
-
-        function openBookWithSound(event, bookUrl) {
-            event.preventDefault();
-
-            unlockBookHubSounds();
-
-            playSound(levelUpSound);
-
-            sessionStorage.setItem("parentHubPageSound", "page.mp3");
 
             setTimeout(() => {
                 window.location.href = bookUrl;
-            }, 500);
+            }, 450);
         }
 
-        document.addEventListener("click", unlockBookHubSounds, { once: false });
-        document.addEventListener("touchstart", unlockBookHubSounds, { once: false });
-
         document.querySelectorAll(".book").forEach(book => {
-            const bookUrl = book.getAttribute("href");
-
             book.addEventListener("click", function(event) {
-                openBookWithSound(event, bookUrl);
+                event.preventDefault();
+
+                const bookUrl = this.getAttribute("href");
+
+                sessionStorage.setItem("parentHubPageSound", "page.mp3");
+                sessionStorage.setItem("parentHubSoundVolume", SOUND_VOLUME);
+
+                playLevelUpAndOpen(bookUrl);
             });
         });
     </script>
 
 </body>
 </html>
-```
