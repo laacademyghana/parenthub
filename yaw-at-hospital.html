@@ -1,183 +1,266 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaw Goes to the Hospital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-<title>Yaw Goes to the Hospital | Parent Hub Series</title>
+    <style>
+        body {
+            margin: 0;
+            background: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f7fb;
-    text-align: center;
-    color: #071f4d;
-}
+        .book-wrapper {
+            width: 100vw;
+            height: calc(100vh - 115px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+        }
 
-.reader {
-    max-width: 1100px;
-    margin: auto;
-    padding: 15px;
-}
+        #book {
+            width: 90vw;
+            height: 72vh;
+        }
 
-.top-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
+        .page {
+            background: white;
+            overflow: hidden;
+        }
 
-.nav-btn {
-    background: #071f4d;
-    color: white;
-    text-decoration: none;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-}
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: white;
+        }
 
-.nav-btn:hover {
-    background: #00a88f;
-}
+        .controls {
+            height: 105px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background: white;
+        }
 
-.book-frame {
-    width: 100%;
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 6px 22px rgba(0,0,0,0.15);
-}
+        .round-btn {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            border: none;
+            background: #071f4d;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+        }
 
-#bookPage {
-    width: 100%;
-    display: block;
-}
+        .round-btn:hover {
+            background: #00a88f;
+            transform: scale(1.08);
+        }
 
-.page-count {
-    margin-top: 15px;
-    font-size: 20px;
-    font-weight: bold;
-}
+        .icon {
+            font-size: 26px;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
 
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-}
+        .big-icon {
+            font-size: 34px;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
 
-@media(max-width:700px) {
-    .reader {
-        padding: 8px;
-    }
+        @media (max-width: 700px) {
+            .book-wrapper {
+                height: calc(100vh - 95px);
+            }
 
-    .nav-btn {
-        font-size: 14px;
-        padding: 10px 16px;
-    }
+            #book {
+                width: 96vw;
+                height: 72vh;
+            }
 
-    .page-count {
-        font-size: 18px;
-    }
-}
-</style>
+            .controls {
+                height: 90px;
+                gap: 10px;
+            }
+
+            .round-btn {
+                width: 66px;
+                height: 66px;
+                font-size: 9px;
+            }
+
+            .icon {
+                font-size: 21px;
+            }
+
+            .big-icon {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="reader">
-
-    <div class="top-buttons">
-        <a class="nav-btn" href="index.html">Home</a>
-        <a class="nav-btn" href="storybooks.html">Book Hub</a>
-    </div>
-
-    <div class="book-frame">
-        <img id="bookPage" src="yaw2.png" alt="Yaw Goes to the Hospital page">
-    </div>
-
-    <div class="page-count">
-        Page <span id="currentPage">1</span> of 19
+    <div class="book-wrapper">
+        <div id="book">
+            <div class="page"><img src="yaw1.png" alt="Yaw Goes to the Hospital page 1"></div>
+            <div class="page"><img src="yaw2.png" alt="Yaw Goes to the Hospital page 2"></div>
+            <div class="page"><img src="yaw3.png" alt="Yaw Goes to the Hospital page 3"></div>
+            <div class="page"><img src="yaw4.png" alt="Yaw Goes to the Hospital page 4"></div>
+            <div class="page"><img src="yaw5.png" alt="Yaw Goes to the Hospital page 5"></div>
+            <div class="page"><img src="yaw6.png" alt="Yaw Goes to the Hospital page 6"></div>
+            <div class="page"><img src="yaw7.png" alt="Yaw Goes to the Hospital page 7"></div>
+            <div class="page"><img src="yaw8.png" alt="Yaw Goes to the Hospital page 8"></div>
+            <div class="page"><img src="yaw9.png" alt="Yaw Goes to the Hospital page 9"></div>
+            <div class="page"><img src="yaw10.png" alt="Yaw Goes to the Hospital page 10"></div>
+            <div class="page"><img src="yaw11.png" alt="Yaw Goes to the Hospital page 11"></div>
+            <div class="page"><img src="yaw12.png" alt="Yaw Goes to the Hospital page 12"></div>
+            <div class="page"><img src="yaw13.png" alt="Yaw Goes to the Hospital page 13"></div>
+            <div class="page"><img src="yaw14.png" alt="Yaw Goes to the Hospital page 14"></div>
+            <div class="page"><img src="yaw15.png" alt="Yaw Goes to the Hospital page 15"></div>
+            <div class="page"><img src="yaw16.png" alt="Yaw Goes to the Hospital page 16"></div>
+            <div class="page"><img src="yaw17.png" alt="Yaw Goes to the Hospital page 17"></div>
+            <div class="page"><img src="yaw18.png" alt="Yaw Goes to the Hospital page 18"></div>
+            <div class="page"><img src="yaw19.png" alt="Yaw Goes to the Hospital page 19"></div>
+            <div class="page"><img src="yaw20.png" alt="Yaw Goes to the Hospital page 20"></div>
+        </div>
     </div>
 
     <div class="controls">
-        <button class="nav-btn" onclick="previousPage()">Previous</button>
-        <button class="nav-btn" onclick="nextPage()">Next</button>
+
+        <a class="round-btn" href="index.html">
+            <span class="icon">⌂</span>
+            Home
+        </a>
+
+        <button class="round-btn" type="button" onclick="goPrevious()">
+            <span class="big-icon">⏮</span>
+            Previous
+        </button>
+
+        <a class="round-btn" href="storybooks.html">
+            <span class="icon">📚</span>
+            Book Hub
+        </a>
+
+        <button class="round-btn" type="button" onclick="goNext()">
+            <span class="big-icon">⏭</span>
+            Next
+        </button>
+
     </div>
 
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
-<audio id="pageSound" src="page.mp3" preload="auto"></audio>
+    <script>
+        let book;
+        let soundsUnlocked = false;
+        let isButtonFlip = false;
 
-<script>
+        const SOUND_VOLUME = 0.25;
 
-const totalPages = 19;
+        const pageSound = new Audio("page.mp3");
+        pageSound.preload = "auto";
+        pageSound.volume = SOUND_VOLUME;
 
-/*
-    Page 1 = yaw2.png
-    Page 2 = yaw3.png
-    Page 3 = yaw4.png
-*/
+        function unlockPageSound() {
+            if (soundsUnlocked) return;
+            soundsUnlocked = true;
 
-let currentPage = 1;
+            pageSound.muted = true;
+            pageSound.play()
+                .then(() => {
+                    pageSound.pause();
+                    pageSound.currentTime = 0;
+                    pageSound.muted = false;
+                    pageSound.volume = SOUND_VOLUME;
+                })
+                .catch(() => {
+                    pageSound.muted = false;
+                    pageSound.volume = SOUND_VOLUME;
+                });
+        }
 
-const bookPage = document.getElementById("bookPage");
-const currentPageText = document.getElementById("currentPage");
-const pageSound = document.getElementById("pageSound");
+        function playPageSound() {
+            unlockPageSound();
 
-function playSound() {
-    pageSound.currentTime = 0;
-    pageSound.play().catch(() => {});
-}
+            try {
+                const freshSound = pageSound.cloneNode(true);
+                freshSound.currentTime = 0;
+                freshSound.volume = SOUND_VOLUME;
+                freshSound.play().catch(() => {});
+            } catch (error) {}
+        }
 
-function updatePage() {
+        window.addEventListener("load", function () {
+            book = new St.PageFlip(document.getElementById("book"), {
+                width: 1100,
+                height: 750,
+                size: "stretch",
+                minWidth: 280,
+                maxWidth: 1500,
+                minHeight: 220,
+                maxHeight: 950,
+                showCover: true,
+                usePortrait: true,
+                mobileScrollSupport: true,
+                flippingTime: 1800,
+                drawShadow: true,
+                maxShadowOpacity: 0.6,
+                startZIndex: 20
+            });
 
-    bookPage.src = "yaw" + (currentPage + 1) + ".png";
+            book.loadFromHTML(document.querySelectorAll(".page"));
 
-    currentPageText.textContent = currentPage;
+            book.on("flip", function () {
+                if (!isButtonFlip) {
+                    playPageSound();
+                }
 
-    playSound();
-}
+                isButtonFlip = false;
+            });
+        });
 
-function nextPage() {
+        document.addEventListener("click", unlockPageSound, { once: false });
+        document.addEventListener("touchstart", unlockPageSound, { once: false });
 
-    if (currentPage < totalPages) {
+        function goNext() {
+            unlockPageSound();
 
-        currentPage++;
+            if (book) {
+                isButtonFlip = true;
+                playPageSound();
+                book.flipNext();
+            }
+        }
 
-        updatePage();
-    }
-}
+        function goPrevious() {
+            unlockPageSound();
 
-function previousPage() {
-
-    if (currentPage > 1) {
-
-        currentPage--;
-
-        updatePage();
-    }
-}
-
-document.addEventListener("keydown", function(event) {
-
-    if (event.key === "ArrowRight") {
-        nextPage();
-    }
-
-    if (event.key === "ArrowLeft") {
-        previousPage();
-    }
-
-});
-
-</script>
+            if (book) {
+                isButtonFlip = true;
+                playPageSound();
+                book.flipPrev();
+            }
+        }
+    </script>
 
 </body>
 </html>
-```
