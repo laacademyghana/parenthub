@@ -185,7 +185,7 @@ let difficulty="easy",childName="Friend",currentQuestions=[],currentIndex=0,scor
 function hideAllScreens(){["hubScreen","startScreen","quizScreen","letterStartScreen","letterGameScreen","resultPopup","tryAgainPopup","levelPopup"].forEach(id=>document.getElementById(id).style.display="none")}
 function showHub(){unlockAudio();playBackgroundMusic();stopLetterTimers();hideAllScreens();document.getElementById("hubScreen").style.display="block"}
 function showQuizStart(){unlockAudio();playBackgroundMusic();stopLetterTimers();hideAllScreens();document.getElementById("startScreen").style.display="block"}
-function showLetterStart(){unlockAudio();playBackgroundMusic();stopLetterTimers();hideAllScreens();document.getElementById("letterStartScreen").style.display="block"}
+function showLetterStart(){unlockAudio();playBackgroundMusic();stopLetterTimers();hideAllScreens();installLetterChopMobileFixes();document.getElementById("letterStartScreen").style.display="block";window.scrollTo({top:0,behavior:"smooth"})}
 function shuffle(a){return a.sort(()=>Math.random()-.5)}function normalize(t){return t.toLowerCase().trim()}
 function setDifficulty(l){difficulty=l;document.getElementById("easyButton").classList.remove("active");document.getElementById("hardButton").classList.remove("active");document.getElementById(l==="easy"?"easyButton":"hardButton").classList.add("active")}
 function beginQuiz(){unlockAudio();playBackgroundMusic();childName=document.getElementById("childName").value.trim()||"Friend";hideAllScreens();document.getElementById("quizScreen").style.display="block";addQuizTypingSound();startQuiz()}
@@ -202,10 +202,10 @@ function restartQuiz(){document.getElementById("resultPopup").style.display="non
 const LC_ANGLES={right:0,down:90,left:180,up:270},LC_EASY_WORDS=["CAT","DOG","SUN","HAT","PEN"],LC_HARD_WORDS=["FISH","BOOK","APPLE","HOUSE","SCHOOL"];
 const LC_MAZES=[["WWWWWWWWWWWWWWWW","W..............W","W.WWWW.WWWW.WW.W","W.W..........W.W","W.W.WWWW.WW.WW.W","W...W....W.....W","WWW.W.WWWW.WWW.W","W.....W........W","W.WWW...WWWW...W","WWWWWWWWWWWWWWWW"],["WWWWWWWWWWWWWWWW","W..............W","W.WW.WWWWWW.WW.W","W....W....W....W","WWW.WW.WW.WW.WWW","W......W.......W","W.WWWW.W.WWWW.W","W.W..........W.W","W...WWWWWWWW...W","WWWWWWWWWWWWWWWW"],["WWWWWWWWWWWWWWWW","W..............W","W.WWW.WW.WWWWW.W","W...W....W.....W","WWW.WWWW.W.WWW.W","W.......W.W....W","W.WWWWW.W.WW.WWW","W.W..........W.W","W...WWWW.WW....W","WWWWWWWWWWWWWWWW"],["WWWWWWWWWWWWWWWW","W..............W","W.WWWW.W.WWWW.WW","W......W.......W","WW.WWWWWWWW.WW.W","W....W.....W...W","W.WW.W.WWW.WWW.W","W.W....W.......W","W...WWWWWWWW...W","WWWWWWWWWWWWWWWW"],["WWWWWWWWWWWWWWWW","W..............W","W.WW.WWW.WWWW.WW","W....W.....W...W","WWW.W.WWW.W.WW.W","W...W...W......W","W.WWWWW.WWWW.W.W","W.....W......W.W","W.WW.....WW....W","WWWWWWWWWWWWWWWW"]];
 let lcGame=null,lcMouthTimer=null,lcCountdownTimer=null,lcBaddieTimer=null,lcBaddieDelayTimer=null,lcLevelPopupTimer=null;
-function beginLetterChop(level){unlockAudio();playBackgroundMusic();childName=document.getElementById("letterChildName").value.trim()||"Friend";hideAllScreens();document.getElementById("letterGameScreen").style.display="block";startLetterGame(level)}
+function beginLetterChop(level){unlockAudio();playBackgroundMusic();childName=document.getElementById("letterChildName").value.trim()||"Friend";hideAllScreens();document.getElementById("letterGameScreen").style.display="block";prepareLetterScreenForMobile();startLetterGame(level)}
 function startLetterGame(level){stopLetterTimers();lcGame={level,words:level==="easy"?LC_EASY_WORDS:LC_HARD_WORDS,timeLeft:300,puzzle:0,score:0,maxScore:625,word:"",nextLetter:0,player:{x:1,y:1,dir:"right",moving:false},letters:[],berries:[],eatenDots:new Set(),baddie:null,baddieActive:false,ended:false,paused:true};document.getElementById("lcLevel").textContent=level==="easy"?"Easy":"Hard";document.getElementById("lcAmaSpeech").innerHTML="Come on "+childName+",<br>you can do it!";loadLetterPuzzle();startLetterTimers()}
 function loadLetterPuzzle(){if(lcBaddieTimer)clearInterval(lcBaddieTimer);if(lcBaddieDelayTimer)clearTimeout(lcBaddieDelayTimer);if(lcLevelPopupTimer)clearTimeout(lcLevelPopupTimer);lcBaddieTimer=null;lcBaddieDelayTimer=null;lcLevelPopupTimer=null;lcGame.timeLeft=300;lcGame.word=lcGame.words[lcGame.puzzle];lcGame.nextLetter=0;lcGame.player={x:1,y:1,dir:"right",moving:false};lcGame.letters=[];lcGame.berries=[];lcGame.eatenDots=new Set();lcGame.baddie=null;lcGame.baddieActive=false;lcGame.paused=true;document.getElementById("lcPuzzle").textContent=lcGame.puzzle+1;document.getElementById("lcTargetWord").textContent=lcGame.word;document.getElementById("lcMessage").textContent="Eat the letters in the correct order.";drawLetterMaze();placeLetterObjects();renderLetterSlots();renderLetterObjects();updateLetterHud();updateLetterPlayer();showLevelPopup(lcGame.puzzle+1)}
-function showLevelPopup(levelNumber){playSound("levelup");document.getElementById("levelPopupImage").src="level"+levelNumber+".png";document.getElementById("levelPopup").style.display="flex";lcLevelPopupTimer=setTimeout(()=>{document.getElementById("levelPopup").style.display="none";if(lcGame&&!lcGame.ended){lcGame.paused=false;startBaddieDelay()}},3000)}
+function showLevelPopup(levelNumber){playSound("levelup");document.getElementById("levelPopupImage").src="level"+levelNumber+".png";document.getElementById("levelPopup").style.display="flex";lcLevelPopupTimer=setTimeout(()=>{document.getElementById("levelPopup").style.display="none";if(lcGame&&!lcGame.ended){lcGame.paused=false;prepareLetterScreenForMobile();startBaddieDelay()}},3000)}
 function startBaddieDelay(){if(lcBaddieDelayTimer)clearTimeout(lcBaddieDelayTimer);lcBaddieDelayTimer=setTimeout(()=>{if(lcGame&&!lcGame.baddieActive&&!lcGame.ended)releaseBaddie()},60000)}
 function drawLetterMaze(){const grid=document.getElementById("lcMazeGrid");grid.innerHTML="";const layout=LC_MAZES[lcGame.puzzle];for(let y=0;y<layout.length;y++){for(let x=0;x<layout[y].length;x++){const cell=document.createElement("div");cell.dataset.x=x;cell.dataset.y=y;cell.className=layout[y][x]==="W"?"maze-cell maze-wall":"maze-cell maze-dot";if(layout[y][x]!=="W"&&x===1&&y===1)cell.classList.add("eaten");grid.appendChild(cell)}}}
 function getOpenCells(){const layout=LC_MAZES[lcGame.puzzle],cells=[];for(let y=0;y<layout.length;y++){for(let x=0;x<layout[y].length;x++){if(layout[y][x]!=="W"&&!(x===1&&y===1))cells.push({x,y})}}return cells}
@@ -231,7 +231,62 @@ function restartLetterChop(){document.getElementById("resultPopup").style.displa
 function stopLetterTimers(){if(lcMouthTimer)clearInterval(lcMouthTimer);if(lcCountdownTimer)clearInterval(lcCountdownTimer);if(lcBaddieTimer)clearInterval(lcBaddieTimer);if(lcBaddieDelayTimer)clearTimeout(lcBaddieDelayTimer);if(lcLevelPopupTimer)clearTimeout(lcLevelPopupTimer);lcMouthTimer=null;lcCountdownTimer=null;lcBaddieTimer=null;lcBaddieDelayTimer=null;lcLevelPopupTimer=null;stopBaddySound()}
 document.addEventListener("keydown",e=>{const map={ArrowUp:"up",ArrowDown:"down",ArrowLeft:"left",ArrowRight:"right"};if(map[e.key]&&document.getElementById("letterGameScreen").style.display==="block"){e.preventDefault();moveLetterPlayer(map[e.key])}});
 
+
+/* MOBILE LETTER CHOP FIXES
+   These helpers stop the maze from trapping mobile scrolling and keep the control buttons reachable. */
+function installLetterChopMobileFixes(){
+    if(document.getElementById("letterChopMobileFixStyle"))return;
+    const style=document.createElement("style");
+    style.id="letterChopMobileFixStyle";
+    style.textContent=`
+        html,body{height:auto!important;overflow-y:auto!important;overscroll-behavior-y:auto!important;}
+        .page{overflow-x:hidden;}
+        @media(max-width:900px){
+            .maze-wrap{touch-action:pan-y!important;}
+            .letter-controls{
+                position:sticky;
+                bottom:8px;
+                z-index:60;
+                background:rgba(255,248,232,.96);
+                border-radius:22px;
+                padding:8px 0;
+                box-shadow:0 -4px 14px rgba(0,0,0,.12);
+            }
+            .letter-card{overflow:visible!important;}
+        }
+    `;
+    document.head.appendChild(style);
+}
+function isSmallScreen(){
+    return window.matchMedia&&window.matchMedia("(max-width:900px)").matches;
+}
+function keepLetterControlsReachable(force){
+    if(!force&&!isSmallScreen())return;
+    const controls=document.querySelector(".letter-controls");
+    if(!controls)return;
+    setTimeout(()=>{
+        try{
+            controls.scrollIntoView({behavior:"smooth",block:"end",inline:"nearest"});
+        }catch(e){
+            const rect=controls.getBoundingClientRect();
+            window.scrollBy(0,rect.bottom-window.innerHeight+18);
+        }
+    },120);
+}
+function prepareLetterScreenForMobile(){
+    installLetterChopMobileFixes();
+    document.body.style.overflowY="auto";
+    document.documentElement.style.overflowY="auto";
+    const wrap=document.getElementById("lcMazeWrap");
+    if(wrap){
+        wrap.style.touchAction="pan-y";
+        wrap.style.webkitOverflowScrolling="touch";
+    }
+    keepLetterControlsReachable(true);
+}
+
 document.addEventListener("DOMContentLoaded",function(){
+    installLetterChopMobileFixes();
     addQuizTypingSound();
     document.querySelectorAll("button").forEach(btn=>{
         if(!btn.getAttribute("type"))btn.setAttribute("type","button");
@@ -248,6 +303,7 @@ document.addEventListener("DOMContentLoaded",function(){
     });
     document.addEventListener("touchstart",unlockAudio,{once:true,passive:true});
     document.addEventListener("click",unlockAudio,{once:true});
+    window.addEventListener("resize",function(){if(document.getElementById("letterGameScreen").style.display==="block")prepareLetterScreenForMobile();});
     playBackgroundMusic();
 });
 </script>
