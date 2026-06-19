@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Counting</title>
+    <title>Elmina Fish Market</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
     <style>
@@ -120,18 +120,22 @@
 
     <div class="book-wrapper">
         <div id="book">
-            <div class="page"><img src="counting1.png" alt="Counting page 1"></div>
-            <div class="page"><img src="counting2.png" alt="Counting page 2"></div>
-            <div class="page"><img src="counting3.png" alt="Counting page 3"></div>
-            <div class="page"><img src="counting4.png" alt="Counting page 4"></div>
-            <div class="page"><img src="counting5.png" alt="Counting page 5"></div>
-            <div class="page"><img src="counting6.png" alt="Counting page 6"></div>
-            <div class="page"><img src="counting7.png" alt="Counting page 7"></div>
-            <div class="page"><img src="counting8.png" alt="Counting page 8"></div>
-            <div class="page"><img src="counting9.png" alt="Counting page 9"></div>
-            <div class="page"><img src="counting10.png" alt="Counting page 10"></div>
-            <div class="page"><img src="counting11.png" alt="Counting page 11"></div>
-            <div class="page"><img src="counting12.png" alt="Counting page 12"></div>
+            <div class="page"><img src="elmina1.png" alt="Elmina Fish Market page 1"></div>
+            <div class="page"><img src="elmina2.png" alt="Elmina Fish Market page 2"></div>
+            <div class="page"><img src="elmina3.png" alt="Elmina Fish Market page 3"></div>
+            <div class="page"><img src="elmina4.png" alt="Elmina Fish Market page 4"></div>
+            <div class="page"><img src="elmina5.png" alt="Elmina Fish Market page 5"></div>
+            <div class="page"><img src="elmina6.png" alt="Elmina Fish Market page 6"></div>
+            <div class="page"><img src="elmina7.png" alt="Elmina Fish Market page 7"></div>
+            <div class="page"><img src="elmina8.png" alt="Elmina Fish Market page 8"></div>
+            <div class="page"><img src="elmina9.png" alt="Elmina Fish Market page 9"></div>
+            <div class="page"><img src="elmina10.png" alt="Elmina Fish Market page 10"></div>
+            <div class="page"><img src="elmina11.png" alt="Elmina Fish Market page 11"></div>
+            <div class="page"><img src="elmina12.png" alt="Elmina Fish Market page 12"></div>
+            <div class="page"><img src="elmina13.png" alt="Elmina Fish Market page 13"></div>
+            <div class="page"><img src="elmina14.png" alt="Elmina Fish Market page 14"></div>
+            <div class="page"><img src="elmina15.png" alt="Elmina Fish Market page 15"></div>
+            <div class="page"><img src="elmina16.png" alt="Elmina Fish Market page 16"></div>
         </div>
     </div>
 
@@ -166,9 +170,11 @@
         let soundsUnlocked = false;
         let isButtonFlip = false;
 
+        const SOUND_VOLUME = 0.25;
+
         const pageSound = new Audio("page.mp3");
         pageSound.preload = "auto";
-        pageSound.volume = 1;
+        pageSound.volume = SOUND_VOLUME;
 
         function unlockPageSound() {
             if (soundsUnlocked) return;
@@ -180,9 +186,11 @@
                     pageSound.pause();
                     pageSound.currentTime = 0;
                     pageSound.muted = false;
+                    pageSound.volume = SOUND_VOLUME;
                 })
                 .catch(() => {
                     pageSound.muted = false;
+                    pageSound.volume = SOUND_VOLUME;
                 });
         }
 
@@ -192,7 +200,7 @@
             try {
                 const freshSound = pageSound.cloneNode(true);
                 freshSound.currentTime = 0;
-                freshSound.volume = 1;
+                freshSound.volume = SOUND_VOLUME;
                 freshSound.play().catch(() => {});
             } catch (error) {}
         }
